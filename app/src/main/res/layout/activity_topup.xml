@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Users.Feautures.Topup">
+    <!--toolbar-->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/tback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_back_24"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Transfer"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+            app:fontFamily="@font/rubik_light" />
+    </LinearLayout>
+
+    <!--header-->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/blue"
+        android:backgroundTint="#1c1464"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:cardCornerRadius="25dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/halfoval"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/onethird_oval"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/oneoval"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/tbalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#D8E3E6"
+                android:text="$:"
+                android:textSize="36sp"
+                android:fontFamily="@font/rubik_light"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_below="@+id/tbalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#D8E3E6"
+                android:text="Total balance : $"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="14sp"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!--enter a amount-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amount"
+            android:fontFamily="@font/rubik_light"
+            android:textStyle="bold"
+            android:textColor="#131A22"
+            android:textSize="19sp"
+            />
+        <EditText
+            android:id="@+id/tvalue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter a Amount"
+            android:fontFamily="@font/rubik_light"
+            android:textSize="18sp"
+            android:inputType="number"
+            android:maxLines="1"
+            android:minLines="1"
+            android:singleLine="true"
+            android:textColor="#131A22"
+
+            />
+
+    </LinearLayout>
+
+    <!--Buttons-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/b1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/b1"
+            android:text="$ 20"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:fontFamily="@font/rubik_light"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            />
+        <Button
+            android:id="@+id/b2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/b2"
+            android:text="$ 50"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:fontFamily="@font/rubik_light"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            />
+        <Button
+            android:id="@+id/b3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/b3"
+            android:text="$ 100"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:fontFamily="@font/rubik_light"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            />
+        <Button
+            android:id="@+id/b4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/b4"
+            android:text="$ 200"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:fontFamily="@font/rubik_light"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+    <!--seekerbar-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="45dp"
+        android:orientation="horizontal">
+
+        <com.warkiz.widget.IndicatorSeekBar
+            android:id="@+id/custom_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isb_seek_smoothly="true"
+            app:isb_show_indicator="rounded_rectangle"
+            app:isb_thumb_color="@color/blue"
+            app:isb_tick_marks_color="#D65A39DE"
+            app:isb_show_tick_marks_type="oval"
+            app:isb_show_tick_texts="true"
+            app:isb_tick_texts_color="@color/blue"
+            app:isb_thumb_adjust_auto="false"
+            app:isb_ticks_count="11"
+            app:isb_track_background_color="#E4FEEF"
+            app:isb_indicator_color="#E8EDFF"
+            app:isb_indicator_text_color="#452A95"
+            app:isb_track_progress_color="@color/blue" />
+
+    </LinearLayout>
+
+
+    <!--Tranfer type-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="35dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share"
+            android:fontFamily="@font/rubik_light"
+            android:textStyle="bold"
+            android:textColor="#131A22"
+            android:textSize="19sp"
+            android:layout_marginBottom="20dp"
+            />
+        <!--parent-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!--friends-->
+            <LinearLayout
+                android:id="@+id/tfriends"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ttype1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_baseline_mobile_screen_share_24"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Firends"
+                    android:gravity="center"
+                    android:fontFamily="@font/rubik_light"
+                    android:textColor="#000"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <!--bank acc-->
+            <LinearLayout
+                android:id="@+id/tbanlacc"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ttype1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_bank"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bank Acc."
+                    android:gravity="center"
+                    android:fontFamily="@font/rubik_light"
+                    android:textColor="#000"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <!--Cnic acc-->
+            <LinearLayout
+                android:id="@+id/cnic"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ttype1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cnic"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CNIC"
+                    android:gravity="center"
+                    android:fontFamily="@font/rubik_light"
+                    android:textColor="#000"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!--Acc info-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--friendAcc-->
+        <LinearLayout
+            android:id="@+id/hidefriend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Friend Contact Number"
+                android:fontFamily="@font/rubik_light"
+                android:textStyle="bold"
+                android:textColor="#131A22"
+                android:textSize="19sp"
+                />
+            <EditText
+                android:id="@+id/tfcontactnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="+1142XXXXXXXXXX"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:maxLines="1"
+                android:minLines="1"
+                android:layout_marginTop="10dp"
+                android:singleLine="true"
+                android:textColor="#131A22"
+                />
+
+        </LinearLayout>
+
+        <!--BankAcc-->
+        <LinearLayout
+            android:id="@+id/hidbank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="IBAN Number"
+                android:fontFamily="@font/rubik_light"
+                android:textStyle="bold"
+                android:textColor="#131A22"
+                android:textSize="19sp"
+                />
+            <EditText
+                android:id="@+id/tIBANnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="XXXXXXXXXXXX"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="18sp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:minLines="1"
+                android:layout_marginTop="10dp"
+                android:singleLine="true"
+                android:textColor="#131A22"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Conatct Number"
+                android:fontFamily="@font/rubik_light"
+                android:textStyle="bold"
+                android:textColor="#131A22"
+                android:textSize="19sp"
+                android:layout_marginTop="10dp"
+                />
+            <EditText
+                android:id="@+id/tbcontactnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="+1142XXXXXXXXXX"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:maxLines="1"
+                android:minLines="1"
+                android:layout_marginTop="10dp"
+                android:singleLine="true"
+                android:textColor="#131A22"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Purpose"
+                android:fontFamily="@font/rubik_light"
+                android:textStyle="bold"
+                android:textColor="#131A22"
+                android:textSize="19sp"
+                android:layout_marginTop="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/blue"
+                    />
+                <Spinner
+                    android:id="@+id/myspinner"
+                    android:entries="@array/Myspinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overlapAnchor="false"
+                    android:spinnerMode="dropdown"
+                    android:dropDownVerticalOffset="45dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--CNIC-->
+        <LinearLayout
+            android:id="@+id/hidecnic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CNIC Number"
+                android:fontFamily="@font/rubik_light"
+                android:textStyle="bold"
+                android:textColor="#131A22"
+                android:textSize="19sp"
+                />
+            <EditText
+                android:id="@+id/tCNICnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="XXXXXXXXXXXX"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:maxLines="1"
+                android:minLines="1"
+                android:layout_marginTop="10dp"
+                android:singleLine="true"
+                android:textColor="#131A22"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Conatct Number"
+                android:fontFamily="@font/rubik_light"
+                android:textStyle="bold"
+                android:textColor="#131A22"
+                android:textSize="19sp"
+                android:layout_marginTop="10dp"
+                />
+            <EditText
+                android:id="@+id/tbCNIcContactnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="+1142XXXXXXXXXX"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:maxLines="1"
+                android:minLines="1"
+                android:layout_marginTop="10dp"
+                android:singleLine="true"
+                android:textColor="#131A22"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <!--cont btn-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="45dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cont_btn"
+            android:textColor="@color/blue"
+            android:text="Continue"
+            />
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

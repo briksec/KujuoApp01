@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1a1367"
+        tools:context=".Users.SignUp">
+
+
+        <!--toolbar-->
+        <LinearLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/whaitback"
+                android:layout_marginLeft="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Sgin Up"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/rubik_italic" />
+        </LinearLayout>
+
+        <!--logo-->
+        <TextView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:text="Kujuo"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="54sp"
+            android:textStyle="italic"
+            app:fontFamily="@font/poppins_bold" />
+
+        <!--Enter Full Name-->
+        <LinearLayout
+            android:id="@+id/entername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logo"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Full Name"
+                android:textSize="17sp"
+                android:fontFamily="@font/rubik_light"
+                android:textColor="#FFFFFF"
+                />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_marginTop="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Enter Full Name"
+                android:textColorHint="#FFFFFF"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="19sp"
+                app:backgroundTint="@color/white"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:minLines="1"
+                android:imeOptions="actionNext"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+
+        <!--enterPhone-->
+        <LinearLayout
+            android:id="@+id/enterphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/entername"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:textSize="17sp"
+                android:fontFamily="@font/rubik_light"
+                android:textColor="#FFFFFF"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                >
+                <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ccp1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    app:ccp_textColor="@color/white"
+                    app:ccp_defaultNameCode="BS"
+                    android:backgroundTint="@color/white"
+                    />
+                <EditText
+
+                    android:id="@+id/contactno"
+                    android:layout_marginTop="9dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Enter Phone Number"
+                    android:textColorHint="#FFFFFF"
+                    android:fontFamily="@font/rubik_light"
+                    android:textSize="19sp"
+                    app:backgroundTint="@color/white"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/white"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--edit email-->
+        <LinearLayout
+            android:id="@+id/enteremail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enterphone"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textSize="17sp"
+                android:fontFamily="@font/rubik_light"
+                android:textColor="#FFFFFF"
+                />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_marginTop="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Enter Email"
+                android:textColorHint="#FFFFFF"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="19sp"
+                app:backgroundTint="@color/white"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:minLines="1"
+                android:imeOptions="actionNext"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+
+        <!--edit passs-->
+        <LinearLayout
+            android:id="@+id/enterpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enteremail"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textSize="17sp"
+                android:fontFamily="@font/rubik_light"
+                android:textColor="#FFFFFF"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:padding="5dp"
+                android:textColorHint="#FFFFFF"
+                android:gravity="center"
+                app:passwordToggleTint="@color/white"
+                >
+                <EditText
+                    android:id="@+id/pass"
+                    android:layout_marginTop="9dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Enter Password"
+                    android:textColorHint="#FFFFFF"
+                    android:fontFamily="@font/rubik_light"
+                    android:textSize="19sp"
+                    app:backgroundTint="@color/white"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/white"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_cont"
+            android:layout_below="@+id/enterpass"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/done_btnclick"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/white"
+            android:text="Continue"
+            android:textSize="19sp"
+            android:layout_marginBottom="30dp"
+            />
+
+
+    </RelativeLayout>
+</ScrollView>

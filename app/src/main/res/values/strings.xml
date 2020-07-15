@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Kujuo App</string>
+    <!-- strings.xml -->
+    <string name="don_t_worry">Don\'t worry! we got you cover.\nUse Wallie instead of cash!
+</string>
+    <string name="let_s_try_w">Let\u00E2\u0080\u0099s try Wallie now!\nAnd get the best solution.
+</string>
+    <array name="Myspinner">
+        <item>Family Support</item>
+        <item>Education</item>
+        <item>Business</item>
+        <item>Transport</item>
+        <item>Medical payment</item>
+        <item>Miscellaneous Payments</item>
+    </array>
+    <array name="Currency">
+        <item>USD</item>
+        <item>RPS</item>
+        <item>INR</item>
+
+    </array>
+    <string name="Where">Where to\nSend?</string>
+</resources>

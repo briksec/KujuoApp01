@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/drawer"
+    tools:context=".Users.UserDashboard">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--toolbar-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hello!"
+                    android:fontFamily="@font/rubik_light"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#131A22"
+                    />
+                <TextView
+                    android:id="@+id/dusename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jimmy Sulivan"
+                    android:fontFamily="@font/rubik_light"
+                    android:textSize="14sp"
+                    android:textColor="#131A22"
+                    />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <!--header-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="10dp">
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:auto_cycle="true"
+            app:pager_animation="Default"
+            app:pager_animation_span="1100"
+            />
+        </androidx.cardview.widget.CardView>
+
+        <!--feautures-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="16sp"
+                android:textColor="#131A22"
+                android:text="Features"
+                android:textStyle="bold"
+
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/userrecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+
+        <!--Special Promo-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="16sp"
+                android:textColor="#131A22"
+                android:text="Special Promo"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+
+                />
+            <androidx.recyclerview.widget.RecyclerView
+               android:layout_weight="1"
+                android:id="@+id/drpromo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="90dp"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!--bottom-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+     >
+<!--
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_oval"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="1dp"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottomicon"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/scanicon"
+            android:layout_marginTop="50dp"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/personicon"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="10dp"
+            />-->
+       <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+           android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:mbn_backgroundBottomColor="#ffffff"
+            app:mbn_countBackgroundColor="#ff6f00"
+            app:mbn_countTextColor="@color/blue"
+            app:mbn_defaultIconColor="@color/black"
+            app:mbn_rippleColor="@color/blue"
+            app:mbn_selectedIconColor="@color/blue"
+            app:mbn_shadowColor="#1f212121"
+
+           />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
