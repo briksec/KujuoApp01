@@ -102,13 +102,13 @@ public class Login extends AppCompatActivity {
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
-                Toasty.error(getApplicationContext(),"Error logging in : "+errString,Toasty.LENGTH_LONG).show();
+                Toasty.error(getApplicationContext(),"Error logging in : "+errString,Toasty.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
-                Toasty.success(getApplicationContext(),"Login Successful ",Toasty.LENGTH_LONG).show();
+                Toasty.success(getApplicationContext(),"Login Successful ",Toasty.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(),UserDashboard.class));
                 finish();
             }
@@ -116,7 +116,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
-                Toasty.error(getApplicationContext(),"Authentication Failed!",Toasty.LENGTH_LONG).show();
+                Toasty.error(getApplicationContext(),"Authentication Failed!",Toasty.LENGTH_SHORT).show();
             }
         });
 

@@ -16,6 +16,7 @@ import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
 import com.example.kujuoapp.Users.DataClass.FeautureData;
 import com.example.kujuoapp.Users.Feautures.Topup;
+import com.example.kujuoapp.Users.Feautures.Transfer;
 
 import java.util.List;
 
@@ -59,7 +60,9 @@ public class FeautureAdapter extends RecyclerView.Adapter<FeautureAdapter.Myview
                 }
                 else if(feautureDataList.get(position).getId()=="2")
                 {
-
+                    Intent intent=new Intent(context, Transfer.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
                 } else if(feautureDataList.get(position).getId()=="3")
                 {
 

@@ -67,6 +67,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:id="@+id/scanqrcode"
                 android:background="@drawable/small_qr1"
                 />
 
