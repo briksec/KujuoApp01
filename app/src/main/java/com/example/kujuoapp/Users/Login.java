@@ -1,9 +1,16 @@
 package com.example.kujuoapp.Users;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,11 +36,15 @@ import com.rilixtech.widget.countrycodepicker.CountryCodePicker;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
+
+import es.dmoral.toasty.Toasty;
 
 public class Login extends AppCompatActivity {
 
     public static EditText userphoneno,password;
     Button cont;
+    ImageView fingerPrint;
     String phoneno;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +61,9 @@ public class Login extends AppCompatActivity {
 
 
 
-            userphoneno=findViewById(R.id.loginphone);
+        userphoneno=findViewById(R.id.loginphone);
         password=findViewById(R.id.loginpass);
+        fingerPrint = findViewById(R.id.z_mythumb);
         cont=findViewById(R.id.btn_cont);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -61,6 +74,67 @@ public class Login extends AppCompatActivity {
 
         intentSigup();
 
+        ///Checking Availability of fingerprint
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.USE_BIOMETRIC}, PackageManager.PERMISSION_GRANTED);
+
+
+        BiometricManager biometricManager = BiometricManager.from(this);
+
+
+        switch (biometricManager.canAuthenticate()){
+            case BiometricManager.BIOMETRIC_SUCCESS:
+                Toasty.success(getApplicationContext(),"You can add fingerprint!",Toasty.LENGTH_SHORT).show();
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                Toasty.warning(getApplicationContext(),"Your fingerprint is not enrolled!",Toasty.LENGTH_SHORT).show();
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+                Toasty.error(getApplicationContext(),"Your device does not support fingerprint service!",Toasty.LENGTH_SHORT).show();
+                break;
+            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+                Toasty.error(getApplicationContext(),"Fingerprint service is unavailable!",Toasty.LENGTH_SHORT).show();
+                break;
+
+        }
+
+        Executor executor = ContextCompat.getMainExecutor(this);
+        final BiometricPrompt biometricPrompt = new BiometricPrompt(Login.this, executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                Toasty.error(getApplicationContext(),"Error logging in : "+errString,Toasty.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Toasty.success(getApplicationContext(),"Login Successful ",Toasty.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(),UserDashboard.class));
+                finish();
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Toasty.error(getApplicationContext(),"Authentication Failed!",Toasty.LENGTH_LONG).show();
+            }
+        });
+
+        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Login")
+                .setDescription("Use your fingerprint to login to the app")
+                .setNegativeButtonText("cancel")
+                .build();
+
+
+
+
+        fingerPrint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                biometricPrompt.authenticate(promptInfo);
+            }
+        });
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,14 +146,14 @@ public class Login extends AppCompatActivity {
                         userCredentials();
                     }
                     else
-                        {
-                            BaseClass.toast(Login.this,"Check Your Internet Connection");
-                        }
+                    {
+                        BaseClass.toast(Login.this,"Check Your Internet Connection");
+                    }
                 }
                 else
-                    {
-                        BaseClass.toast(Login.this,"Fill All First");
-                    }
+                {
+                    BaseClass.toast(Login.this,"Fill All First");
+                }
 
             }
         });
@@ -120,7 +194,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String ServerResponse) {
                         BaseClass.progressDialog.dismiss();
-                      //  Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
 
                         if(ServerResponse.trim().equals("0"))
                         {

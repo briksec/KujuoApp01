@@ -149,46 +149,81 @@
             app:passwordToggleTint="@color/white"
             android:textColorHint="#FFFFFF"
             >
-        <EditText
-            android:id="@+id/loginpass"
-            android:layout_marginTop="9dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="Enter Password"
-            android:textColorHint="#FFFFFF"
-            android:fontFamily="@font/rubik_light"
-            android:textSize="19sp"
-            app:backgroundTint="@color/white"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:minLines="1"
-            android:imeOptions="actionNext"
-            android:textColor="@color/white"
-            />
+            <EditText
+                android:id="@+id/loginpass"
+                android:layout_marginTop="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Enter Password"
+                android:textColorHint="#FFFFFF"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="19sp"
+                app:backgroundTint="@color/white"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:minLines="1"
+                android:imeOptions="actionNext"
+                android:textColor="@color/white"
+                />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_cont"
+
+    <LinearLayout
         android:layout_below="@+id/enterpass"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/done_btnclick"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_lay"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:layout_marginTop="30dp"
-        android:textColor="@color/white"
         android:text="Continue"
         android:textSize="19sp"
-        />
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:background="@drawable/thumb_backg"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="3dp"
+                android:id="@+id/z_mythumb"
+                android:src="@drawable/ic_baseline_fingerprint_24"
+                />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_cont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:background="@drawable/done_btnclick"
+            android:textColor="@color/white"
+            android:text="Continue"
+            android:textSize="19sp"
+            />
+
+    </LinearLayout>
+
+
 
     <!--signup-->
     <TextView
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_cont"
+        android:layout_below="@+id/btn_lay"
         android:layout_marginTop="10dp"
         android:text="SignUp"
         android:fontFamily="@font/rubik_light"
