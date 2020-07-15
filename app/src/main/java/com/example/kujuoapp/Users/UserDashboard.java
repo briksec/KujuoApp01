@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -30,7 +31,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
 public class UserDashboard extends AppCompatActivity {
-
+    MeowBottomNavigation bottomNavigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class UserDashboard extends AppCompatActivity {
         promos();
         size();
 
-        MeowBottomNavigation bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation= findViewById(R.id.bottomNavigation);
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.bottomicon));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.scanicon));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.personicon));
@@ -56,6 +57,8 @@ public class UserDashboard extends AppCompatActivity {
                 if(model.getId()==1)
                 {
                     BaseClass.toast(getApplicationContext(),"kjfk");
+                }else if (model.getId()==2){
+                    startActivity(new Intent(getApplicationContext(),QRCodeGenerator.class));
                 }
                 return null;
             }
