@@ -6,8 +6,11 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +40,22 @@ public class QRCodeGenerator extends AppCompatActivity {
         qrcodeShow = findViewById(R.id.qr_show);
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
         initUI();
+        stausbar();
+    }
+
+    private void stausbar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Window window = QRCodeGenerator.this.getWindow();
+
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            window.setStatusBarColor(Color.TRANSPARENT);
+
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+            Window window = getWindow();
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
     }
 
     private void initUI() {
@@ -65,8 +84,9 @@ public class QRCodeGenerator extends AppCompatActivity {
     private void checkQR() {
         MultiFormatWriter mfw = new MultiFormatWriter();
         String mylink = amount.getText().toString()
-                +"-"+message.getText().toString()
-                +"-"+"23";
+                +"@-"+message.getText().toString()
+                +"@-"+"+92343417"
+                +"@-" +"Mr xyz";
         try{
 
             BitMatrix bitMatrix = mfw.encode(mylink

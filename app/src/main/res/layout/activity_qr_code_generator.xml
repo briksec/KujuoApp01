@@ -5,52 +5,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".Users.QRCodeGenerator">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Generate QR Code"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        android:fontFamily="@font/rubik_bold"
-        android:layout_marginBottom="10dp"
-        />
 
-    <ImageView
+    <!--toolbar-->
+    <LinearLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/qr_show"
-        android:layout_marginBottom="10dp"
-        />
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/tback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_back_24"
+            android:layout_marginLeft="10dp"
+            />
 
-    <EditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="QR Code Generator"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/rubik_light" />
+    </LinearLayout>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Amount"
-        android:layout_margin="5dp"
-        android:inputType="number"
-        android:id="@+id/z_amount"
-        />
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
 
-    <EditText
-        android:id="@+id/z_messsage"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:hint="Enter message"
-        android:inputType="text" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
-        android:text="Generate"
-        android:id="@+id/btn_gen"
-        android:layout_marginBottom="10dp"
-        />
+        android:layout_marginRight="15dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amount"
+            android:textSize="20dp"
+            android:fontFamily="@font/rubik"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Amount"
+            android:inputType="number"
+            android:id="@+id/z_amount"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Message"
+            android:textSize="20dp"
+            android:fontFamily="@font/rubik"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:id="@+id/z_messsage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter message"
+            android:textColor="@color/black"
+            android:inputType="text" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Generate"
+            android:id="@+id/btn_gen"
+            android:layout_gravity="center"
+            android:background="@drawable/cont_btn"
+            android:layout_marginBottom="20dp"
+            />
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/qr_show"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/qr_generate1"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="QR Code"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:fontFamily="@font/rubik_bold"
+            android:layout_marginBottom="10dp"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

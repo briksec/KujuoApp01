@@ -1,11 +1,17 @@
 package com.example.kujuoapp.Users;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,10 +29,16 @@ import com.example.kujuoapp.Users.Adapter.FeautureAdapter;
 import com.example.kujuoapp.Users.Adapter.PromoAdapter;
 import com.example.kujuoapp.Users.DataClass.FeautureData;
 import com.example.kujuoapp.Users.DataClass.PromoClass;
+import com.example.kujuoapp.Users.Feautures.QrSetter;
+import com.example.kujuoapp.Users.Feautures.Transfer;
+import com.example.kujuoapp.Users.Fragments.User_menu;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
@@ -40,15 +52,14 @@ public class UserDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_user_dashboard);
 
         stausbar();
-        inflateImageSlider();
-        feauture();
-        promos();
-        size();
+
+        //size();
 
         bottomNavigation= findViewById(R.id.bottomNavigation);
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.bottomicon));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.scanicon));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.personicon));
+
 
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
@@ -56,22 +67,40 @@ public class UserDashboard extends AppCompatActivity {
                 // YOUR CODES
                 if(model.getId()==1)
                 {
-                    BaseClass.toast(getApplicationContext(),"kjfk");
-                }else if (model.getId()==2){
-                    startActivity(new Intent(getApplicationContext(),QRCodeGenerator.class));
+                    setFragment(new User_menu());
                 }
+                else if (model.getId()==2)
+                {
+                    scanQRMethod();
+                    // startActivity(new Intent(getApplicationContext(),QRCodeGenerator.class));
+                     }
                 return null;
             }
         });
 
+        bottomNavigation.setCallListenerWhenIsSelected(true);
+        bottomNavigation.show(1,true);
         bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
             public Unit invoke(MeowBottomNavigation.Model model) {
-                // YOUR CODES
-                return null;
+                if(model.getId()==1)
+                {
+                    setFragment(new User_menu());
+                }
+                else if (model.getId()==2)
+                {
+                    scanQRMethod();
+                    // startActivity(new Intent(getApplicationContext(),QRCodeGenerator.class));
+                }
+                else if (model.getId()==3)
+                {
+                    scanQRMethod();
+                    // startActivity(new Intent(getApplicationContext(),QRCodeGenerator.class));
+                }                return null;
             }
         });
     }
+
 
     private void stausbar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -100,70 +129,44 @@ public class UserDashboard extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),height+"/n"+width+"",Toast.LENGTH_LONG).show();
     }
 
-    private void inflateImageSlider() {
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction ft =getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.user_container, fragment, "Menu");
+        ft.commit();
+    }
 
-        // Using Image Slider -----------------------------------------------------------------------
-         SliderLayout sliderShow = findViewById(R.id.slider);
+    private void scanQRMethod() {
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
 
-        //populating Image slider
-        ArrayList<String> sliderImages = new ArrayList<>();
-        sliderImages.add("https://i.ibb.co/k9K0XMd/download.jpg");
-        sliderImages.add("https://i.ibb.co/k9K0XMd/download.jpg");
-        sliderImages.add("https://i.ibb.co/MD60t7K/download-1.jpg");
-        //  sliderImages.add("https://www.printstop.co.in/images/flashgallary/large/calendar-diaries-home-banner.jpg");
-       /* sliderImages.add("https://www.printstop.co.in/images/flashgallary/large/calendar-diaries-banner.jpg");
-        sliderImages.add("https://www.printstop.co.in/images/flashgallary/large/free-visiting-cards-home-banner.JPG");
-*/
-        for (String s : sliderImages) {
-            DefaultSliderView sliderView = new DefaultSliderView(this);
-            sliderView.image(s);
-            sliderShow.addSlider(sliderView);
+                IntentIntegrator intentIntegrator = new IntentIntegrator(UserDashboard.this);
+                intentIntegrator.setBarcodeImageEnabled(false);
+                intentIntegrator.setPrompt("");
+                intentIntegrator.initiateScan(IntentIntegrator.QR_CODE_TYPES);
+
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        BaseClass.progress(this);
+        BaseClass.progressDialog.show();
+        BaseClass.progressDialog.setCancelable(true);
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+
+        if (intentResult != null){
+
+            if (intentResult.getContents() != null){
+             //   Toasty.success(getApplicationContext(),intentResult.getContents().toString(),Toasty.LENGTH_LONG).show();
+                Intent intent=new Intent(UserDashboard.this, QrSetter.class);
+                intent.putExtra("rec_data",intentResult.getContents().toString());
+                startActivity(intent);
+                BaseClass.progressDialog.dismiss();
+            }
+            else {
+                // Toasty.error(getApplicationContext(),"Error: Something went wrong!",Toasty.LENGTH_LONG).show();
+            }
         }
 
-        sliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
-
+        super.onActivityResult(requestCode, resultCode, data);
     }
-
-    private void feauture() {
-        RecyclerView recyclerView=findViewById(R.id.userrecycler);
-
-        List<FeautureData> feautureData= new ArrayList<>();
-        feautureData.add(new FeautureData("1","Top Up",R.drawable.purplecircle,R.drawable.replus));
-        feautureData.add(new FeautureData("2","Transfer",R.drawable.yellowcircle,R.drawable.yellowicon));
-        feautureData.add(new FeautureData("3","Wallet",R.drawable.orangecolor,R.drawable.orangeicon));
-        feautureData.add(new FeautureData("4","Bill",R.drawable.yellowcircle,R.drawable.billicon));
-        feautureData.add(new FeautureData("5","Mobile Prepaid",R.drawable.orangecolor,R.drawable.mblicon));
-        GridLayoutManager gridLayout=new GridLayoutManager(UserDashboard.this,4);
-        recyclerView.setLayoutManager(gridLayout);
-        recyclerView.hasFixedSize();
-        FeautureAdapter feautureAdapter=new FeautureAdapter(feautureData,getApplicationContext());
-        recyclerView.setAdapter(feautureAdapter);
-
-     /*   List<DashboardData> dashboardData=new ArrayList<>();
-
-        dashboardData.add(new DashboardData("1","Cars","https://i.ibb.co/MD60t7K/download-1.jpg"));
-       dashboardData.add(new DashboardData("1","Cloths","https://i.ibb.co/k9K0XMd/download.jpg"));
-        GridLayoutManager gridLayout=new GridLayoutManager(UserDasboard.this,2);
-        recyclerView.setLayoutManager(gridLayout);
-
-        CategoryAdapter categoryAdapter= new CategoryAdapter(UserDasboard.this,dashboardData);
-        recyclerView.setAdapter(categoryAdapter);*/
-    }
-
-
-    private void promos() {
-        RecyclerView recyclerView=findViewById(R.id.drpromo);
-
-        List<PromoClass> data=new ArrayList<>();
-
-        data.add(new PromoClass("1","Bonus CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","https://i.ibb.co/MD60t7K/download-1.jpg"));
-        data.add(new PromoClass("1","DailyDiscount CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","https://i.ibb.co/MD60t7K/downd"));
-        data.add(new PromoClass("1","Bonus CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","https://i.ibb.co/k9K0XMd/download.jpg"));
-        GridLayoutManager gridLayout=new GridLayoutManager(UserDashboard.this,2);
-        recyclerView.setLayoutManager(gridLayout);
-
-        PromoAdapter promoAdapter=new PromoAdapter(data,getApplicationContext());
-        recyclerView.setAdapter(promoAdapter);
-    }
-
 }
