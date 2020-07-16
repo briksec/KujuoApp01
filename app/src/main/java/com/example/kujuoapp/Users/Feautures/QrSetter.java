@@ -24,7 +24,6 @@ public class QrSetter extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_setter);
-
         init();
         stausbar();
 
@@ -38,12 +37,14 @@ public class QrSetter extends AppCompatActivity {
                 String data= extras.getString("rec_data");
 
                 String[] separatedData = data.split("@-");
-
-                reciever_name.setText(": "+separatedData[3]);
                 rec_amount.setText(": "+separatedData[0]);
-                reciever_contactno.setText(": "+separatedData[2]);
                 rec_msg.setText(": "+separatedData[1]);
-                settext();
+                reciever_contactno.setText(": "+separatedData[2]);
+                reciever_name.setText(": "+separatedData[3]);
+
+
+
+              //  settext();
             }
         }
 

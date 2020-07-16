@@ -31,6 +31,7 @@ import com.example.kujuoapp.Users.DataClass.FeautureData;
 import com.example.kujuoapp.Users.DataClass.PromoClass;
 import com.example.kujuoapp.Users.Feautures.QrSetter;
 import com.example.kujuoapp.Users.Feautures.Transfer;
+import com.example.kujuoapp.Users.Fragments.ProfileFragment;
 import com.example.kujuoapp.Users.Fragments.User_menu;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -94,7 +95,8 @@ public class UserDashboard extends AppCompatActivity {
                 }
                 else if (model.getId()==3)
                 {
-                    scanQRMethod();
+                    setFragment(new ProfileFragment());
+                    //scanQRMethod();
                     // startActivity(new Intent(getApplicationContext(),QRCodeGenerator.class));
                 }                return null;
             }
@@ -156,13 +158,14 @@ public class UserDashboard extends AppCompatActivity {
         if (intentResult != null){
 
             if (intentResult.getContents() != null){
-             //   Toasty.success(getApplicationContext(),intentResult.getContents().toString(),Toasty.LENGTH_LONG).show();
+                Toasty.success(getApplicationContext(),intentResult.getContents().toString(),Toasty.LENGTH_LONG).show();
                 Intent intent=new Intent(UserDashboard.this, QrSetter.class);
                 intent.putExtra("rec_data",intentResult.getContents().toString());
                 startActivity(intent);
                 BaseClass.progressDialog.dismiss();
             }
             else {
+                BaseClass.progressDialog.dismiss();
                 // Toasty.error(getApplicationContext(),"Error: Something went wrong!",Toasty.LENGTH_LONG).show();
             }
         }

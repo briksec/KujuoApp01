@@ -62,4 +62,7 @@ dependencies {
     implementation 'androidx.biometric:biometric:1.0.1'
     implementation 'com.github.GrenderG:Toasty:1.4.2'
 
+    //for swipe to logout
+    implementation 'com.github.gratusik:AGIKSwipeButton:1.0.1'
+
 }
