@@ -5,39 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.kujuoapp.R;
-import com.example.kujuoapp.Users.Adapter.FeautureAdapter;
-import com.example.kujuoapp.Users.Adapter.PromoAdapter;
-import com.example.kujuoapp.Users.DataClass.FeautureData;
-import com.example.kujuoapp.Users.DataClass.PromoClass;
 import com.example.kujuoapp.Users.Feautures.QrSetter;
-import com.example.kujuoapp.Users.Feautures.Transfer;
-import com.example.kujuoapp.Users.Fragments.ProfileFragment;
+import com.example.kujuoapp.Profile.ProfileFragment;
 import com.example.kujuoapp.Users.Fragments.User_menu;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import kotlin.Unit;
