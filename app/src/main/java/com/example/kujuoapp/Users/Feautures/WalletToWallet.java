@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -38,6 +39,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
+import com.example.kujuoapp.Users.Login;
+import com.example.kujuoapp.Users.UserDashboard;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -61,7 +64,7 @@ public class WalletToWallet extends AppCompatActivity {
     HashMap<String,String> HashMap;
     Spinner balchk,convert2;
     ArrayList<String> countryName=new ArrayList<>();
-    TextView balance,tcuurency;
+    TextView balance,tcuurency,view_currency;
 
     ImageView open_eye,close_eye;
     boolean showBalance=false;
@@ -72,6 +75,11 @@ public class WalletToWallet extends AppCompatActivity {
 
     EditText transfer_amount;
 
+    Button transaction;
+
+    EditText walletid,phone_no,message;
+
+    String receiverid=null, transaction_type=null,messages;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +109,7 @@ public class WalletToWallet extends AppCompatActivity {
                 {
                     tcuurency.setText(balchk.getSelectedItem().toString());
 
-                    Double cal= Double.parseDouble("1.00") * Double.parseDouble(value);
+                    Double cal= Double.parseDouble(UserDashboard.user_wallet) * Double.parseDouble(value);
 
                     balance.setText(String.valueOf(cal));
                 }
@@ -135,7 +143,7 @@ public class WalletToWallet extends AppCompatActivity {
 
                     Double cal= Double.parseDouble(transfer_amount.getText().toString().trim()) * Double.parseDouble(value);
 
-                    transfer_amount.setText(String.valueOf(cal));
+                    view_currency.setText(": "+String.valueOf(cal) );
                 }
 
 
@@ -182,24 +190,57 @@ public class WalletToWallet extends AppCompatActivity {
         qr_scan=findViewById(R.id.qr_scan);
         convert2=findViewById(R.id.s2);
         transfer_amount=findViewById(R.id.t_amount);
+        view_currency=findViewById(R.id.view_currency);
+        transaction=findViewById(R.id.trans);
+        walletid=findViewById(R.id.wallet_id);
+        phone_no=findViewById(R.id.phoneno);
+        message=findViewById(R.id.msg);
 
-        phonelayout.setOnClickListener(new View.OnClickListener() {
+        transaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(walletlayout.getVisibility()==View.VISIBLE)
                 {
-                    walletlayout.setVisibility(View.GONE);
-                    phoneparentlaout.setVisibility(View.VISIBLE);
-                    phontext.setText("Wallet ID");
-                    phoneicon.setImageResource(R.drawable.wallet_24);
+                    if(walletid.length()==10)
+                    {
+                        receiverid = walletid.getText().toString();
+                        transaction_type="wallet-to-wallet";
+                        if(message.getText().length()>0)
+                        {
+                            if(transfer_amount.getText().toString().length()>0)
+                            {
+                                SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                                String userid=preferences1.getString("user_id", "");
+                                check_walletid_balance(userid,walletid.getText().toString(),transfer_amount.getText().toString());
+                            }
+                            else
+                            {
+                                transfer_amount.setError("Amount Required");
+                            }
+                        }
+                        else
+                        {
+                            message.setError("Message Required");
+
+                        }
+                    }
+                    else
+                    {
+                        walletid.setError("Wallet ID Must Be Ten(10).");
+                    }
                 }
                 else
-                    {
-                        walletlayout.setVisibility(View.VISIBLE);
-                        phoneparentlaout.setVisibility(View.GONE);
-                        phontext.setText("Phone Number");
-                        phoneicon.setImageResource(R.drawable.phoneicon);
+                {
+                    if(phone_no.length()>9) {
+                        receiverid = phone_no.getText().toString();
+                        transaction_type="wallet-to-contactno";
                     }
+                    else
+                    {
+                        phone_no.setError("Wallet ID Must Be Ten(10).");
+                    }
+                }
 
             }
         });
@@ -212,8 +253,27 @@ public class WalletToWallet extends AppCompatActivity {
             }
         });
 
+        phone_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                if(walletlayout.getVisibility()==View.VISIBLE)
+                {
+                    walletlayout.setVisibility(View.GONE);
+                    phoneparentlaout.setVisibility(View.VISIBLE);
+                    phontext.setText("Wallet ID");
+                    phoneicon.setImageResource(R.drawable.wallet_24);
+                }
+                else
+                {
+                    walletlayout.setVisibility(View.VISIBLE);
+                    phoneparentlaout.setVisibility(View.GONE);
+                    phontext.setText("Phone Number");
+                    phoneicon.setImageResource(R.drawable.phoneicon);
+                }
 
+            }
+        });
         
     }
 
@@ -291,12 +351,12 @@ public class WalletToWallet extends AppCompatActivity {
 
                 String grt_pin=p1.getText().toString()+p2.getText().toString()+p3.getText().toString()+
                         p4.getText().toString()+p5.getText().toString()+p6.getText().toString();
-                if(grt_pin.equals("123456"))
+                if(grt_pin.equals(UserDashboard.user_password))
                 {
                     dialog.dismiss();
                     close_eye.setVisibility(View.GONE);
                     open_eye.setVisibility(View.VISIBLE);
-                    balance.setText("1");
+                    balance.setText(UserDashboard.user_wallet);
                     showBalance=true;
                 }
                 else
@@ -435,6 +495,182 @@ public class WalletToWallet extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    public void check_walletid_balance(final String senderid, final String wallet_id, final String amount) {
+
+        BaseClass.progress(WalletToWallet.this);
+        BaseClass.progressDialog.show();
+        BaseClass.progressDialog.setCancelable(true);
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"check-wallet-id-ballance.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        BaseClass.progressDialog.dismiss();
+                       Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
+
+                        if(ServerResponse.trim().equals("0"))
+                        {
+                            BaseClass.toast(WalletToWallet.this,"Wrong Wallet ID");
+                        }
+                        else if(ServerResponse.trim().equals("1"))
+                        {
+                            BaseClass.toast(WalletToWallet.this,"You Have No Ballance");
+                        }
+                        else if(ServerResponse.trim().equals("ok"))
+                        {
+                            transactionInfoPopup();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        BaseClass.progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"check your internet connection", Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("sender_id",senderid);
+                params.put("wallet_id",wallet_id);
+                params.put("amount",amount);
+
+                return params;
+
+            }
+
+        };
+
+        // Creating RequestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+
+        // Adding the StringRequest object into requestQueue.
+
+        requestQueue.add(stringRequest);
+
+    }
+
+    private void transactionInfoPopup()
+    {
+        final Dialog dialog=new Dialog(WalletToWallet.this);
+        dialog.setContentView(R.layout.transaction_slip_popup);
+        dialog.setCancelable(true);
+        final TextView recid=dialog.findViewById(R.id.recid);
+        final TextView sendamount=dialog.findViewById(R.id.sendamount);
+        final TextView msg=dialog.findViewById(R.id.dmsg);
+        final TextView adminDetect=dialog.findViewById(R.id.adminfees);
+        final TextView totalamount=dialog.findViewById(R.id.totalamount);
+        final ImageView x=dialog.findViewById(R.id.cros);
+        final Button pay=dialog.findViewById(R.id.payes);
+
+
+        x.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        recid.setText(receiverid);
+        sendamount.setText(transfer_amount.getText().toString());
+        msg.setText(message.getText().toString());
+
+        final float cal=Integer.parseInt(transfer_amount.getText().toString())*Float.parseFloat(adminDetect.getText().toString());
+       final float total=Integer.parseInt(transfer_amount.getText().toString())-cal;
+
+        totalamount.setText(total+"");
+
+
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                String userid=preferences1.getString("user_id", "");
+                perform_transaction(String.valueOf(total),userid);
+            }
+        });
+        dialog.show();
+
+    }
+    public void perform_transaction(final String transacted, final String userid) {
+
+        BaseClass.progress(WalletToWallet.this);
+        BaseClass.progressDialog.show();
+        BaseClass.progressDialog.setCancelable(true);
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"wallet-to-wallet.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        BaseClass.progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
+
+                        if(ServerResponse.trim().equals("0"))
+                        {
+                            BaseClass.toast(WalletToWallet.this,"Wrong Wallet ID");
+                        }
+                        else if(ServerResponse.trim().equals("1"))
+                        {
+                            BaseClass.toast(WalletToWallet.this,"You Have No Ballance");
+                        }
+                        else if(ServerResponse.trim().equals("ok"))
+                        {
+                            transactionInfoPopup();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        BaseClass.progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"check your internet connection", Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+              /*  $transaction_type=$_POST['type'];
+                $reciever_id=$_POST['recieverid'];
+                $sender_id=$_POST['senderid'];
+                $amount=$_POST['amount'];
+                $message=$_POST['message'];*/
+
+              //  $transfer_amount=$_POST['transfer_amount'];
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("type",transaction_type);
+                params.put("recieverid",receiverid);
+                params.put("senderid",userid);
+                params.put("amount",transfer_amount.getText().toString());
+                params.put("message",message.getText().toString());
+                params.put("transfer_amount",transacted);
+
+                return params;
+
+            }
+
+        };
+
+        // Creating RequestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+
+        // Adding the StringRequest object into requestQueue.
+
+        requestQueue.add(stringRequest);
+
+    }
 
     private void scanQRMethod() {
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);

@@ -22,7 +22,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="30dp"
@@ -42,12 +42,52 @@
                         android:id="@+id/dusename"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jimmy Sulivan"
+                        android:text="Loading"
+                        android:fontFamily="@font/rubik_light"
+                        android:textSize="14sp"
+                        android:textColor="#131A22"
+                        />
+                    <TextView
+                        android:id="@+id/wallet_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loading"
                         android:fontFamily="@font/rubik_light"
                         android:textSize="14sp"
                         android:textColor="#131A22"
                         />
                 </LinearLayout>
+
+<!--
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Current \n Ballence:"
+                        android:fontFamily="@font/rubik_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#131A22"
+                        />
+                    <TextView
+                        android:id="@+id/bal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jimmy Sulivan"
+                        android:fontFamily="@font/rubik_light"
+                        android:textSize="14sp"
+                        android:layout_gravity="center"
+                        android:textColor="#131A22"
+                        />
+                </LinearLayout>
+-->
 
 
             </RelativeLayout>

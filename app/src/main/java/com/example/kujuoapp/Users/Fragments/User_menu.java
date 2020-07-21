@@ -1,14 +1,17 @@
 package com.example.kujuoapp.Users.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
@@ -30,17 +33,40 @@ public class User_menu extends Fragment {
         // Required empty public constructor
     }
 
+
     View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_user, container, false);
+
         inflateImageSlider();
+
         feauture();
+
         promos();
+
+        setname();
+
         return view;
     }
+
+    private void setname()
+    {
+        SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+       String get_name=preferences1.getString("user_name", "");
+       String wallet_id=preferences1.getString("wallet_id", "");
+        TextView user_name=view.findViewById(R.id.dusename);
+        TextView walletid=view.findViewById(R.id.wallet_id);
+
+        walletid.setText("Wallet ID : "+wallet_id);
+
+        user_name.setText(get_name);
+
+    }
+
     private void inflateImageSlider() {
 
         // Using Image Slider -----------------------------------------------------------------------

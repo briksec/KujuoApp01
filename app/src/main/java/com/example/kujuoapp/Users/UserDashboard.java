@@ -61,7 +61,7 @@ import kotlin.jvm.functions.Function1;
 public class UserDashboard extends AppCompatActivity {
     MeowBottomNavigation bottomNavigation;
 
-    public static String reg_datetime,user_name,user_email,user_password,user_wallet,user_phoneno;
+    public static String reg_datetime,user_name,user_email,user_password,user_wallet,user_phoneno,wallet_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,6 @@ public class UserDashboard extends AppCompatActivity {
 
         setContentView(R.layout.activity_user_dashboard);
 
-        stausbar();
 
         //size();
 
@@ -81,8 +80,30 @@ public class UserDashboard extends AppCompatActivity {
         else
             {
                 BaseClass.toast(this,"Check Your Internet Connection");
+                SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                user_name=preferences1.getString("user_name", "");
+                user_email=preferences1.getString("user_email", "");
+                user_password=preferences1.getString("user_password", "");
+                user_wallet=preferences1.getString("user_wallet", "");
+                reg_datetime=preferences1.getString("reg_datetime", "");
+                user_phoneno=preferences1.getString("user_phoneno", "");
+                wallet_id=preferences1.getString("wallet_id", "");
             }
+        stausbar();
+        init();
+        bottomNavigations();
+
+    }
+
+    private void init()
+    {
         bottomNavigation= findViewById(R.id.bottomNavigation);
+
+    }
+
+    private void bottomNavigations()
+    {
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.bottomicon));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.scanicon));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.personicon));
@@ -100,7 +121,7 @@ public class UserDashboard extends AppCompatActivity {
                 {
                     scanQRMethod();
                     // startActivity(new Intent(getApplicationContext(),QRCodeGenerator.class));
-                     }
+                }
                 return null;
             }
         });
@@ -207,11 +228,9 @@ public class UserDashboard extends AppCompatActivity {
                     @Override
                     public void onResponse(String ServerResponse) {
                         //progress_spinner.dismiss();
-                        // Toast.makeText(getApplicationContext(),ServerResponse.toString(),Toast.LENGTH_SHORT).show();
+               //         Toast.makeText(getApplicationContext(),ServerResponse.toString(),Toast.LENGTH_SHORT).show();
                         if(ServerResponse.trim().equals("0")){
-
                             Toast.makeText(getApplicationContext(),"Not Found",Toast.LENGTH_SHORT).show();
-
                         }
 
 
@@ -230,11 +249,13 @@ public class UserDashboard extends AppCompatActivity {
                                     editor.putString("user_wallet",info.getString("user_wallet"));
                                     editor.putString("reg_datetime",info.getString("reg_datetime"));
                                     editor.putString("user_phoneno",info.getString("user_phoneno"));
+                                    editor.putString("wallet_id",info.getString("wallet_id"));
 
-                                    ///   Toast.makeText(getApplicationContext(),info.getString("email"),Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(getApplicationContext(),user_name,Toast.LENGTH_SHORT).show();
                                     editor.apply();
                                     if (user_name != null)
                                     { SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
 
                                         user_name=preferences1.getString("user_name", "");
                                         user_email=preferences1.getString("user_email", "");
@@ -242,7 +263,8 @@ public class UserDashboard extends AppCompatActivity {
                                         user_wallet=preferences1.getString("user_wallet", "");
                                         reg_datetime=preferences1.getString("reg_datetime", "");
                                         user_phoneno=preferences1.getString("user_phoneno", "");
-
+                                        wallet_id=preferences1.getString("wallet_id", "");
+                                        Toast.makeText(getApplicationContext(),user_name,Toast.LENGTH_SHORT).show();
                                     }
                                     else{
                                         Toast.makeText(getApplicationContext(),"No Data",Toast.LENGTH_SHORT).show();
@@ -269,11 +291,13 @@ public class UserDashboard extends AppCompatActivity {
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+                SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+                String userid=preferences1.getString("user_id", "");
                 // Creating Map String Params.
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("userid", "2");
+                params.put("userid", userid);
 
 
                 return params;
