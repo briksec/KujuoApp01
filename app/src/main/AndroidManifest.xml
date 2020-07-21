@@ -18,7 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Users.Feautures.WalletToCnic"
+        <activity android:name=".Users.Feautures.WalletToCnic"/>
+        <activity android:name=".Profile.ChangeProfileActivity"></activity>
+        <activity
+            android:name=".Users.Feautures.QrSetter"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
