@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.Adapter.TransHistoryAdapter;
@@ -30,11 +31,28 @@ import es.dmoral.toasty.Toasty;
 public class Transfer extends AppCompatActivity {
 
     ImageView scanQRCode;
+    RelativeLayout walTowal, walTonic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
         scanQRCode = findViewById(R.id.scanqrcode);
+        walTowal=findViewById(R.id.walletToWallet);
+        walTonic=findViewById(R.id.walletToCnic);
+
+
+        walTowal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Transfer.this,WalletToWallet.class));
+            }
+        });
+        walTonic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Transfer.this,WalletToCnic.class));
+            }
+        });
         statusbar();
 
         recyclerView();

@@ -194,19 +194,25 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String ServerResponse) {
                         BaseClass.progressDialog.dismiss();
-                        //  Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
+                         Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
 
                         if(ServerResponse.trim().equals("0"))
                         {
                             BaseClass.toast(Login.this,"Register First");
                         }
-                        else if(ServerResponse.trim().equals("1"))
+                        else
                         {
-                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putString("userlogin","true");
                             editor.apply();
 
+                            startActivity(new Intent(Login.this,UserDashboard.class));
+                            finish();*/
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("user_id",ServerResponse.trim());
+                            editor.apply();
                             startActivity(new Intent(Login.this,UserDashboard.class));
                             finish();
                         }

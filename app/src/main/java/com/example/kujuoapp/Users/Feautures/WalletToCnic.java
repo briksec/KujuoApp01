@@ -1,15 +1,8 @@
 package com.example.kujuoapp.Users.Feautures;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.app.Dialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -18,18 +11,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -38,47 +29,35 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import es.dmoral.toasty.Toasty;
+public class WalletToCnic extends AppCompatActivity {
 
-public class WalletToWallet extends AppCompatActivity {
 
-    LinearLayout phonelayout,walletlayout,phoneparentlaout;
-    TextView phontext;
-    ImageView phoneicon;
-    HashMap<String,String> HashMap;
-    Spinner balchk,convert2;
-    ArrayList<String> countryName=new ArrayList<>();
-    TextView balance,tcuurency;
+    java.util.HashMap<String,String> HashMap;
+    Spinner balchk;
+   List<String> countryName=new ArrayList<String>();
+   TextView balance,tcuurency;
 
-    ImageView open_eye,close_eye;
-    boolean showBalance=false;
+   ImageView open_eye,close_eye;
 
-    boolean editable=false;
-
-    LinearLayout qr_scan;
-
-    EditText transfer_amount;
-
+   boolean showBalance=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wallet_to_wallet);
-        balchk=findViewById(R.id.balCurr);
+        setContentView(R.layout.activity_wallet_to_cnic);
 
-        HashMap=new HashMap<String, String>();
+
+        /*balance.setText("1");*/
+
 
         init();
         statusbar();
@@ -92,7 +71,7 @@ public class WalletToWallet extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String value=HashMap.get(balchk.getSelectedItem().toString());
-                //  BaseClass.toast(WalletToWallet.this,value);
+              //  BaseClass.toast(WalletToCnic.this,value);
                 TextView selectedText = (TextView) parent.getChildAt(0);
                 if (selectedText != null) {
                     selectedText.setTextColor(Color.WHITE);
@@ -107,39 +86,7 @@ public class WalletToWallet extends AppCompatActivity {
                 }
 
 
-                //  ((TextView) view).setTextColor(Color.WHITE); //Change selected text color
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-         convert2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                String value=HashMap.get(convert2.getSelectedItem().toString());
-                //  BaseClass.toast(WalletToWallet.this,value);
-                TextView selectedText = (TextView) parent.getChildAt(0);
-                if (selectedText != null) {
-                    selectedText.setTextColor(Color.WHITE);
-                }
-                if(convert2.getSelectedItem()!=null && value != null
-                        && transfer_amount.getText().toString()!= null
-                        && transfer_amount.getText().toString()!= ""
-                        && transfer_amount.getText().toString().length()>0 )
-                {
-                    BaseClass.toast(WalletToWallet.this,value);
-
-                    Double cal= Double.parseDouble(transfer_amount.getText().toString().trim()) * Double.parseDouble(value);
-
-                    transfer_amount.setText(String.valueOf(cal));
-                }
-
-
-                //  ((TextView) view).setTextColor(Color.WHITE); //Change selected text color
+              //  ((TextView) view).setTextColor(Color.WHITE); //Change selected text color
 
             }
 
@@ -149,92 +96,8 @@ public class WalletToWallet extends AppCompatActivity {
             }
         });
 
-         back();
-
+        back();
     }
-
-    private void back() {
-
-        ImageView back=findViewById(R.id.tback);
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-    }
-
-    private void init() {
-
-
-        phonelayout=findViewById(R.id.phonumlayout);
-        phontext=findViewById(R.id.phonetext);
-        phoneicon=findViewById(R.id.phoneicon);
-        phoneparentlaout=findViewById(R.id.phoneparentlayout);
-        walletlayout=findViewById(R.id.walletlayout);
-        HashMap=new HashMap<String, String>();
-        balchk=findViewById(R.id.balCurr);
-        balance=findViewById(R.id.t_balance);
-        tcuurency=findViewById(R.id.t_currency);
-        open_eye=findViewById(R.id.openeye);
-        close_eye=findViewById(R.id.closeeye);
-        qr_scan=findViewById(R.id.qr_scan);
-        convert2=findViewById(R.id.s2);
-        transfer_amount=findViewById(R.id.t_amount);
-
-        phonelayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(walletlayout.getVisibility()==View.VISIBLE)
-                {
-                    walletlayout.setVisibility(View.GONE);
-                    phoneparentlaout.setVisibility(View.VISIBLE);
-                    phontext.setText("Wallet ID");
-                    phoneicon.setImageResource(R.drawable.wallet_24);
-                }
-                else
-                    {
-                        walletlayout.setVisibility(View.VISIBLE);
-                        phoneparentlaout.setVisibility(View.GONE);
-                        phontext.setText("Phone Number");
-                        phoneicon.setImageResource(R.drawable.phoneicon);
-                    }
-
-            }
-        });
-
-        qr_scan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                scanQRMethod();
-                finish();
-            }
-        });
-
-
-
-        
-    }
-
-
-    private void statusbar() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Window window = WalletToWallet.this.getWindow();
-
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            window.setStatusBarColor(Color.TRANSPARENT);
-
-        }
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
-            Window window = getWindow();
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            window.setStatusBarColor(Color.TRANSPARENT);
-        }
-    }
-
 
     private void hideAndShow() {
 
@@ -242,15 +105,15 @@ public class WalletToWallet extends AppCompatActivity {
         close_eye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BaseClass.toast(WalletToWallet.this,"dsa");
+                BaseClass.toast(WalletToCnic.this,"dsa");
 
-                pwdpopup();
+                    pwdpopup();
             }
         });
         open_eye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BaseClass.toast(WalletToWallet.this,"dsa");
+                BaseClass.toast(WalletToCnic.this,"dsa");
 
                 balance.setText("****");
                 open_eye.setVisibility(View.GONE);
@@ -262,7 +125,7 @@ public class WalletToWallet extends AppCompatActivity {
 
     private void pwdpopup()
     {
-        final Dialog dialog = new Dialog(WalletToWallet.this);
+        final Dialog dialog = new Dialog(WalletToCnic.this);
         dialog.setContentView(R.layout.pwd_popup);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCanceledOnTouchOutside(false);
@@ -300,9 +163,9 @@ public class WalletToWallet extends AppCompatActivity {
                     showBalance=true;
                 }
                 else
-                {
-                    BaseClass.toast(WalletToWallet.this,"Wrong Pin");
-                }
+                    {
+                        BaseClass.toast(WalletToCnic.this,"Wrong Pin");
+                    }
             }
         });
 
@@ -339,6 +202,33 @@ public class WalletToWallet extends AppCompatActivity {
         });
 
     }
+
+
+    private void init() {
+        HashMap=new HashMap<String, String>();
+        balchk=findViewById(R.id.balCurr);
+        balance=findViewById(R.id.t_balance);
+        tcuurency=findViewById(R.id.t_currency);
+        open_eye=findViewById(R.id.openeye);
+        close_eye=findViewById(R.id.closeeye);
+    }
+    private void statusbar() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Window window = WalletToCnic.this.getWindow();
+
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            window.setStatusBarColor(Color.TRANSPARENT);
+
+        }
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+            Window window = getWindow();
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
 
     private void FetchCurrency() {
 
@@ -396,19 +286,15 @@ public class WalletToWallet extends AppCompatActivity {
                                 for(Map.Entry map  :  HashMap.entrySet() )
 
                                 {
-                                    countryName.add(String.valueOf(map.getKey()));
+                                   countryName.add(String.valueOf(map.getKey()));
                                 }
-                                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(WalletToWallet.this, android.R.layout.simple_spinner_item, countryName);
+                                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(WalletToCnic.this, android.R.layout.simple_spinner_item, countryName);
                                 //set the view for the Drop down list
                                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 //set the ArrayAdapter to the spinner
                                 balchk.setAdapter(dataAdapter);
 
                                 balchk.setSelection(dataAdapter.getPosition("USD"));
-
-                                convert2.setAdapter(dataAdapter);
-
-                                convert2.setSelection(dataAdapter.getPosition("USD"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -434,41 +320,17 @@ public class WalletToWallet extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
     }
+    private void back() {
 
+        ImageView back = findViewById(R.id.tback);
 
-    private void scanQRMethod() {
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
-
-        IntentIntegrator intentIntegrator = new IntentIntegrator(WalletToWallet.this);
-        intentIntegrator.setBarcodeImageEnabled(false);
-        intentIntegrator.setPrompt("");
-        intentIntegrator.initiateScan(IntentIntegrator.QR_CODE_TYPES);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-        BaseClass.progress(this);
-        BaseClass.progressDialog.show();
-        BaseClass.progressDialog.setCancelable(true);
-        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
-
-        if (intentResult != null){
-
-            if (intentResult.getContents() != null){
-                Toasty.success(getApplicationContext(),intentResult.getContents().toString(),Toasty.LENGTH_LONG).show();
-                Intent intent=new Intent(WalletToWallet.this, QrSetter.class);
-                intent.putExtra("rec_data",intentResult.getContents().toString());
-                startActivity(intent);
-                BaseClass.progressDialog.dismiss();
-            }
-            else {
-                BaseClass.progressDialog.dismiss();
-                // Toasty.error(getApplicationContext(),"Error: Something went wrong!",Toasty.LENGTH_LONG).show();
-            }
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
     }
-}

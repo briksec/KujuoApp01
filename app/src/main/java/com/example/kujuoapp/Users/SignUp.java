@@ -116,15 +116,16 @@ public class SignUp extends AppCompatActivity {
                             BaseClass.progressDialog.dismiss();
                             BaseClass.toast(SignUp.this,"Try Again");
                         }
-                        else if(ServerResponse.trim().equals("1"))
+                        else
                         {
                             BaseClass.progressDialog.dismiss();
-                            startActivity(new Intent(SignUp.this,UserDashboard.class));
-                            finish();
+
                             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("userlogin","true");
+                            editor.putString("user_id",ServerResponse.trim());
                             editor.apply();
+                            startActivity(new Intent(SignUp.this,UserDashboard.class));
+                            finish();
                         }
 
 

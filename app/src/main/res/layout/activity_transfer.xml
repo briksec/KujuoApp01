@@ -86,6 +86,7 @@
             app:cardCornerRadius="30dp"
             >
             <RelativeLayout
+                android:id="@+id/walletToWallet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -149,6 +150,7 @@
             app:cardCornerRadius="30dp"
             >
             <RelativeLayout
+                android:id="@+id/walletToCnic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

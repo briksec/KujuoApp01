@@ -21,6 +21,15 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
@@ -36,8 +45,14 @@ import com.example.kujuoapp.Users.Fragments.User_menu;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 import kotlin.Unit;
@@ -45,6 +60,9 @@ import kotlin.jvm.functions.Function1;
 
 public class UserDashboard extends AppCompatActivity {
     MeowBottomNavigation bottomNavigation;
+
+    public static String reg_datetime,user_name,user_email,user_password,user_wallet,user_phoneno;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,4 +190,98 @@ public class UserDashboard extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
+    private void fetchdata() {
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"fetch_user_info.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        //progress_spinner.dismiss();
+                        // Toast.makeText(getApplicationContext(),ServerResponse.toString(),Toast.LENGTH_SHORT).show();
+                        if(ServerResponse.trim().equals("0")){
+
+                            Toast.makeText(getApplicationContext(),"Not Found",Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(ServerResponse);
+                            if (jsonArray.length() > 0) {
+                                for (int j = 0; j < jsonArray.length(); j++) {
+
+                                    JSONObject info = jsonArray.getJSONObject(j);
+                                    user_name=info.getString("user_name");
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putString("user_name",info.getString("user_name"));
+                                    editor.putString("user_email",info.getString("user_email"));
+                                    editor.putString("user_password",info.getString("user_password"));
+                                    editor.putString("user_wallet",info.getString("user_wallet"));
+                                    editor.putString("reg_datetime",info.getString("reg_datetime"));
+                                    editor.putString("user_phoneno",info.getString("user_phoneno"));
+
+                                    ///   Toast.makeText(getApplicationContext(),info.getString("email"),Toast.LENGTH_SHORT).show();
+                                    editor.apply();
+                                    if (user_name != null)
+                                    { SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                                        user_name=preferences1.getString("user_name", "");
+                                        user_email=preferences1.getString("user_email", "");
+                                        user_password=preferences1.getString("user_password", "");
+                                        user_wallet=preferences1.getString("user_wallet", "");
+                                        reg_datetime=preferences1.getString("reg_datetime", "");
+                                        user_phoneno=preferences1.getString("user_phoneno", "");
+
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(),"No Data",Toast.LENGTH_SHORT).show();
+
+                                    }
+
+
+                                }// levelAdapter.notifyDataSetChanged();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                        Toast.makeText(getApplicationContext(),"Check Your Internet Connection", Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("userid", "2");
+
+
+                return params;
+
+            }
+
+        };
+
+        // Creating RequestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+
+        // Adding the StringRequest object into requestQueue.
+
+        requestQueue.add(stringRequest);
+
+    }
+
 }
