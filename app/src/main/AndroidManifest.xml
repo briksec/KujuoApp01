@@ -26,10 +26,7 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
         </activity>
-        <activity
-            android:name=".Users.Feautures.QrSetter"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+   
         <activity
             android:name=".Users.QRCodeGenerator"
             android:screenOrientation="portrait"
@@ -50,6 +47,11 @@
             android:name=".Users.UserDashboard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
@@ -60,11 +62,6 @@
             android:name=".Users.Login"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CommanActivity.SplashScreen3"

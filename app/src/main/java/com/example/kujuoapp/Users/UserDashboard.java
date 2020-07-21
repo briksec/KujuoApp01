@@ -74,6 +74,14 @@ public class UserDashboard extends AppCompatActivity {
 
         //size();
 
+        if(BaseClass.isNetworkConnected(UserDashboard.this)==true)
+        {
+            fetchdata();
+        }
+        else
+            {
+                BaseClass.toast(this,"Check Your Internet Connection");
+            }
         bottomNavigation= findViewById(R.id.bottomNavigation);
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.bottomicon));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.scanicon));
