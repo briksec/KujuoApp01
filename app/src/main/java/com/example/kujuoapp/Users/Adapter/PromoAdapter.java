@@ -36,8 +36,8 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.MyviewHolder
     public void onBindViewHolder(@NonNull MyviewHolder holder, int position) {
         Glide.with(context)
                 .load(data.get(position).getImage())
-                .placeholder(R.drawable.cap_boy)
-                .error(R.drawable.cap_boy)
+                .placeholder(R.drawable.promo_img)
+                .error(R.drawable.promo_img)
                 .centerCrop()
                 .into(holder.imageView);
         holder.title.setText(data.get(position).getTitle());

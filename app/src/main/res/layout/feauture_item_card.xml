@@ -4,6 +4,7 @@
     android:layout_width="70dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginBottom="5dp"
     android:gravity="center_vertical"
    >
     <!--image View-->
@@ -12,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/purplecircle"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:gravity="center">
@@ -30,7 +31,8 @@
         android:text="Loading"
         android:textAlignment="center"
         android:gravity="center_horizontal"
-        android:textSize="17sp"
+        android:layout_marginTop="3dp"
+        android:textSize="12sp"
         android:fontFamily="@font/rubik_light"
         android:textColor="#131A22"/>
     <!--<TextView
