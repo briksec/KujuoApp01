@@ -4,5 +4,6 @@
         <domain includeSubdomains="true">deploy.myob.host</domain>
         <domain includeSubdomains="true">prismotube.com</domain>
         <domain includeSubdomains="true">192.168.18.5</domain>
+        <domain includeSubdomains="true">kujofinancials.com</domain>
     </domain-config>
 </network-security-config>

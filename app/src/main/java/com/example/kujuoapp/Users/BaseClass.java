@@ -11,7 +11,8 @@ import com.example.kujuoapp.R;
 
 public class BaseClass {
 
-    public static  String domain="http://192.168.18.5/kujuoApp/";
+    ///public static  String domain="http://192.168.18.5/kujuoApp/";
+    public static  String domain="http://kujofinancials.com/kujuo_official/";
 
     public static ProgressDialog progressDialog;
 
