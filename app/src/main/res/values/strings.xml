@@ -31,4 +31,7 @@
     <string name="fullname">Full Name</string>
     <string name="savechanges">Save Change</string>
     <string name="phone">Phone Number</string>
+    <string name="top_up">
+    <font size="9">Top Up</font>
+</string>
 </resources>

@@ -75,6 +75,16 @@
             </LinearLayout>
         </LinearLayout>
 <!--        Balance-->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,7 +150,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:id="@+id/work_qrcode"
             android:orientation="horizontal"
+
             >
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -187,6 +199,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:orientation="horizontal"
             >
             <LinearLayout
@@ -288,6 +301,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:id="@+id/work_fingerprint"
             android:orientation="horizontal"
             >
             <LinearLayout
@@ -393,7 +407,7 @@
         android:layout_marginTop="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         >
     <com.agik.AGIKSwipeButton.View.Swipe_Button_View
@@ -408,5 +422,9 @@
         app:sb_thumb_image="@drawable/ic_logout"
         app:sb_swipe_text="Sign Out" />
     </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </FrameLayout>

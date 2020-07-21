@@ -100,7 +100,7 @@ public class User_menu extends Fragment {
         feautureData.add(new FeautureData("3","Wallet",R.drawable.orangecolor,R.drawable.orangeicon));
         feautureData.add(new FeautureData("4","Bill",R.drawable.yellowcircle,R.drawable.billicon));
         feautureData.add(new FeautureData("5","Mobile Prepaid",R.drawable.orangecolor,R.drawable.mblicon));
-        feautureData.add(new FeautureData("6","QR Code",R.drawable.yellowcircle,R.drawable.qr_code_image));
+        feautureData.add(new FeautureData("6","QR Code",R.drawable.purplecircle,R.drawable.my_qr_code));
 
         GridLayoutManager gridLayout=new GridLayoutManager(getContext(),4);
         recyclerView.setLayoutManager(gridLayout);
@@ -126,7 +126,7 @@ public class User_menu extends Fragment {
         List<PromoClass> data=new ArrayList<>();
 
         data.add(new PromoClass("1","Bonus CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","https://i.ibb.co/MD60t7K/download-1.jpg"));
-        data.add(new PromoClass("1","DailyDiscount CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","https://i.ibb.co/MD60t7K/downd"));
+        data.add(new PromoClass("1","DailyDiscount CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ",""));
         data.add(new PromoClass("1","Bonus CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","https://i.ibb.co/k9K0XMd/download.jpg"));
         GridLayoutManager gridLayout=new GridLayoutManager(getContext(),2);
         recyclerView.setLayoutManager(gridLayout);
