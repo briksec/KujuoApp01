@@ -264,7 +264,6 @@ public class UserDashboard extends AppCompatActivity {
                                         reg_datetime=preferences1.getString("reg_datetime", "");
                                         user_phoneno=preferences1.getString("user_phoneno", "");
                                         wallet_id=preferences1.getString("wallet_id", "");
-                                        Toast.makeText(getApplicationContext(),user_name,Toast.LENGTH_SHORT).show();
                                     }
                                     else{
                                         Toast.makeText(getApplicationContext(),"No Data",Toast.LENGTH_SHORT).show();

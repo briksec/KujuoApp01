@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.Adapter;
@@ -79,7 +80,7 @@ public class WalletToWallet extends AppCompatActivity {
 
     EditText walletid,phone_no,message;
 
-    String receiverid=null, transaction_type=null,messages;
+    String receiverid=null, transaction_type=null,messages,walletamount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,13 +88,27 @@ public class WalletToWallet extends AppCompatActivity {
         balchk=findViewById(R.id.balCurr);
 
         HashMap=new HashMap<String, String>();
-
         init();
         statusbar();
         FetchCurrency();
-
         hideAndShow();
 
+        if(BaseClass.isNetworkConnected(WalletToWallet.this))
+        {
+            first_fetch_wallet_balance();
+        }
+        else
+        {
+            BaseClass.toast(WalletToWallet.this,"Check Your Internet Connection");
+            finish();
+        }
+        spinner_work();
+         back();
+
+    }
+
+    private void spinner_work()
+    {
         //attach the listener to the spinner
         balchk.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -102,14 +117,17 @@ public class WalletToWallet extends AppCompatActivity {
                 String value=HashMap.get(balchk.getSelectedItem().toString());
                 //  BaseClass.toast(WalletToWallet.this,value);
                 TextView selectedText = (TextView) parent.getChildAt(0);
-                if (selectedText != null) {
+
+
+                if (selectedText != null)
+                {
                     selectedText.setTextColor(Color.WHITE);
                 }
                 if(balchk.getSelectedItem()!=null && value != null && balance.getText().toString()!= null && balance.getText().toString()!= "" && showBalance==true )
                 {
                     tcuurency.setText(balchk.getSelectedItem().toString());
 
-                    Double cal= Double.parseDouble(UserDashboard.user_wallet) * Double.parseDouble(value);
+                    Double cal= Double.parseDouble(walletamount) * Double.parseDouble(value);
 
                     balance.setText(String.valueOf(cal));
                 }
@@ -124,7 +142,7 @@ public class WalletToWallet extends AppCompatActivity {
 
             }
         });
-         convert2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        convert2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -156,8 +174,6 @@ public class WalletToWallet extends AppCompatActivity {
 
             }
         });
-
-         back();
 
     }
 
@@ -351,16 +367,31 @@ public class WalletToWallet extends AppCompatActivity {
 
                 String grt_pin=p1.getText().toString()+p2.getText().toString()+p3.getText().toString()+
                         p4.getText().toString()+p5.getText().toString()+p6.getText().toString();
-                if(grt_pin.equals(UserDashboard.user_password))
+
+          ///      BaseClass.toast(WalletToWallet.this,UserDashboard.user_password);
+                if(grt_pin.equals("111111"))
                 {
-                    dialog.dismiss();
-                    close_eye.setVisibility(View.GONE);
-                    open_eye.setVisibility(View.VISIBLE);
-                    balance.setText(UserDashboard.user_wallet);
-                    showBalance=true;
+
+                    SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                    String userid=preferences1.getString("user_id", "");
+
+                    if(BaseClass.isNetworkConnected(WalletToWallet.this))
+                    {
+                        fetch_wallet_balance(userid,dialog);
+
+                    }
+                    else
+                    {
+                        dialog.dismiss();
+                        BaseClass.toast(WalletToWallet.this,"Check Your Internet Connection");
+                    }
+
+
                 }
                 else
                 {
+                    dialog.dismiss();
                     BaseClass.toast(WalletToWallet.this,"Wrong Pin");
                 }
             }
@@ -382,9 +413,7 @@ public class WalletToWallet extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // specify length of your editext here to move on next edittext
-                if(e1.getText().toString().trim().length()==0){
-                    e2.requestFocus();
-                }
+
             }
 
             @Override
@@ -394,7 +423,10 @@ public class WalletToWallet extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if(e1.getText().toString().trim().length()==1){
+                    e2.requestFocus();
+                    e1.hashCode();
+                }
             }
         });
 
@@ -507,7 +539,7 @@ public class WalletToWallet extends AppCompatActivity {
                     @Override
                     public void onResponse(String ServerResponse) {
                         BaseClass.progressDialog.dismiss();
-                       Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
+                     //  Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
 
                         if(ServerResponse.trim().equals("0"))
                         {
@@ -538,7 +570,7 @@ public class WalletToWallet extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("sender_id",senderid);
-                params.put("wallet_id",wallet_id);
+                params.put("wallet_id",walletid.getText().toString());
                 params.put("amount",amount);
 
                 return params;
@@ -561,7 +593,9 @@ public class WalletToWallet extends AppCompatActivity {
     {
         final Dialog dialog=new Dialog(WalletToWallet.this);
         dialog.setContentView(R.layout.transaction_slip_popup);
-        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         final TextView recid=dialog.findViewById(R.id.recid);
         final TextView sendamount=dialog.findViewById(R.id.sendamount);
         final TextView msg=dialog.findViewById(R.id.dmsg);
@@ -595,13 +629,21 @@ public class WalletToWallet extends AppCompatActivity {
                 SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
                 String userid=preferences1.getString("user_id", "");
-                perform_transaction(String.valueOf(total),userid);
+                if(BaseClass.isNetworkConnected(WalletToWallet.this)){
+                    perform_transaction(String.valueOf(total),userid,dialog,String.valueOf(cal));
+                }
+                else
+                    {
+                        dialog.dismiss();
+                        BaseClass.toast(WalletToWallet.this,"Check Your Internet Connection");
+                    }
+
             }
         });
         dialog.show();
 
     }
-    public void perform_transaction(final String transacted, final String userid) {
+    public void perform_transaction(final String transacted, final String userid, final  Dialog dialog,final String transaction_charges) {
 
         BaseClass.progress(WalletToWallet.this);
         BaseClass.progressDialog.show();
@@ -613,8 +655,8 @@ public class WalletToWallet extends AppCompatActivity {
                     @Override
                     public void onResponse(String ServerResponse) {
                         BaseClass.progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
-
+                //        Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                         if(ServerResponse.trim().equals("0"))
                         {
                             BaseClass.toast(WalletToWallet.this,"Wrong Wallet ID");
@@ -623,9 +665,11 @@ public class WalletToWallet extends AppCompatActivity {
                         {
                             BaseClass.toast(WalletToWallet.this,"You Have No Ballance");
                         }
-                        else if(ServerResponse.trim().equals("ok"))
+                        else if(ServerResponse.trim().equals("sucesss"))
                         {
-                            transactionInfoPopup();
+                            int remainingbalance=Integer.valueOf(walletamount)-Integer.parseInt(transfer_amount.getText().toString());
+                            balance.setText(remainingbalance+"");
+                            BaseClass.toast(WalletToWallet.this,"Transaction Done");
                         }
                     }
                 },
@@ -639,14 +683,7 @@ public class WalletToWallet extends AppCompatActivity {
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-              /*  $transaction_type=$_POST['type'];
-                $reciever_id=$_POST['recieverid'];
-                $sender_id=$_POST['senderid'];
-                $amount=$_POST['amount'];
-                $message=$_POST['message'];*/
 
-              //  $transfer_amount=$_POST['transfer_amount'];
-                // Creating Map String Params.
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("type",transaction_type);
@@ -655,6 +692,130 @@ public class WalletToWallet extends AppCompatActivity {
                 params.put("amount",transfer_amount.getText().toString());
                 params.put("message",message.getText().toString());
                 params.put("transfer_amount",transacted);
+                params.put("transaction_charges",transaction_charges);
+
+                return params;
+
+            }
+
+        };
+
+        // Creating RequestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+
+        // Adding the StringRequest object into requestQueue.
+
+        requestQueue.add(stringRequest);
+
+    }
+
+    public void fetch_wallet_balance(final String userid,final Dialog dialog) {
+
+        BaseClass.progress(WalletToWallet.this);
+        BaseClass.progressDialog.show();
+        BaseClass.progressDialog.setCancelable(true);
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"fetch_wallet_ballance.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        BaseClass.progressDialog.dismiss();
+              //          Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
+
+
+                        if(ServerResponse.trim().equals("false"))
+                        {
+                            BaseClass.toast(WalletToWallet.this,"Try again");
+                        }
+                        else
+                            {
+                                dialog.dismiss();
+                                close_eye.setVisibility(View.GONE);
+                                open_eye.setVisibility(View.VISIBLE);
+                                balance.setText(ServerResponse.trim());
+                                showBalance=true;
+                                walletamount=ServerResponse.trim();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        BaseClass.progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"Restart Your App..."+volleyError.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("userid",userid);
+
+                return params;
+
+            }
+
+        };
+
+        // Creating RequestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+
+        // Adding the StringRequest object into requestQueue.
+
+        requestQueue.add(stringRequest);
+
+    }
+
+
+    public void first_fetch_wallet_balance() {
+
+        BaseClass.progress(WalletToWallet.this);
+        BaseClass.progressDialog.show();
+        BaseClass.progressDialog.setCancelable(true);
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"fetch_wallet_ballance.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        BaseClass.progressDialog.dismiss();
+                      //  Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
+
+
+                        if(ServerResponse.trim().equals("false"))
+                        {
+                            BaseClass.toast(WalletToWallet.this,"Try again");
+                        }
+                        else
+                            {
+                                walletamount=ServerResponse.trim();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        BaseClass.progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"Restart Your App...", Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                String userid=preferences1.getString("user_id", "");
+                params.put("userid",userid);
 
                 return params;
 

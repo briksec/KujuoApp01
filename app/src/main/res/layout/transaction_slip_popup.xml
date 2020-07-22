@@ -4,7 +4,6 @@
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="10dp"
     android:background="@drawable/gray_radious"
     >
 
@@ -258,6 +257,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="30dp"
+            android:paddingBottom="10dp"
             >
             <Button
                 android:id="@+id/payes"
