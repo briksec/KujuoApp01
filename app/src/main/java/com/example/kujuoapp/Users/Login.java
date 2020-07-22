@@ -211,7 +211,9 @@ public class Login extends AppCompatActivity {
                             finish();*/
                             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("user_id",ServerResponse.trim());
+                            //Edited by Zeeshan
+                            String[] split=ServerResponse.split("!");
+                            editor.putString("user_id",split[0].toString());
                             editor.apply();
                             startActivity(new Intent(Login.this,UserDashboard.class));
                             finish();

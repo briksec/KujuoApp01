@@ -54,6 +54,7 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.MyviewHolder
         TextView title, content;
         public MyviewHolder(@NonNull View itemView) {
             super(itemView);
+
             imageView=itemView.findViewById(R.id.pimage);
             title=itemView.findViewById(R.id.ptitle);
             content=itemView.findViewById(R.id.pcontent);

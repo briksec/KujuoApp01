@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kujuoapp.R;
+import com.example.kujuoapp.SQLiteDatabase.DatabaseHelper;
 import com.rilixtech.widget.countrycodepicker.CountryCodePicker;
 
 import java.util.HashMap;
@@ -30,11 +31,13 @@ public class SignUp extends AppCompatActivity {
     EditText name,contact,pass,email;
     Button  cont;
     String phoneno;
+    DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        db = new DatabaseHelper(getApplicationContext());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.ap_bg, this.getTheme()));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -122,8 +125,16 @@ public class SignUp extends AppCompatActivity {
 
                             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("user_id",ServerResponse.trim());
+                            //Edited by Zeeshan
+                            String[] split=ServerResponse.split("!");
+                            editor.putString("user_id",split[0].toString());
                             editor.apply();
+
+                            if (db.insertNewUser(split[0],split[1])){
+                                BaseClass.toast(getApplicationContext(),"sent to sqlite!");
+                             }else {
+                                BaseClass.toast(getApplicationContext(),"Not sent to sqlite!");
+                            }
                             startActivity(new Intent(SignUp.this,UserDashboard.class));
                             finish();
                         }
