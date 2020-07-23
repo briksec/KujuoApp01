@@ -2,12 +2,16 @@ package com.example.kujuoapp.Users;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,10 +32,11 @@ import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
 
-    EditText name,contact,pass,email;
+    EditText name,contact,email,code, code2, code3, code4, code5, code6;
     Button  cont;
     String phoneno;
     DatabaseHelper db;
+    String total_pin = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +56,16 @@ public class SignUp extends AppCompatActivity {
     {
         name=findViewById(R.id.name);
         contact=findViewById(R.id.contactno);
-        pass=findViewById(R.id.pass);
+        //pass=findViewById(R.id.pass);
+        code = findViewById(R.id.codess);
+        code2 = findViewById(R.id.codess2);
+        code3 = findViewById(R.id.codess3);
+        code4 = findViewById(R.id.codess4);
+        code5 = findViewById(R.id.codess5);
+        code6 = findViewById(R.id.codess6);
         cont=findViewById(R.id.btn_cont);
         email=findViewById(R.id.email);
+        editTextEditor();
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,10 +77,10 @@ public class SignUp extends AppCompatActivity {
                 {
                     contact.setError("Enter a Phone Number First");
                 }
-                  else if(pass.getText().toString().isEmpty())
-                {
-                    pass.setError("Enter a Password First");
-                }
+//                  else if(pass.getText().toString().isEmpty())
+//                {
+//                    pass.setError("Enter a Password First");
+//                }
                   else if(contact.getText().toString().length()!=10)
                 {
                     contact.setError("Enter a Correct Number");
@@ -90,6 +102,131 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
+    private void editTextEditor() {
+        code.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code.getText().toString().trim().length()==0){
+                    code2.requestFocus();
+
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        code2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code2.getText().toString().trim().length()==0){
+                    code3.requestFocus();
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        code3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code3.getText().toString().trim().length()==0){
+                    code4.requestFocus();
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        code4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code4.getText().toString().trim().length()==0){
+                    code5.requestFocus();
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        code5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code5.getText().toString().trim().length()>0){
+                    code6.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        code6.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code6.getText().toString().trim().length()>0){
+                    //code6.requestFocus();
+                    total_pin=code.getText().toString().trim()+code2.getText().toString().trim()+code3.getText().toString().trim()+code4.getText().toString().trim()+code5.getText().toString().trim()+code6.getText().toString().trim();
+                    hideKeyboard(SignUp.this);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+    }
+
     private void countrtyCode() {
         CountryCodePicker countryCodePicker;
         countryCodePicker =findViewById(R.id.ccp1);
@@ -101,8 +238,18 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
     public void userCredentials() {
-
+        BaseClass.toast(getApplicationContext(),""+total_pin);
         BaseClass.progress(SignUp.this);
         BaseClass.progressDialog.show();
         BaseClass.progressDialog.setCancelable(true);
@@ -130,11 +277,11 @@ public class SignUp extends AppCompatActivity {
                             editor.putString("user_id",split[0].toString());
                             editor.apply();
 
-                            if (db.insertNewUser(split[0],split[1])){
-                                BaseClass.toast(getApplicationContext(),"sent to sqlite!");
-                             }else {
-                                BaseClass.toast(getApplicationContext(),"Not sent to sqlite!");
-                            }
+//                            if (db.insertNewUser(split[0],split[1])){
+//                                BaseClass.toast(getApplicationContext(),"sent to sqlite!");
+//                             }else {
+//                                BaseClass.toast(getApplicationContext(),"Not sent to sqlite!");
+//                            }
                             startActivity(new Intent(SignUp.this,UserDashboard.class));
                             finish();
                         }
@@ -158,7 +305,7 @@ public class SignUp extends AppCompatActivity {
 
                 params.put("user_name",name.getText().toString().trim());
                 params.put("phoneno",phoneno);
-                params.put("pass",pass.getText().toString().trim());
+                params.put("pass",total_pin.toString());
                 params.put("email",email.getText().toString().trim());
 
                 return params;

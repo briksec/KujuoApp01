@@ -142,38 +142,103 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="Pin Code"
             android:textSize="17sp"
             android:fontFamily="@font/rubik_light"
             android:textColor="#FFFFFF"
             />
-        <com.google.android.material.textfield.TextInputLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true"
-            android:padding="5dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:gravity="center"
-            app:passwordToggleTint="@color/white"
-            android:textColorHint="#FFFFFF"
+            android:layout_marginTop="20dp"
+
             >
+
             <EditText
-                android:id="@+id/loginpass"
-                android:layout_marginTop="9dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Enter Password"
-                android:textColorHint="#FFFFFF"
-                android:fontFamily="@font/rubik_light"
-                android:textSize="19sp"
-                app:backgroundTint="@color/white"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:minLines="1"
+                android:id="@+id/codess"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:textSize="14sp"
+                android:inputType="numberPassword"
+                android:gravity="center"
                 android:imeOptions="actionNext"
                 android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@drawable/thumb_backg"
+                android:layout_marginRight="5dp"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
                 />
-        </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/codess2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:textSize="14sp"
+                android:inputType="numberPassword"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@drawable/thumb_backg"
+                android:layout_marginRight="5dp"
+                />
+            <EditText
+                android:id="@+id/codess3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:textSize="14sp"
+                android:inputType="numberPassword"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@drawable/thumb_backg"
+                android:layout_marginRight="5dp"
+                />
+            <EditText
+                android:id="@+id/codess4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:textSize="14sp"
+                android:inputType="numberPassword"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@drawable/thumb_backg"
+                android:layout_marginRight="5dp"
+                />
+            <EditText
+                android:id="@+id/codess5"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:textSize="14sp"
+                android:inputType="numberPassword"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@drawable/thumb_backg"
+                android:layout_marginRight="5dp"
+                />
+            <EditText
+                android:id="@+id/codess6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:textSize="14sp"
+                android:inputType="numberPassword"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@drawable/thumb_backg"
+                android:layout_marginRight="5dp"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
 

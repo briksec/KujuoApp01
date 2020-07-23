@@ -34,4 +34,7 @@
     <string name="top_up">
     <font size="9">Top Up</font>
 </string>
+    <string name="order_debit_card">Order Debit Card</string>
+    <string name="add_funds">Add Funds</string>
+    <string name="pincode">Pin Code</string>
 </resources>

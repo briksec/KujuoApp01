@@ -8,15 +8,20 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.StaticLayout;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,8 +47,9 @@ import es.dmoral.toasty.Toasty;
 
 public class Login extends AppCompatActivity {
 
-    public static EditText userphoneno,password;
+    public static EditText userphoneno,code, code2, code3, code4, code5, code6;
     Button cont;
+    public static String password_pin="";
     ImageView fingerPrint;
     String phoneno;
     @Override
@@ -62,10 +68,17 @@ public class Login extends AppCompatActivity {
 
 
         userphoneno=findViewById(R.id.loginphone);
-        password=findViewById(R.id.loginpass);
+        //password=findViewById(R.id.loginpass);
         fingerPrint = findViewById(R.id.z_mythumb);
-        cont=findViewById(R.id.btn_cont);
+        code = findViewById(R.id.codess);
+        code2 = findViewById(R.id.codess2);
+        code3 = findViewById(R.id.codess3);
+        code4 = findViewById(R.id.codess4);
+        code5 = findViewById(R.id.codess5);
+        code6 = findViewById(R.id.codess6);
 
+        cont=findViewById(R.id.btn_cont);
+        editTextEditor();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.ap_bg, this.getTheme()));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -135,10 +148,12 @@ public class Login extends AppCompatActivity {
                 biometricPrompt.authenticate(promptInfo);
             }
         });
+
+
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!TextUtils.isEmpty(userphoneno.getText().toString()) && !TextUtils.isEmpty(password.getText().toString()))
+                if(!TextUtils.isEmpty(userphoneno.getText().toString()) && !password_pin.isEmpty())
                 {
                     if(BaseClass.isNetworkConnected(Login.this))
                     {
@@ -159,6 +174,131 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    private void editTextEditor() {
+        code.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code.getText().toString().trim().length()==0){
+                    code2.requestFocus();
+
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        code2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code2.getText().toString().trim().length()==0){
+                    code3.requestFocus();
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        code3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code3.getText().toString().trim().length()==0){
+                    code4.requestFocus();
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        code4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code4.getText().toString().trim().length()==0){
+                    code5.requestFocus();
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        code5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code5.getText().toString().trim().length()>0){
+                    code6.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        code6.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // specify length of your editext here to move on next edittext
+                if(code6.getText().toString().trim().length()>0){
+                    //code6.requestFocus();
+                    password_pin=code.getText().toString().trim()+code2.getText().toString().trim()+code3.getText().toString().trim()+code4.getText().toString().trim()+code5.getText().toString().trim()+code6.getText().toString().trim();
+                    hideKeyboard(Login.this);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+    }
+
     private void intentSigup() {
         TextView sigup=findViewById(R.id.signup);
         sigup.setOnClickListener(new View.OnClickListener() {
@@ -169,7 +309,16 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
     private void countrtyCode() {
         CountryCodePicker countryCodePicker;
         countryCodePicker =findViewById(R.id.ccp1);
@@ -235,7 +384,7 @@ public class Login extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("phone",phoneno);
-                params.put("password",password.getText().toString().trim());
+                params.put("password",password_pin.toString());
 
                 return params;
 

@@ -30,6 +30,7 @@
              <ImageView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
+                 android:id="@+id/cp_backz"
                  android:background="@drawable/ic_arrow_backward"
                  />
              <TextView
@@ -85,6 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:id="@+id/fname_line"
                 >
         <LinearLayout
             android:layout_width="match_parent"
@@ -148,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:hint="Jimmy Sulivan"
+                    android:hint="Enter your Full Name..."
                     android:paddingLeft="5dp"
                     android:id="@+id/fullname_edit"
                     android:visibility="gone"
@@ -161,6 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:id="@+id/phoneline"
                 >
         <LinearLayout
             android:layout_width="match_parent"
@@ -226,7 +229,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="2dp"
                     android:paddingLeft="5dp"
-                    android:hint="+1898860119"
+                    android:hint="Enter phone number..."
                     android:visibility="gone"
                     android:id="@+id/ph_edit"
                     />
@@ -248,7 +251,9 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:text="@string/savechanges"
+                android:id="@+id/save_changes"
                 android:textColor="#452A95"
+                android:enabled="false"
                 android:fontFamily="@font/rubik"
                 android:textAllCaps="false"
                 android:layout_marginBottom="50dp"

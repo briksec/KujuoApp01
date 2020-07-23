@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
 import com.example.kujuoapp.Users.DataClass.FeautureData;
+import com.example.kujuoapp.Users.Feautures.BalanceActivity;
 import com.example.kujuoapp.Users.Feautures.Topup;
 import com.example.kujuoapp.Users.Feautures.Transfer;
 import com.example.kujuoapp.Users.Feautures.WalletToWallet;
@@ -67,7 +68,9 @@ public class FeautureAdapter extends RecyclerView.Adapter<FeautureAdapter.Myview
                     context.startActivity(intent);
                 } else if(feautureDataList.get(position).getId()=="3")
                 {
-
+                    Intent intent=new Intent(context, BalanceActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
                 } else if(feautureDataList.get(position).getId()=="4")
                 {
 
