@@ -58,6 +58,7 @@ public class User_menu extends Fragment {
 
        String get_name=preferences1.getString("user_name", "");
        String wallet_id=preferences1.getString("wallet_id", "");
+
         TextView user_name=view.findViewById(R.id.dusename);
         TextView walletid=view.findViewById(R.id.wallet_id);
 

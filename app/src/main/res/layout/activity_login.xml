@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="fill_parent"
+    android:background="#1a1367"
+    android:layout_width="fill_parent">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1a1367"
@@ -178,9 +184,10 @@
         android:id="@+id/btn_lay"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="Continue"
         android:textSize="19sp"
+
         >
 
         <LinearLayout
@@ -257,3 +264,4 @@
         android:background="@drawable/login_bottom2"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>
+</ScrollView>

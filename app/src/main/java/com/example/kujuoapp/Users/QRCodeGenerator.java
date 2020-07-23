@@ -85,8 +85,8 @@ public class QRCodeGenerator extends AppCompatActivity {
         MultiFormatWriter mfw = new MultiFormatWriter();
         String mylink = amount.getText().toString()
                 +"@-"+message.getText().toString()
-                +"@-"+"+92343417"
-                +"@-" +"Mr xyz";
+                +"@-"+UserDashboard.user_phoneno
+                +"@-" +UserDashboard.user_name;
         try{
 
             BitMatrix bitMatrix = mfw.encode(mylink

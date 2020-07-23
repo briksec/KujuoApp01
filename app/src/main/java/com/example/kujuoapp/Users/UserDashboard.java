@@ -228,7 +228,7 @@ public class UserDashboard extends AppCompatActivity {
                     @Override
                     public void onResponse(String ServerResponse) {
                         //progress_spinner.dismiss();
-               //         Toast.makeText(getApplicationContext(),ServerResponse.toString(),Toast.LENGTH_SHORT).show();
+              Toast.makeText(getApplicationContext(),ServerResponse.toString(),Toast.LENGTH_SHORT).show();
                         if(ServerResponse.trim().equals("0")){
                             Toast.makeText(getApplicationContext(),"Not Found",Toast.LENGTH_SHORT).show();
                         }
@@ -264,6 +264,8 @@ public class UserDashboard extends AppCompatActivity {
                                         reg_datetime=preferences1.getString("reg_datetime", "");
                                         user_phoneno=preferences1.getString("user_phoneno", "");
                                         wallet_id=preferences1.getString("wallet_id", "");
+
+
                                     }
                                     else{
                                         Toast.makeText(getApplicationContext(),"No Data",Toast.LENGTH_SHORT).show();

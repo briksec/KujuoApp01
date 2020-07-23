@@ -17,6 +17,7 @@ import com.example.kujuoapp.Users.BaseClass;
 import com.example.kujuoapp.Users.DataClass.FeautureData;
 import com.example.kujuoapp.Users.Feautures.Topup;
 import com.example.kujuoapp.Users.Feautures.Transfer;
+import com.example.kujuoapp.Users.Feautures.WalletToWallet;
 import com.example.kujuoapp.Users.QRCodeGenerator;
 
 import java.util.List;
