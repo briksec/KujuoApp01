@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
 import com.example.kujuoapp.Users.Login;
@@ -50,6 +51,7 @@ public class ProfileFragment extends Fragment {
     static TextView email;
     static TextView topname;
     static TextView topnumber;
+    static ImageView prof_pic;
     LinearLayout fingerprintline,QRCodeline ;
     public static Fragment profFrag;
     public ProfileFragment() {
@@ -72,6 +74,7 @@ public class ProfileFragment extends Fragment {
         email = view.findViewById(R.id.u_email);
         topname = view.findViewById(R.id.top_name);
         topnumber = view.findViewById(R.id.top_number);
+        prof_pic = view.findViewById(R.id.prof_pic);
         swipe_button_view.setOnSwipeCompleteListener_forward_reverse(new OnSwipeCompleteListener() {
             @Override
             public void onSwipe_Forward(Swipe_Button_View swipe_button_view) {
@@ -117,6 +120,11 @@ public class ProfileFragment extends Fragment {
                                     email.setText(info.getString("user_email"));
                                     pincode.setText(info.getString("user_password"));
                                     walletamt.setText(info.getString("balance"));
+                                    Glide.with(ProfileFragment.context)
+                                            .load(info.getString("user_profilepic"))
+                                            .circleCrop()
+                                            .placeholder(R.drawable.ic_loading)
+                                            .into(prof_pic);
                                     topname.setText(info.getString("user_name"));
                                     topnumber.setText(info.getString("user_phoneno"));
                                     }

@@ -47,7 +47,7 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    app:srcCompat="@drawable/cap_boy"
+                    android:id="@+id/prof_pic"
                      />
 
                 <LinearLayout
@@ -77,15 +77,6 @@
             </LinearLayout>
         </LinearLayout>
 <!--        Balance-->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -404,6 +395,13 @@
         </LinearLayout>
     </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -420,6 +418,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:sb_swipe_animate_text="true"
+        android:layout_marginLeft="1dp"
+        android:paddingLeft="20dp"
         app:sb_swipe_bg_color="#E8EDFF"
         app:sb_thumb_bg_color="#8360CE"
         app:sb_swipe_text_color="#452A95"
@@ -429,7 +429,7 @@
     </LinearLayout>
 
 
-            </LinearLayout>
-        </ScrollView>
+
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>
