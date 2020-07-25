@@ -61,7 +61,7 @@
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:textColor="@color/white"
-                      android:text="Jimmy Sulivan"
+                      android:text="loading..."
                       android:id="@+id/top_name"
                       />
                     <TextView
@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:textColor="@color/white"
-                        android:text="+1898860119"
+                        android:text="loading..."
                         android:id="@+id/top_number"
                         />
                 </LinearLayout>
@@ -125,7 +125,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="115.00"
+                    android:text="loading..."
                     android:id="@+id/u_wallamount"
                     android:gravity="center"
                     android:layout_marginLeft="1dp"
@@ -241,6 +241,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:id="@+id/pin_code_set"
             android:orientation="horizontal"
             >
             <LinearLayout
@@ -277,7 +278,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="24****"
+                    android:text="loading..."
                     android:id="@+id/u_pincode"
                     android:gravity="center"
                     android:layout_marginLeft="10dp"
@@ -380,7 +381,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Sulivan@gmail.com"
+                android:text="loading..."
                 android:gravity="center"
                 android:id="@+id/u_email"
                 android:layout_marginLeft="10dp"

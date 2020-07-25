@@ -20,15 +20,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Users.Feautures.BalanceActivity">
-
-        </activity>
+        <activity android:name=".Users.Feautures.ChangePinCodeActivity"></activity>
+        <activity android:name=".Users.Feautures.BalanceActivity"></activity>
         <activity android:name=".Users.Feautures.WalletToCnic" />
         <activity android:name=".Profile.ChangeProfileActivity" />
         <activity
             android:name=".Users.Feautures.QrSetter"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".Users.QRCodeGenerator"
             android:screenOrientation="portrait"
@@ -40,9 +39,7 @@
         <activity
             android:name=".Users.Feautures.Transfer"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" >
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
             android:name=".Users.Feautures.Topup"
             android:screenOrientation="portrait"
@@ -50,21 +47,15 @@
         <activity
             android:name=".Users.UserDashboard"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
             android:name=".Users.SignUp"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
             android:name=".Users.Login"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
             android:name=".CommanActivity.SplashScreen3"
             android:screenOrientation="portrait"

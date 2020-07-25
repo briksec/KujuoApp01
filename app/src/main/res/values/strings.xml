@@ -37,4 +37,6 @@
     <string name="order_debit_card">Order Debit Card</string>
     <string name="add_funds">Add Funds</string>
     <string name="pincode">Pin Code</string>
+    <string name="acpc_text">Be sure the new pincode is</string>
+    <string name="acpc_text2">different from the old pincode.</string>
 </resources>

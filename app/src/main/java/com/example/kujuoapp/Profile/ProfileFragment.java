@@ -31,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
+import com.example.kujuoapp.Users.Feautures.ChangePinCodeActivity;
 import com.example.kujuoapp.Users.Login;
 import com.example.kujuoapp.Users.QRCodeGenerator;
 import com.example.kujuoapp.Users.UserDashboard;
@@ -53,7 +54,7 @@ public class ProfileFragment extends Fragment {
     static TextView topname;
     static TextView topnumber;
     static ImageView prof_pic;
-    LinearLayout fingerprintline,QRCodeline ;
+    LinearLayout fingerprintline,QRCodeline,resetpinCode ;
     public static Fragment profFrag;
     public ProfileFragment() {
         // Required empty public constructor
@@ -73,6 +74,7 @@ public class ProfileFragment extends Fragment {
         walletamt = view.findViewById(R.id.u_wallamount);
         pincode = view.findViewById(R.id.u_pincode);
         email = view.findViewById(R.id.u_email);
+        resetpinCode = view.findViewById(R.id.pin_code_set);
         topname = view.findViewById(R.id.top_name);
         topnumber = view.findViewById(R.id.top_number);
         prof_pic = view.findViewById(R.id.prof_pic);
@@ -96,12 +98,24 @@ public class ProfileFragment extends Fragment {
 
         changeProfile();
         validateStuff();
-        topname.setText(UserDashboard.user_name);
-        topnumber.setText(UserDashboard.user_phoneno);
+        changepinCode();
+        fetchUData();
+       // topname.setText(UserDashboard.user_name);
+      //  topnumber.setText(UserDashboard.user_phoneno);
         return view;
     }
 
-/*
+    private void changepinCode() {
+        resetpinCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ChangePinCodeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+    }
+
     public static void fetchUData() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"fetch_profile_data1.php",
                 new Response.Listener<String>() {
@@ -122,9 +136,9 @@ public class ProfileFragment extends Fragment {
                                     JSONObject info = jsonArray.getJSONObject(j);
                                     email.setText(info.getString("user_email"));
                                     pincode.setText(info.getString("user_password"));
-                                    walletamt.setText(info.getString("balance"));
+                                    walletamt.setText(info.getString("user_wallet"));
                                     Glide.with(ProfileFragment.context)
-                                            .load(info.getString("user_profilepic"))
+                                            .load(info.getString("user_profile"))
                                             .circleCrop()
                                             .placeholder(R.drawable.ic_loading)
                                             .into(prof_pic);
@@ -174,7 +188,6 @@ public class ProfileFragment extends Fragment {
         requestQueue.add(stringRequest);
 
     }
-*/
 
     private void changeProfile() {
         change_prof_btn.setOnClickListener(new View.OnClickListener() {

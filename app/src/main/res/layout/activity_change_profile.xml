@@ -130,7 +130,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Jimmy Sulivan"
+                    android:text="loading..."
                     android:id="@+id/my_username"
                     android:gravity="center"
                     android:layout_marginLeft="10dp"
@@ -207,7 +207,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="+1898860119"
+                    android:text="loading..."
                     android:id="@+id/my_userphone"
                     android:gravity="center"
                     android:layout_marginLeft="10dp"

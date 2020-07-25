@@ -64,6 +64,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
     Bitmap selct,cap;
     Uri selectedImage;
     String image;
+    public static String type="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,13 +91,15 @@ public class ChangeProfileActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*ProfileFragment.fetchUData();*/
+                ProfileFragment.fetchUData();
                 finish();
             }
         });
         changeProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+              type = "image";
+                save_changes_btn.setEnabled(true);
                 if(checkPermission()) {
                     selectImage();
                 } else {
@@ -114,6 +117,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
                     usersetdname.setVisibility(View.GONE);
                     nameEdit.setVisibility(View.VISIBLE);
                     save_changes_btn.setEnabled(true);
+                    type = "name";
                     eGSetter.setCheckname(false);
                 }else {
                     arrowright.setBackgroundResource(R.drawable.ic_right_arrow);
@@ -134,6 +138,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
                     phoneEdit.setVisibility(View.VISIBLE);
                     save_changes_btn.setEnabled(true);
                     eGSetter.setCheckphone(false);
+                    type = "phone";
                 }else {
                     arrowbottom.setBackgroundResource(R.drawable.ic_right_arrow);
                     usersetdphone.setVisibility(View.VISIBLE);
@@ -158,7 +163,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
     }
 
     private void updateUData(final String name, final String phone) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"update_profile_data.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"update_profile_text.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
@@ -208,7 +213,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String ServerResponse) {
                         //progress_spinner.dismiss();
-                        // Toast.makeText(getContext(),ServerResponse.toString(),Toast.LENGTH_SHORT).show();
+                     //    Toast.makeText(getApplicationContext(),ServerResponse.toString(),Toast.LENGTH_SHORT).show();
                         if(ServerResponse.trim().equals("0")){
                             Toast.makeText(getApplicationContext(),"Not Found",Toast.LENGTH_SHORT).show();
                         }
@@ -223,8 +228,8 @@ public class ChangeProfileActivity extends AppCompatActivity {
                                     usersetdname.setText(info.getString("user_name"));
                                     usersetdphone.setText(info.getString("user_phoneno"));
                                     Glide.with(getApplicationContext())
-                                            .load(info.getString("user_profilepic"))
-                                            .placeholder(R.drawable.user)
+                                            .load(info.getString("user_profile"))
+                                            .placeholder(R.drawable.ic_loading)
                                             .circleCrop()
                                             .into(changeProfile);
                                     nameEdit.setText(info.getString("user_name"));
@@ -255,10 +260,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
                 String userid=preferences1.getString("user_id", "");
                 // Creating Map String Params.
                 Map<String, String> params = new HashMap<String, String>();
-
                 params.put("userid", userid);
-
-
                 return params;
 
             }
@@ -303,25 +305,20 @@ public class ChangeProfileActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void updateImagedata( final String updatefield, final String type) {
+    public void updatedata(final String updatefield, final String type) {
         BaseClass.progress(ChangeProfileActivity.this);
         BaseClass.progressDialog.show();
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://kujofinancials.com/kujuo_official/update_profile.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"update_profile_data.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
                         // Toast.makeText(getApplicationContext(), ServerResponse.trim().toString(),  Toast.LENGTH_SHORT).show();
                         // Hiding the progress dialog after all task complete.
 
-                        if(ServerResponse.trim().equals("0")) {
-                              Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_SHORT).show();
+
+                             BaseClass.toast(getApplicationContext(), ""+ServerResponse);
                                 BaseClass.progressDialog.hide();
-                        }
-                        else if(ServerResponse.trim().equals("done")) {
-                              Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                                BaseClass.progressDialog.hide();
-                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -340,11 +337,9 @@ public class ChangeProfileActivity extends AppCompatActivity {
                 // Creating Map String Params.
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("id", userid);
+                params.put("userid", userid);
                 params.put("updatefields", updatefield);
                 params.put("type",type);
-
-
 
                 return params;
             }
@@ -386,7 +381,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
             if (requestCode == 1 ){
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 image=ImageToString(bitmap);
-                updateImagedata(image,"image");
+                updatedata(image,"image");
                // changeProfile.setImageBitmap(bitmap);
                 Glide.with(getApplicationContext()).load(bitmap)
                         .circleCrop()
@@ -406,7 +401,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
                 try {
                     selct = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), selectedImage);
                     image=ImageToString(selct);
-                    updateImagedata(image,"image");
+                    updatedata(image,"image");
                    // changeProfile.setImageBitmap(selct);
                     Glide.with(getApplicationContext())
                             .load(selct)
@@ -431,7 +426,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-      /*  ProfileFragment.fetchUData();*/
+       ProfileFragment.fetchUData();
         finish();
     }
 }
