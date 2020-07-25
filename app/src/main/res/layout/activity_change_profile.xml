@@ -57,7 +57,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:srcCompat="@drawable/cap_boy"
+            android:id="@+id/change_profile"
             />
         <LinearLayout
             android:layout_width="match_parent"
