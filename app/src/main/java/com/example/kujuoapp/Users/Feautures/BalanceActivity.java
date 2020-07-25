@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,6 +35,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
+import com.example.kujuoapp.Users.UserDashboard;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -205,7 +208,7 @@ public class BalanceActivity extends AppCompatActivity {
                         p4.getText().toString()+p5.getText().toString()+p6.getText().toString();
                 p1.requestFocus();
                 ///      BaseClass.toast(BalanceActivity.this,UserDashboard.user_password);
-                if(grt_pin.equals("111111"))
+                if(grt_pin.equals(UserDashboard.user_password))
                 {
 
                     SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -228,10 +231,12 @@ public class BalanceActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    /*YoYo.with(Techniques.Bounce)
-                            .duration(7000)
-                            .playOn(findViewById(R.id.logo));*/
-
+                    Vibrator vibrator = (Vibrator) getSystemService(BalanceActivity.VIBRATOR_SERVICE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        vibrator.vibrate(500);
+                    }
                     YoYo.with(Techniques.Shake)
                             .duration(500).repeat(1)
                             .playOn(dialog.findViewById(R.id.layout));

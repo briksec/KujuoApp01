@@ -16,6 +16,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -219,9 +221,16 @@ public class WalletToWallet extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(WalletToWallet.this,Transfer.class));
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(WalletToWallet.this,Transfer.class));
+        finish();
     }
 
     private void init() {
@@ -481,7 +490,7 @@ public class WalletToWallet extends AppCompatActivity {
                         p4.getText().toString()+p5.getText().toString()+p6.getText().toString();
 
           ///      BaseClass.toast(WalletToWallet.this,UserDashboard.user_password);
-                if(grt_pin.equals("111111"))
+                if(grt_pin.equals(UserDashboard.user_password))
                 {
 
                     SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -504,10 +513,12 @@ public class WalletToWallet extends AppCompatActivity {
                 }
                 else
                 {
-                    /*YoYo.with(Techniques.Bounce)
-                            .duration(7000)
-                            .playOn(findViewById(R.id.logo));*/
-
+                    Vibrator vibrator = (Vibrator) getSystemService(WalletToWallet.VIBRATOR_SERVICE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        vibrator.vibrate(500);
+                    }
                     YoYo.with(Techniques.Bounce)
                             .duration(1000)
                             .playOn(dialog.findViewById(R.id.layout));

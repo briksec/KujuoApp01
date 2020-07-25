@@ -431,7 +431,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        ProfileFragment.fetchUData();
+      /*  ProfileFragment.fetchUData();*/
         finish();
     }
 }

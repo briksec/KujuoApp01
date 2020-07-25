@@ -1,6 +1,7 @@
 package com.example.kujuoapp.Users.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,19 +38,37 @@ public class TransHistoryAdapter extends RecyclerView.Adapter<TransHistoryAdapte
     @Override
     public void onBindViewHolder(@NonNull MyviewHolder holder, int position)
     {
+        if(position%2==1)
+        {
+            holder.trans_amount.setTextColor(Color.BLUE);
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#FFF1F0"));
+        }
         Glide.with(context)
                 .load(data.get(position).getProfile())
                 .placeholder(R.drawable.cap_boy)
                 .error(R.drawable.cap_boy)
                 .centerCrop()
                 .into(holder.profile);
-
         holder.name.setText(data.get(position).getName());
-        holder.trans_amount.setText(data.get(position).getTrasaction());
-        holder.contact.setText(data.get(position).getContact());
+        holder.trans_amount.setText("-$ "+data.get(position).getTrasaction());
+
+       String lastFourDigits = "*****"+data.get(position).getContact().substring(data.get(position).getContact().length() - 4);
+
+        holder.contact.setText(lastFourDigits);
+
 
     }
+    public String MaskDigits(String input)
+    {
+        //take first 6 characters
+        String firstPart = input.substring(0, 6);
 
+        //take last 4 characters
+        int len = input.length();
+        String lastPart = "********"+input.substring(len - 4, 4);
+
+        return lastPart;
+    }
     @Override
     public int getItemCount() {
         return data.size();

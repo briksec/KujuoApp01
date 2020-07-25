@@ -219,11 +219,24 @@
                 android:textColor="#131A22"
                 android:textSize="18dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/transhistory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/transhistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"/>
+                <TextView
+                    android:id="@+id/nohistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24dp"
+                    android:text="No Transact History"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginTop="20dp"/>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 

@@ -8,23 +8,41 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.Adapter.TransHistoryAdapter;
+import com.example.kujuoapp.Users.BaseClass;
 import com.example.kujuoapp.Users.DataClass.TransHistoryData;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
@@ -32,6 +50,9 @@ public class Transfer extends AppCompatActivity {
 
     ImageView scanQRCode;
     RelativeLayout walTowal, walTonic;
+    List<TransHistoryData> data=new ArrayList<>();
+    RecyclerView recyclerView;
+    TextView no;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +60,13 @@ public class Transfer extends AppCompatActivity {
         scanQRCode = findViewById(R.id.scanqrcode);
         walTowal=findViewById(R.id.walletToWallet);
         walTonic=findViewById(R.id.walletToCnic);
-
+        no=findViewById(R.id.nohistory);
 
         walTowal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Transfer.this,WalletToWallet.class));
+                finish();
             }
         });
         walTonic.setOnClickListener(new View.OnClickListener() {
@@ -95,19 +117,15 @@ public class Transfer extends AppCompatActivity {
 
     private void recyclerView()
     {
-        RecyclerView recyclerView=findViewById(R.id.transhistory);
+         recyclerView=findViewById(R.id.transhistory);
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        List<TransHistoryData> data=new ArrayList<>();
-        data.add(new TransHistoryData("1","","Ali","****5454854","-332","fsd","-233"));
-        data.add(new TransHistoryData("1","","Ali","****5454854","-332","fsd","-233"));
-        data.add(new TransHistoryData("1","","Ali","****5454854","-332","fsd","-233"));
-
-        TransHistoryAdapter adapter=new TransHistoryAdapter(this,data);
-
-        recyclerView.setAdapter(adapter);
+        if(BaseClass.isNetworkConnected(Transfer.this))
+            fetchdata();
+        else
+            BaseClass.toast(Transfer.this,"Check Your Internet Connection");
 
 
     }
@@ -138,4 +156,83 @@ public class Transfer extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
+
+    private void fetchdata() {
+        BaseClass.progress(Transfer.this);
+
+        BaseClass.progressDialog.show();
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"trans_history.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        BaseClass.progressDialog.dismiss();                     //   Toast.makeText(getApplicationContext(),ServerResponse.toString(),Toast.LENGTH_SHORT).show();
+                        if(ServerResponse.trim().equals("0")){
+                            no.setVisibility(View.VISIBLE);
+                            Toast.makeText(getApplicationContext(),"Not Found",Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(ServerResponse);
+                            if (jsonArray.length() > 0) {
+                                for (int j = 0; j < jsonArray.length(); j++) {
+
+                                    JSONObject info = jsonArray.getJSONObject(j);
+                                    data.add(new TransHistoryData(info.getString("trans_id"),
+                                            info.getString("rec_pic"),info.getString("rec_name"),
+                                            info.getString("rec_phone"),info.getString("date_time"),
+                                            info.getString("date_time"),info.getString("trsacted_amount")));
+
+                                }// levelAdapter.notifyDataSetChanged();
+                                TransHistoryAdapter adapter=new TransHistoryAdapter(Transfer.this,data);
+                                recyclerView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        BaseClass.progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"Check Your Internet Connection", Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                String userid=preferences1.getString("user_id", "");
+                // Creating Map String Params.
+                Map<String, String> params = new HashMap<String, String>();
+
+                if(userid!=null)
+                    params.put("userid", userid);
+                else
+                    params.put("userid","0");
+
+                return params;
+
+            }
+
+        };
+
+        // Creating RequestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+
+        // Adding the StringRequest object into requestQueue.
+
+        requestQueue.add(stringRequest);
+
+    }
+
 }
