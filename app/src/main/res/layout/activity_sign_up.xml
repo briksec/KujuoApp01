@@ -227,8 +227,9 @@
                     android:imeOptions="actionNext"
                     android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:background="@drawable/thumb_backg"
-                    android:layout_marginRight="5dp"
+                    android:background="@drawable/login_pin_bg"
+                    android:hint="X"
+                    android:textColorHint="@color/white"                    android:layout_marginRight="5dp"
                     android:descendantFocusability="beforeDescendants"
                     android:focusableInTouchMode="true"
                     />
@@ -242,8 +243,9 @@
                     android:imeOptions="actionNext"
                     android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:background="@drawable/thumb_backg"
-                    android:layout_marginRight="5dp"
+                    android:background="@drawable/login_pin_bg"
+                    android:hint="X"
+                    android:textColorHint="@color/white"                    android:layout_marginRight="5dp"
                     />
                 <EditText
                     android:id="@+id/codess3"
@@ -255,8 +257,9 @@
                     android:imeOptions="actionNext"
                     android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:background="@drawable/thumb_backg"
-                    android:layout_marginRight="5dp"
+                    android:background="@drawable/login_pin_bg"
+                    android:hint="X"
+                    android:textColorHint="@color/white"                    android:layout_marginRight="5dp"
                     />
                 <EditText
                     android:id="@+id/codess4"
@@ -268,8 +271,9 @@
                     android:imeOptions="actionNext"
                     android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:background="@drawable/thumb_backg"
-                    android:layout_marginRight="5dp"
+                    android:background="@drawable/login_pin_bg"
+                    android:hint="X"
+                    android:textColorHint="@color/white"                    android:layout_marginRight="5dp"
                     />
                 <EditText
                     android:id="@+id/codess5"
@@ -281,8 +285,9 @@
                     android:imeOptions="actionNext"
                     android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:background="@drawable/thumb_backg"
-                    android:layout_marginRight="5dp"
+                    android:background="@drawable/login_pin_bg"
+                    android:hint="X"
+                    android:textColorHint="@color/white"                    android:layout_marginRight="5dp"
                     />
                 <EditText
                     android:id="@+id/codess6"
@@ -294,8 +299,9 @@
                     android:imeOptions="actionNext"
                     android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:background="@drawable/thumb_backg"
-                    android:layout_marginRight="5dp"
+                    android:background="@drawable/login_pin_bg"
+                    android:hint="X"
+                    android:textColorHint="@color/white"                    android:layout_marginRight="5dp"
                     />
 
             </LinearLayout>

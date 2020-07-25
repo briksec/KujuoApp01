@@ -32,6 +32,7 @@ import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
 import com.example.kujuoapp.Users.Login;
 import com.example.kujuoapp.Users.QRCodeGenerator;
+import com.example.kujuoapp.Users.UserDashboard;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,10 +93,12 @@ public class ProfileFragment extends Fragment {
 
         changeProfile();
         validateStuff();
-        fetchUData();
+        topname.setText(UserDashboard.user_name);
+        topnumber.setText(UserDashboard.user_phoneno);
         return view;
     }
 
+/*
     public static void fetchUData() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"fetch_profile_data1.php",
                 new Response.Listener<String>() {
@@ -163,6 +166,7 @@ public class ProfileFragment extends Fragment {
         requestQueue.add(stringRequest);
 
     }
+*/
 
     private void changeProfile() {
         change_prof_btn.setOnClickListener(new View.OnClickListener() {

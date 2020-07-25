@@ -220,7 +220,6 @@ public class UserDashboard extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
     private void fetchdata() {
         // Creating string request with post method.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"fetch_user_info.php",
@@ -264,6 +263,7 @@ public class UserDashboard extends AppCompatActivity {
                                         reg_datetime=preferences1.getString("reg_datetime", "");
                                         user_phoneno=preferences1.getString("user_phoneno", "");
                                         wallet_id=preferences1.getString("wallet_id", "");
+                                        Toast.makeText(getApplicationContext(),user_name,Toast.LENGTH_SHORT).show();
 
 
                                     }

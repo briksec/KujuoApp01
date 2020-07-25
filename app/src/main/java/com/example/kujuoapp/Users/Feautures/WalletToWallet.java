@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +40,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
 import com.example.kujuoapp.Users.Login;
@@ -92,13 +96,14 @@ public class WalletToWallet extends AppCompatActivity {
         HashMap=new HashMap<String, String>();
         init();
         statusbar();
-        FetchCurrency();
+
         hideAndShow();
         swipe_pho_wallet();
 
         if(BaseClass.isNetworkConnected(WalletToWallet.this))
         {
             first_fetch_wallet_balance();
+            FetchCurrency();
             fetch_percentage();
         }
         else
@@ -341,7 +346,7 @@ public class WalletToWallet extends AppCompatActivity {
         BaseClass.progressDialog.setCancelable(true);
 
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"check_phonno.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"check_phoneno.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
@@ -434,7 +439,7 @@ public class WalletToWallet extends AppCompatActivity {
                 eyeopen=false;
 
                 BaseClass.toast(WalletToWallet.this,"dsa");
-
+                tcuurency.setText("$");
                 balance.setText("****");
                 open_eye.setVisibility(View.GONE);
                 close_eye.setVisibility(View.VISIBLE);
@@ -490,6 +495,7 @@ public class WalletToWallet extends AppCompatActivity {
                     }
                     else
                     {
+
                         dialog.dismiss();
                         BaseClass.toast(WalletToWallet.this,"Check Your Internet Connection");
                     }
@@ -498,7 +504,18 @@ public class WalletToWallet extends AppCompatActivity {
                 }
                 else
                 {
-                    dialog.dismiss();
+                    /*YoYo.with(Techniques.Bounce)
+                            .duration(7000)
+                            .playOn(findViewById(R.id.logo));*/
+
+                    YoYo.with(Techniques.Bounce)
+                            .duration(1000)
+                            .playOn(dialog.findViewById(R.id.layout));
+
+                    p1.setText("");p2.setText("");p3.setText("");p4.setText("");p5.setText("");p6.setText("");
+
+                    p1.requestFocus();
+
                     BaseClass.toast(WalletToWallet.this,"Wrong Pin");
                 }
             }
@@ -1024,7 +1041,6 @@ public class WalletToWallet extends AppCompatActivity {
     }
 
     private void setQrData(String toString)
-
     {
         String rec_amount,reciever_contno,rec_msg,rec_name;
 

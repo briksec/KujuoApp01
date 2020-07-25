@@ -65,10 +65,18 @@ public class SignUp extends AppCompatActivity {
         code6 = findViewById(R.id.codess6);
         cont=findViewById(R.id.btn_cont);
         email=findViewById(R.id.email);
-        editTextEditor();
+
+
+        nextmove(code,code2);
+        nextmove(code2,code3);
+        nextmove(code3,code4);
+        nextmove(code5,code6);
+
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                total_pin=code.getText().toString().trim()+code2.getText().toString().trim()+code3.getText().toString().trim()+code4.getText().toString().trim()+code5.getText().toString().trim()+code6.getText().toString().trim();
+
                 if(name.getText().toString().isEmpty())
                 {
                     name.setError("Enter a Name First");
@@ -77,10 +85,15 @@ public class SignUp extends AppCompatActivity {
                 {
                     contact.setError("Enter a Phone Number First");
                 }
-//                  else if(pass.getText().toString().isEmpty())
-//                {
-//                    pass.setError("Enter a Password First");
-//                }
+                  else if(code.getText().toString().isEmpty() || code2.getText().toString().isEmpty() || code3.getText().toString().isEmpty() || code4.getText().toString().isEmpty() || code5.getText().toString().isEmpty() || code6.getText().toString().isEmpty())
+                {
+                    code.setError("Enter a Pin No First");
+                    code2.setError("Enter a Pin No First");
+                    code3.setError("Enter a Pin No First");
+                    code4.setError("Enter a Pin No First");
+                    code5.setError("Enter a Pin No First");
+                    code6.setError("Enter a Pin No First");
+                }
                   else if(contact.getText().toString().length()!=10)
                 {
                     contact.setError("Enter a Correct Number");
@@ -102,15 +115,13 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
-    private void editTextEditor() {
-        code.addTextChangedListener(new TextWatcher() {
+    private void nextmove(final EditText e1,final EditText e2)
+    {
+        e1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // specify length of your editext here to move on next edittext
-                if(code.getText().toString().trim().length()==0){
-                    code2.requestFocus();
 
-                }
             }
 
             @Override
@@ -120,108 +131,10 @@ public class SignUp extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        code2.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // specify length of your editext here to move on next edittext
-                if(code2.getText().toString().trim().length()==0){
-                    code3.requestFocus();
+                if(e1.getText().toString().trim().length()==1){
+                    e2.requestFocus();
+                    e1.hashCode();
                 }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        code3.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // specify length of your editext here to move on next edittext
-                if(code3.getText().toString().trim().length()==0){
-                    code4.requestFocus();
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        code4.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // specify length of your editext here to move on next edittext
-                if(code4.getText().toString().trim().length()==0){
-                    code5.requestFocus();
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        code5.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // specify length of your editext here to move on next edittext
-                if(code5.getText().toString().trim().length()>0){
-                    code6.requestFocus();
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        code6.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // specify length of your editext here to move on next edittext
-                if(code6.getText().toString().trim().length()>0){
-                    //code6.requestFocus();
-                    total_pin=code.getText().toString().trim()+code2.getText().toString().trim()+code3.getText().toString().trim()+code4.getText().toString().trim()+code5.getText().toString().trim()+code6.getText().toString().trim();
-                    hideKeyboard(SignUp.this);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
             }
         });
 
@@ -238,18 +151,8 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(activity);
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
     public void userCredentials() {
-        BaseClass.toast(getApplicationContext(),""+total_pin);
+        //BaseClass.toast(getApplicationContext(),""+total_pin);
         BaseClass.progress(SignUp.this);
         BaseClass.progressDialog.show();
         BaseClass.progressDialog.setCancelable(true);
