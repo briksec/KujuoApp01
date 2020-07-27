@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ public class Transfer extends AppCompatActivity {
     RelativeLayout walTowal, walTonic;
     List<TransHistoryData> data=new ArrayList<>();
     RecyclerView recyclerView;
+    Button viewall;
     TextView no;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class Transfer extends AppCompatActivity {
         walTowal=findViewById(R.id.walletToWallet);
         walTonic=findViewById(R.id.walletToCnic);
         no=findViewById(R.id.nohistory);
+        viewall=findViewById(R.id.viewAll);
 
         walTowal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +85,14 @@ public class Transfer extends AppCompatActivity {
         back();
 
         scanQRMethod();
+
+        viewAll();
+    }
+
+    private void viewAll()
+    {
+        startActivity(new Intent(Transfer.this,ViewAll.class));
+
     }
 
 
@@ -119,7 +130,9 @@ public class Transfer extends AppCompatActivity {
     {
          recyclerView=findViewById(R.id.transhistory);
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,true);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         if(BaseClass.isNetworkConnected(Transfer.this))

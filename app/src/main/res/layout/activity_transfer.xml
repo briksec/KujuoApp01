@@ -192,7 +192,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="Wallet to CNIC"
+                        android:text="Wallet to NIS"
                         android:textColor="#131A22"
                         android:textSize="25dp"
                         android:textStyle="bold" />
@@ -210,14 +210,31 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp">
 
-            <TextView
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:fontFamily="@font/rubik"
-                android:text="Recent Transaction"
-                android:textColor="#131A22"
-                android:textSize="18dp"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/rubik"
+                    android:text="Recent Transaction"
+                    android:textColor="#131A22"
+                    android:layout_centerVertical="true"
+                    android:textSize="18dp"/>
+
+                <Button
+                    android:id="@+id/viewAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#0AF8F7F7"
+                    android:text="View All"
+                    android:textAllCaps="false"
+                    android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+
 
             <RelativeLayout
                 android:layout_width="wrap_content"

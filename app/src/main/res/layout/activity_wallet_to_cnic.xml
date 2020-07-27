@@ -216,7 +216,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Enter A CNIC No"
+                    android:text="Enter A NIS No"
                     android:fontFamily="@font/rubik_light"
                     android:textColor="@color/black"
                     android:textSize="20dp"
@@ -296,4 +296,5 @@
                 android:fontFamily="sans-serif-condensed"/>
         </LinearLayout>
     </LinearLayout>
+
 </ScrollView>
