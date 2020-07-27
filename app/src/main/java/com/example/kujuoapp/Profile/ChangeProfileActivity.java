@@ -228,12 +228,12 @@ public class ChangeProfileActivity extends AppCompatActivity {
                                     usersetdname.setText(info.getString("user_name"));
                                     usersetdphone.setText(info.getString("user_phoneno"));
                                     Glide.with(getApplicationContext())
-                                            .load(info.getString("user_profile"))
+                                            .load(info.getString("profile_pic"))
                                             .placeholder(R.drawable.ic_loading)
                                             .circleCrop()
                                             .into(changeProfile);
-                                    nameEdit.setText(info.getString("user_name"));
-                                    phoneEdit.setText(info.getString("user_phoneno"));
+                                    nameEdit.setText(usersetdname.getText().toString());
+                                    phoneEdit.setText(usersetdphone.getText().toString());
 
                                 }
 

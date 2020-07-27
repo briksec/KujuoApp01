@@ -32,11 +32,13 @@
                 android:gravity="end"
                 >
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/ic_dots"
                     android:id="@+id/chg_btn"
-                    android:layout_marginRight="20dp"
+                    android:scaleX="0.15"
+                    android:scaleY="0.6"
+                    android:layout_marginRight="5dp"
                     />
             </LinearLayout>
             <LinearLayout

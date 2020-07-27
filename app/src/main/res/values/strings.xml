@@ -39,4 +39,11 @@
     <string name="pincode">Pin Code</string>
     <string name="acpc_text">Be sure the new pincode is</string>
     <string name="acpc_text2">different from the old pincode.</string>
+    <string name="your_pin_code">Your Pin Code</string>
+    <string name="please_enter">Please Enter</string>
+    <string name="to_make_a_new_password_you_need">To make a new password you need</string>
+    <string name="to_confirm_with_your_old_password">to confirm with your existing pincode</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="incorrect_password_please_try_again">Incorrect password, please try again!</string>
+    <string name="pin_code_confirmation">Pin Code Confirmation</string>
 </resources>

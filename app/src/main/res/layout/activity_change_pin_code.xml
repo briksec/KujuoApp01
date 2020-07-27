@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F2F2F2"
-    tools:context=".Users.Feautures.ChangePinCodeActivity">
+    tools:context=".Profile.ChangePinCodeActivity">
 
     <!--        Header-->
     <LinearLayout
@@ -113,7 +113,7 @@
 
             >
             <EditText
-                android:id="@+id/codess"
+                android:id="@+id/codesss"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:textSize="14sp"
@@ -130,7 +130,7 @@
                 android:focusableInTouchMode="true"
                 />
             <EditText
-                android:id="@+id/codess2"
+                android:id="@+id/codesss2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:textSize="14sp"
@@ -147,7 +147,7 @@
                 android:layout_marginRight="10dp"
                 />
             <EditText
-                android:id="@+id/codess3"
+                android:id="@+id/codesss3"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:textSize="14sp"
@@ -163,7 +163,7 @@
                 android:layout_marginRight="10dp"
                 />
             <EditText
-                android:id="@+id/codess4"
+                android:id="@+id/codesss4"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:textSize="14sp"
@@ -179,7 +179,7 @@
                 android:layout_marginRight="10dp"
                 />
             <EditText
-                android:id="@+id/codess5"
+                android:id="@+id/codesss5"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:textSize="14sp"
@@ -195,7 +195,7 @@
                 android:layout_marginRight="10dp"
                 />
             <EditText
-                android:id="@+id/codess6"
+                android:id="@+id/codesss6"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:textSize="14sp"

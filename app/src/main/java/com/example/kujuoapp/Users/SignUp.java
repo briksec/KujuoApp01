@@ -70,6 +70,7 @@ public class SignUp extends AppCompatActivity {
         nextmove(code,code2);
         nextmove(code2,code3);
         nextmove(code3,code4);
+        nextmove(code4,code5);
         nextmove(code5,code6);
 
         cont.setOnClickListener(new View.OnClickListener() {
