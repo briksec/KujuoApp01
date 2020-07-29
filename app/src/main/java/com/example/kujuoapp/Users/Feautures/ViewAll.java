@@ -163,9 +163,9 @@ public class ViewAll extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 if(userid!=null)
-                    params.put("userid", "22");
+                    params.put("userid", userid);
                 else
-                    params.put("userid","22");
+                    params.put("userid","0");
 
                 return params;
 

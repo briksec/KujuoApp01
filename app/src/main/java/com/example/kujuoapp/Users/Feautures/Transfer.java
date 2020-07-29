@@ -55,6 +55,7 @@ public class Transfer extends AppCompatActivity {
     RecyclerView recyclerView;
     Button viewall;
     TextView no;
+    TransHistoryAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +92,13 @@ public class Transfer extends AppCompatActivity {
 
     private void viewAll()
     {
-        startActivity(new Intent(Transfer.this,ViewAll.class));
+        viewall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Transfer.this,ViewAll.class));
+
+            }
+        });
 
     }
 
@@ -128,13 +135,14 @@ public class Transfer extends AppCompatActivity {
 
     private void recyclerView()
     {
-         recyclerView=findViewById(R.id.transhistory);
+         recyclerView=findViewById(R.id.transhistorys);
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,RecyclerView.HORIZONTAL,true);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-
+         adapter=new TransHistoryAdapter(Transfer.this,data);
+        recyclerView.setAdapter(adapter);
         if(BaseClass.isNetworkConnected(Transfer.this))
             fetchdata();
         else
@@ -180,7 +188,7 @@ public class Transfer extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-                        BaseClass.progressDialog.dismiss();                     //   Toast.makeText(getApplicationContext(),ServerResponse.toString(),Toast.LENGTH_SHORT).show();
+                        BaseClass.progressDialog.dismiss();
                         if(ServerResponse.trim().equals("0")){
                             no.setVisibility(View.VISIBLE);
                             Toast.makeText(getApplicationContext(),"Not Found",Toast.LENGTH_SHORT).show();
@@ -188,19 +196,23 @@ public class Transfer extends AppCompatActivity {
                         else{
 
                         try {
+
                             JSONArray jsonArray = new JSONArray(ServerResponse);
                             if (jsonArray.length() > 0) {
-                                for (int j = 0; j < jsonArray.length(); j++) {
 
+                                for (int j = 0; j < jsonArray.length(); j++) {
                                     JSONObject info = jsonArray.getJSONObject(j);
+                                    Toast.makeText(getApplicationContext(),info.getString("trans_id"),Toast.LENGTH_SHORT).show();
+
+
                                     data.add(new TransHistoryData(info.getString("trans_id"),
                                             info.getString("rec_pic"),info.getString("rec_name"),
                                             info.getString("rec_phone"),info.getString("date_time"),
-                                            info.getString("date_time"),info.getString("trsacted_amount")));
-
+                                            info.getString("date_time"),info.getString("send_amount")));
+                           //         Toast.makeText(getApplicationContext(),info.getString("trans_id"),Toast.LENGTH_SHORT).show();
+                                    recyclerView.setVisibility(View.VISIBLE);
                                 }// levelAdapter.notifyDataSetChanged();
-                                TransHistoryAdapter adapter=new TransHistoryAdapter(Transfer.this,data);
-                                recyclerView.setAdapter(adapter);
+
                                 adapter.notifyDataSetChanged();
 
                             }

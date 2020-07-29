@@ -351,6 +351,7 @@
                         android:textStyle="bold"
                         android:fontFamily="@font/rubik"
                         android:layout_marginTop="10dp"
+                        android:inputType="number"
                         android:gravity="center"
                         />
 

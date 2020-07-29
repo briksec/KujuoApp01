@@ -3,6 +3,7 @@ package com.example.kujuoapp.Users.Adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -11,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -27,11 +29,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.FileProvider;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.kujuoapp.R;
+import com.example.kujuoapp.Users.BaseClass;
 import com.example.kujuoapp.Users.DataClass.AllTrans;
 import com.example.kujuoapp.Users.DataClass.TransHistoryData;
 import com.example.kujuoapp.Users.Feautures.ViewAll;
@@ -114,7 +118,7 @@ public class AllTransHistoryAdapter extends RecyclerView.Adapter<AllTransHistory
         return str;
     }
 
-    public void tran_popup(int pos)
+    public void tran_popup(final int pos)
     {
         final Dialog dialog=new Dialog(context);
         dialog.setContentView(R.layout.transaction_record_popup);
@@ -139,6 +143,8 @@ public class AllTransHistoryAdapter extends RecyclerView.Adapter<AllTransHistory
         final TextView transatype =dialog.findViewById(R.id.transatype);
         final ImageView cross =dialog.findViewById(R.id.cros);
         final ImageView image =dialog.findViewById(R.id.my);
+        final ImageView saveicon =dialog.findViewById(R.id.saveicon);
+        final ImageView shareicon =dialog.findViewById(R.id.shareicon);
         final LinearLayout share =dialog.findViewById(R.id.share);
         final LinearLayout save =dialog.findViewById(R.id.save);
 
@@ -169,130 +175,197 @@ public class AllTransHistoryAdapter extends RecyclerView.Adapter<AllTransHistory
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               takeScreenShot(dialog,image);
+                saveicon.setImageResource(R.drawable.blue_saved);
+               takeScreenShot(dialog,image,data.get(pos).getName(),parseDateToddMMyyyy(data.get(pos).getDate()),true);
+            }
+        });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareicon.setImageResource(R.drawable.blueshare);
+                takeScreenShot(dialog,image,data.get(pos).getName(),parseDateToddMMyyyy(data.get(pos).getDate()),false);
             }
         });
         dialog.show();
 
     }
 
-    private void takeScreenShot(Dialog dialog,ImageView cr) {
+    private void takeScreenShot(Dialog dialog,ImageView cr,String name,String datetime,boolean cond) {
 
-        File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Kujuo/");
+        if(cond==true)
+        {
+            File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Kujuo_App ScreenShot/");
 
-        if (!folder.exists()) {
-            boolean success = folder.mkdir();
+            if (!folder.exists()) {
+                boolean success = folder.mkdir();
+            }
+
+            path = folder.getAbsolutePath();
+            String signature_pdf_=name, signature_img_=datetime;
+            path = path + "/" + signature_pdf_ + datetime + ".pdf";// path where pdf will be stored
+
+            View u = dialog.findViewById(R.id.scroll);
+            NestedScrollView z = (NestedScrollView) dialog.findViewById(R.id.scroll); // parent view
+            int totalHeight = z.getChildAt(0).getHeight();// parent view height
+            int totalWidth = z.getChildAt(0).getWidth();// parent view width
+
+            //Save bitmap to  below path
+            String extr = Environment.getExternalStorageDirectory() + "/Kujuo_App Receipts PDF/";
+            File file = new File(extr);
+            if (!file.exists())
+                file.mkdir();
+            String fileName = signature_pdf_+signature_img_ + ".jpg";
+            File myPath = new File(extr, fileName);
+            String imagesUri = myPath.getPath();
+            FileOutputStream fos = null;
+
+            b = getBitmapFromView(u, totalHeight, totalWidth);
+
+            // cr.setImageBitmap(b);
+            try {
+                fos = new FileOutputStream(myPath);
+                b.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                fos.flush();
+                fos.close();
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                createPdf();// create pdf after creating bitmap and saving}
+            }
+            else
+                {
+                    BaseClass.toast(context,"Your OS Version is Old");
+                }
         }
+        else
+            {
+                File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Kujuo_App ScreenShot/");
 
-        path = folder.getAbsolutePath();
-        String signature_pdf_="nx", signature_img_="xxxx";
-        path = path + "/" + signature_pdf_ + System.currentTimeMillis() + ".pdf";// path where pdf will be stored
+                if (!folder.exists()) {
+                    boolean success = folder.mkdir();
+                }
 
-        View u = dialog.findViewById(R.id.scroll);
-        NestedScrollView z = (NestedScrollView) dialog.findViewById(R.id.scroll); // parent view
-       int totalHeight = z.getChildAt(0).getHeight();// parent view height
-        int totalWidth = z.getChildAt(0).getWidth();// parent view width
+                path = folder.getAbsolutePath();
+                String signature_pdf_=name, signature_img_=datetime;
+                path = path + "/" + signature_pdf_ + datetime + ".pdf";// path where pdf will be stored
 
-        //Save bitmap to  below path
-        String extr = Environment.getExternalStorageDirectory() + "/Signature/";
-        File file = new File(extr);
-        if (!file.exists())
-            file.mkdir();
-        String fileName = signature_img_ + ".jpg";
-        File myPath = new File(extr, fileName);
-        String imagesUri = myPath.getPath();
-        FileOutputStream fos = null;
+                View u = dialog.findViewById(R.id.scroll);
+                NestedScrollView z = (NestedScrollView) dialog.findViewById(R.id.scroll); // parent view
+                int totalHeight = z.getChildAt(0).getHeight();// parent view height
+                int totalWidth = z.getChildAt(0).getWidth();// parent view width
 
-         b = getBitmapFromView(u, totalHeight, totalWidth);
+                //Save bitmap to  below path
+                String extr = Environment.getExternalStorageDirectory() + "/Kujuo_App Receipts PDF/";
+                File file = new File(extr);
+                if (!file.exists())
+                    file.mkdir();
+                String fileName = signature_pdf_+signature_img_ + ".jpg";
+                File myPath = new File(extr, fileName);
+                String imagesUri = myPath.getPath();
+                FileOutputStream fos = null;
 
-        cr.setImageBitmap(b);
-        try {
-            fos = new FileOutputStream(myPath);
-            b.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.flush();
-            fos.close();
+                b = getBitmapFromView(u, totalHeight, totalWidth);
 
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+                shareBitmap(b);
+                // cr.setImageBitmap(b);
+                try {
+                    fos = new FileOutputStream(myPath);
+                    b.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                    fos.flush();
+                    fos.close();
+
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+            }
+
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void createPdf() {
+
+        PdfDocument document = null;
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            createPdf();// create pdf after creating bitmap and saving}
+            document = new PdfDocument();
+            PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(b.getWidth(), b.getHeight(), 1).create();
+            PdfDocument.Page page = document.startPage(pageInfo);
+
+            canvas= page.getCanvas();
+
+
+            Paint paint = new Paint();
+            paint.setColor(Color.parseColor("#ffffff"));
+            canvas.drawPaint(paint);
+
+
+            Bitmap bitmap = Bitmap.createScaledBitmap(b, b.getWidth(), b.getHeight(), true);
+
+            paint.setColor(Color.BLUE);
+            canvas.drawBitmap(bitmap, 0, 0, null);
+            document.finishPage(page);
+            File filePath = new File(path);
+            try {
+                document.writeTo(new FileOutputStream(filePath));
+                Toast.makeText(context, "Saved", Toast.LENGTH_LONG).show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(context, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
+            }
+
+            // close the document
+            document.close();
+
+            //openPdf(path);// You can open pdf after complete
         }
+
     }
 
- /*   private void takeScreenShot1(Dialog dialog,ImageView cr)
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private void shareBitmap(@NonNull Bitmap bitmap)
     {
-        View u = dialog.findViewById(R.id.scroll);
+        //---Save bitmap to external cache directory---//
+        //get cache directory
+        File cachePath = new File(context.getExternalCacheDir(), "my_images/");
+        cachePath.mkdirs();
 
-        NestedScrollView z = dialog.findViewById(R.id.scroll);
-        int totalHeight = z.getChildAt(0).getHeight();
-        int totalWidth = z.getChildAt(0).getWidth();
+        //create png file
+        File file = new File(cachePath, "Image_123.png");
+        FileOutputStream fileOutputStream;
+        try
+        {
+            fileOutputStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
 
-        Bitmap b = getBitmapFromView(u,totalHeight,totalWidth);
-
-        cr.setImageBitmap(b);
-        //Save bitmap
-        String extr = Environment.getExternalStorageDirectory()+"/Folder/";
-        String fileName = "report.jpg";
-        File myPath = new File(extr, fileName);
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(myPath);
-            b.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-            MediaStore.Images.Media.insertImage(context.getContentResolver(), b, "Screen", "screen");
-        }catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
+        } catch (FileNotFoundException e)
+        {
             e.printStackTrace();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
 
+        //---Share File---//
+        //get file uri
+        Uri myImageFileUri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);
+
+        //create a intent
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.putExtra(Intent.EXTRA_STREAM, myImageFileUri);
+        intent.setType("image/png");
+        context.startActivity(Intent.createChooser(intent, "Share with"));
     }
-*/
- @RequiresApi(api = Build.VERSION_CODES.KITKAT)
- private void createPdf() {
-
-     PdfDocument document = null;
-
-     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-         document = new PdfDocument();
-         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(b.getWidth(), b.getHeight(), 1).create();
-         PdfDocument.Page page = document.startPage(pageInfo);
-
-          canvas= page.getCanvas();
-
-
-     Paint paint = new Paint();
-     paint.setColor(Color.parseColor("#ffffff"));
-     canvas.drawPaint(paint);
-
-
-     Bitmap bitmap = Bitmap.createScaledBitmap(b, b.getWidth(), b.getHeight(), true);
-
-     paint.setColor(Color.BLUE);
-     canvas.drawBitmap(bitmap, 0, 0, null);
-     document.finishPage(page);
-     File filePath = new File(path);
-     try {
-         document.writeTo(new FileOutputStream(filePath));
-         Toast.makeText(context, path, Toast.LENGTH_LONG).show();
-
-     } catch (IOException e) {
-         e.printStackTrace();
-         Toast.makeText(context, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
-     }
-
-     // close the document
-     document.close();
-
-     //openPdf(path);// You can open pdf after complete
-     }
-
- }
 
     public Bitmap getBitmapFromView(View view, int totalHeight, int totalWidth) {
 

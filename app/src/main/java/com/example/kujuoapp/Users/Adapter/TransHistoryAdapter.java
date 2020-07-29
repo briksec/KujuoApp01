@@ -1,6 +1,7 @@
 package com.example.kujuoapp.Users.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.kujuoapp.R;
+import com.example.kujuoapp.Users.BaseClass;
 import com.example.kujuoapp.Users.DataClass.TransHistoryData;
+import com.example.kujuoapp.Users.Feautures.Topup;
+import com.example.kujuoapp.Users.Feautures.ViewAll;
 
 import java.util.List;
 
@@ -56,19 +60,17 @@ public class TransHistoryAdapter extends RecyclerView.Adapter<TransHistoryAdapte
 
         holder.contact.setText(lastFourDigits);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, ViewAll.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
 
     }
-    public String MaskDigits(String input)
-    {
-        //take first 6 characters
-        String firstPart = input.substring(0, 6);
 
-        //take last 4 characters
-        int len = input.length();
-        String lastPart = "********"+input.substring(len - 4, 4);
-
-        return lastPart;
-    }
     @Override
     public int getItemCount() {
         return data.size();
