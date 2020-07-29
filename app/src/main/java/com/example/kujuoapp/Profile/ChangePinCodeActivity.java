@@ -37,7 +37,7 @@ public class ChangePinCodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_pin_code);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         back = findViewById(R.id.cp_backzcp);
         et1 = findViewById(R.id.codesss);
         et2 = findViewById(R.id.codesss2);

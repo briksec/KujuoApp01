@@ -41,11 +41,13 @@ public class EnterExistingPin extends AppCompatActivity {
     EditText et1,et2,et3,et4,et5,et6;
     String data = "";
     TextView incorrectpass;
+    Intent intent;
+    String mode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_existing_pin);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         back = findViewById(R.id.cp_backzep);
         forgotPass = findViewById(R.id.forgot_pass);
         incorrectpass = findViewById(R.id.incorrect_pass);
@@ -63,6 +65,10 @@ public class EnterExistingPin extends AppCompatActivity {
         nextmove(et3,et4);
         nextmove(et4,et5);
         nextmove(et5,et6);
+
+        intent = getIntent();
+        mode = intent.getStringExtra("mode");
+
 
         et6.addTextChangedListener(new TextWatcher() {
             @Override
@@ -83,7 +89,10 @@ public class EnterExistingPin extends AppCompatActivity {
                         et4.getText().toString() +""+
                         et5.getText().toString() +""+
                         et6.getText().toString();
-                verify_pincode(data);
+
+                     verify_pincode(data);
+
+
                // BaseClass.toast(getApplicationContext(),""+toMD5(data));
             }
         });
@@ -99,10 +108,18 @@ public class EnterExistingPin extends AppCompatActivity {
                         //progress_spinner.dismiss();
                         //    Toast.makeText(getApplicationContext(),ServerResponse.toString(),Toast.LENGTH_SHORT).show();
                         if(ServerResponse.trim().equals("1")){
-                            startActivity(new Intent(getApplicationContext(),ChangePinCodeActivity.class));
-                            BaseClass.progressDialog.hide();
-                            finish();
-                        }else if (ServerResponse.trim().equals("0")){
+
+                            if ("change_pin_code".equals(mode)){
+                                startActivity(new Intent(getApplicationContext(),ChangePinCodeActivity.class));
+                                BaseClass.progressDialog.hide();
+                                finish();
+
+                            }else if ("change_email".equals(mode)){
+                                startActivity(new Intent(getApplicationContext(),ChangeEmailActivity.class));
+                                BaseClass.progressDialog.hide();
+                                finish();
+                            }
+                            }else if (ServerResponse.trim().equals("0")){
                             incorrectpass.setVisibility(View.VISIBLE);
                             BaseClass.progressDialog.hide();
                             et1.getText().clear();
