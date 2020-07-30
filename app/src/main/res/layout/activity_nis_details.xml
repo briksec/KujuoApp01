@@ -284,8 +284,24 @@
                         android:textSize="20dp"
                         />
                 </LinearLayout>
+            </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/sent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bluerectangle"
+                    android:text="sent"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/white"
+                    android:paddingRight="10dp"
+                    android:drawableRight="@drawable/ic_baseline_send_24"/>
             </LinearLayout>
         </LinearLayout>
 

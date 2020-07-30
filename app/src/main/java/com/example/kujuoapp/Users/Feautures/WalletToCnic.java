@@ -3,11 +3,14 @@ package com.example.kujuoapp.Users.Feautures;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,8 +33,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
+import com.example.kujuoapp.Users.UserDashboard;
 import com.rilixtech.widget.countrycodepicker.CountryCodePicker;
 
 import org.json.JSONException;
@@ -51,56 +57,60 @@ public class WalletToCnic extends AppCompatActivity {
     List<String> countryName=new ArrayList<String>();
     TextView balance,tcuurency;
     ImageView open_eye,close_eye;
-    String contactno,percentage,walletamount;
+    public static String contactno,percentage,walletamount;
     boolean showBalance=false;
     CountryCodePicker countryCodePicker;
-    EditText phoneno,amount,nis;
+    public static EditText phoneno,amount,nis;
     Button cont;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet_to_cnic);
 
-        if(BaseClass.isNetworkConnected(WalletToCnic.this))
+      /*  if(BaseClass.isNetworkConnected(WalletToCnic.this))
         {
-            fetch_percentage();
-            first_fetch_wallet_balance();
+           fetch_percentage();
+          first_fetch_wallet_balance();
         }
         else
             {
                 BaseClass.toast(WalletToCnic.this,"Check Your Internet Connection");
                 finish();
-            }
-
+            }*/
+        fetch_percentage();
+        first_fetch_wallet_balance();
         init();
         statusbar();
-        FetchCurrency();
+      FetchCurrency();
         back();
         hideAndShow();
 
-        continues();
+
         //attach the listener to the spinner
         balchk.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String value=HashMap.get(balchk.getSelectedItem().toString());
-              //  BaseClass.toast(WalletToCnic.this,value);
+                //  BaseClass.toast(WalletToWallet.this,value);
                 TextView selectedText = (TextView) parent.getChildAt(0);
-                if (selectedText != null) {
+
+
+                if (selectedText != null)
+                {
                     selectedText.setTextColor(Color.WHITE);
                 }
                 if(balchk.getSelectedItem()!=null && value != null && balance.getText().toString()!= null && balance.getText().toString()!= "" && showBalance==true )
                 {
                     tcuurency.setText(balchk.getSelectedItem().toString());
 
-                    Double cal= Double.parseDouble("1.00") * Double.parseDouble(value);
+                    Double cal= Double.parseDouble(walletamount) * Double.parseDouble(value);
 
                     balance.setText(String.valueOf(cal));
                 }
 
 
-              //  ((TextView) view).setTextColor(Color.WHITE); //Change selected text color
+                //  ((TextView) view).setTextColor(Color.WHITE); //Change selected text color
 
             }
 
@@ -121,7 +131,17 @@ public class WalletToCnic extends AppCompatActivity {
             {
                 if(amount.getText().length()>0)
                 {
-                    contactno=countryCodePicker.getSelectedCountryCode()+phoneno.getText().toString();
+                    if(Integer.parseInt(amount.getText().toString())<Integer.parseInt(walletamount))
+                    {
+                        countrtyCode();
+
+                        startActivity(new Intent(WalletToCnic.this,NisDetails.class));
+                    }
+                    else
+                        {
+                            BaseClass.toast(getApplicationContext(),"You have no balance");
+                        }
+
                 }
                 else
                 {
@@ -146,14 +166,27 @@ public class WalletToCnic extends AppCompatActivity {
         tcuurency=findViewById(R.id.t_currency);
         open_eye=findViewById(R.id.openeye);
         close_eye=findViewById(R.id.closeeye);
-        countryCodePicker=findViewById(R.id.ccp1);
         phoneno=findViewById(R.id.t_no);
         nis=findViewById(R.id.t_cnicno);
         amount=findViewById(R.id.t_amount);
         cont=findViewById(R.id.t_cont);
+        cont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                continues();
+            }
+        });
 
     }
 
+    private void countrtyCode() {
+        CountryCodePicker countryCodePicker;
+        countryCodePicker =findViewById(R.id.t_ccp1);
+        countryCodePicker.showFlag(true);
+        countryCodePicker.hideNameCode(true);
+
+        contactno = "+"+countryCodePicker.getSelectedCountryCode()+phoneno.getText().toString();
+    }
 
 
     private void hideAndShow() {
@@ -170,7 +203,6 @@ public class WalletToCnic extends AppCompatActivity {
         open_eye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BaseClass.toast(WalletToCnic.this,"dsa");
 
                 balance.setText("****");
                 open_eye.setVisibility(View.GONE);
@@ -209,27 +241,50 @@ public class WalletToCnic extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
                 String grt_pin=p1.getText().toString()+p2.getText().toString()+p3.getText().toString()+
                         p4.getText().toString()+p5.getText().toString()+p6.getText().toString();
-                if(grt_pin.equals("123456"))
+
+                ///      BaseClass.toast(WalletToWallet.this,UserDashboard.user_password);
+                if(grt_pin.equals(UserDashboard.user_password))
                 {
-                    if(showpass==true)
+
+                    SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+                    String userid=preferences1.getString("user_id", "");
+
+                    if(BaseClass.isNetworkConnected(WalletToCnic.this))
                     {
-                        dialog.dismiss();
-                        close_eye.setVisibility(View.GONE);
-                        open_eye.setVisibility(View.VISIBLE);
-                        balance.setText("1");
-                        showBalance=true;
+                        fetch_wallet_balance(userid,dialog);
+
                     }
                     else
-                        {
+                    {
 
-                        }
+                        dialog.dismiss();
+                        BaseClass.toast(WalletToCnic.this,"Check Your Internet Connection");
+                    }
+
+
                 }
                 else
-                    {
-                        BaseClass.toast(WalletToCnic.this,"Wrong Pin");
+                {
+                    Vibrator vibrator = (Vibrator) getSystemService(WalletToWallet.VIBRATOR_SERVICE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        vibrator.vibrate(500);
                     }
+                    YoYo.with(Techniques.Bounce)
+                            .duration(1000)
+                            .playOn(dialog.findViewById(R.id.layout));
+
+                    p1.setText("");p2.setText("");p3.setText("");p4.setText("");p5.setText("");p6.setText("");
+
+                    p1.requestFocus();
+
+                    BaseClass.toast(WalletToCnic.this,"Wrong Pin");
+                }
             }
         });
 
@@ -292,7 +347,7 @@ public class WalletToCnic extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-                        BaseClass.progressDialog.show();
+                        BaseClass.progressDialog.dismiss();
 
                         // BaseClass.toast(WalletToWallet.this,ServerResponse.toString());
                         if(ServerResponse.trim().equals("Something Wrong"))
@@ -362,7 +417,7 @@ public class WalletToCnic extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        BaseClass.progressDialog.show();
+                        BaseClass.progressDialog.dismiss();
 
                         Toast.makeText(getApplicationContext(),"Check your Internet Connection", Toast.LENGTH_LONG).show();
 
@@ -398,12 +453,11 @@ public class WalletToCnic extends AppCompatActivity {
 
     private void fetch_percentage() {
         BaseClass.progress(WalletToCnic.this);
-        BaseClass.progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"fetch_admin_percentage.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-
+                        BaseClass.toast(getApplicationContext(),ServerResponse.trim());
                         BaseClass.progressDialog.dismiss();
                         percentage=ServerResponse.trim();
                     }
@@ -431,10 +485,6 @@ public class WalletToCnic extends AppCompatActivity {
 
     public void first_fetch_wallet_balance() {
 
-        BaseClass.progress(WalletToCnic.this);
-        BaseClass.progressDialog.show();
-        BaseClass.progressDialog.setCancelable(true);
-
         // Creating string request with post method.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"fetch_wallet_ballance.php",
                 new Response.Listener<String>() {
@@ -442,7 +492,7 @@ public class WalletToCnic extends AppCompatActivity {
                     public void onResponse(String ServerResponse) {
                         BaseClass.progressDialog.dismiss();
                         //  Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
-
+                        BaseClass.toast(getApplicationContext(),ServerResponse.trim());
 
                         if(ServerResponse.trim().equals("false"))
                         {
@@ -471,6 +521,67 @@ public class WalletToCnic extends AppCompatActivity {
                 SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
                 String userid=preferences1.getString("user_id", "");
+                params.put("userid",userid);
+
+                return params;
+
+            }
+
+        };
+
+        // Creating RequestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+
+        // Adding the StringRequest object into requestQueue.
+
+        requestQueue.add(stringRequest);
+
+    }
+
+    public void fetch_wallet_balance(final String userid,final Dialog dialog) {
+
+        BaseClass.progress(WalletToCnic.this);
+        BaseClass.progressDialog.show();
+        BaseClass.progressDialog.setCancelable(true);
+
+        // Creating string request with post method.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"fetch_wallet_ballance.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        BaseClass.progressDialog.dismiss();
+                        //          Toast.makeText(getApplicationContext(),ServerResponse.trim(),Toast.LENGTH_SHORT).show();
+
+
+                        if(ServerResponse.trim().equals("false"))
+                        {
+                            BaseClass.toast(WalletToCnic.this,"Try again");
+                        }
+                        else
+                        {
+                            dialog.dismiss();
+                            close_eye.setVisibility(View.GONE);
+                            open_eye.setVisibility(View.VISIBLE);
+                            balance.setText(ServerResponse.trim());
+                            walletamount=ServerResponse.trim();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        BaseClass.progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"Restart Your App..."+volleyError.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+
                 params.put("userid",userid);
 
                 return params;
