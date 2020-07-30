@@ -70,7 +70,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_profile);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         arrowright = findViewById(R.id.fname_arrow);
         arrowbottom = findViewById(R.id.phno_arrow);
         usersetdname = findViewById(R.id.my_username);

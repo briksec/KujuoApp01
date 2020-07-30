@@ -46,4 +46,6 @@
     <string name="forgot_password">Forgot Password</string>
     <string name="incorrect_password_please_try_again">Incorrect password, please try again!</string>
     <string name="pin_code_confirmation">Pin Code Confirmation</string>
+    <string name="enter_new_email_address">Enter new email address</string>
+    <string name="xyz_example_com">xyz@example.com</string>
 </resources>

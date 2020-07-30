@@ -13,6 +13,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
+import com.example.kujuoapp.Users.Feautures.BalanceActivity;
 import com.example.kujuoapp.Users.Login;
 import com.example.kujuoapp.Users.QRCodeGenerator;
 
@@ -43,7 +45,7 @@ import java.util.Map;
 public class ProfileFragment extends Fragment {
 
 
-    ImageView change_prof_btn;
+    ImageButton change_prof_btn;
     static Context context;
     static TextView walletamt;
     static TextView pincode;
@@ -51,7 +53,7 @@ public class ProfileFragment extends Fragment {
     static TextView topname;
     static TextView topnumber;
     static ImageView prof_pic;
-    LinearLayout fingerprintline,QRCodeline,resetpinCode ;
+    LinearLayout fingerprintline,QRCodeline,resetpinCode,setEmail,showBalance ;
     public static Fragment profFrag;
     public ProfileFragment() {
         // Required empty public constructor
@@ -74,6 +76,8 @@ public class ProfileFragment extends Fragment {
         resetpinCode = view.findViewById(R.id.pin_code_set);
         topname = view.findViewById(R.id.top_name);
         topnumber = view.findViewById(R.id.top_number);
+        showBalance = view.findViewById(R.id.to_balance);
+        setEmail = view.findViewById(R.id.email_set);
         prof_pic = view.findViewById(R.id.prof_pic);
         swipe_button_view.setOnSwipeCompleteListener_forward_reverse(new OnSwipeCompleteListener() {
             @Override
@@ -96,10 +100,35 @@ public class ProfileFragment extends Fragment {
         changeProfile();
         validateStuff();
         changepinCode();
+        changeEmail();
+        showMyBalance();
         fetchUData();
        // topname.setText(UserDashboard.user_name);
       //  topnumber.setText(UserDashboard.user_phoneno);
         return view;
+    }
+
+    private void showMyBalance() {
+    showBalance.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getContext(), BalanceActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    });
+    }
+
+    private void changeEmail() {
+        setEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), EnterExistingPin.class);
+                intent.putExtra("mode","change_email");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
     }
 
     private void changepinCode() {
@@ -107,6 +136,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), EnterExistingPin.class);
+                intent.putExtra("mode","change_pin_code");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

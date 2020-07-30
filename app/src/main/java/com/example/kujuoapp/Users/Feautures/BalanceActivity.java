@@ -59,7 +59,7 @@ public class BalanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balance);
         back = findViewById(R.id.wbackz);
-        getSupportActionBar().hide();
+///        getSupportActionBar().hide();
         statusbar();
         HashMap=new HashMap<String, String>();
 
