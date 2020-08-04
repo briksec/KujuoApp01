@@ -16,7 +16,7 @@ public class PayBill extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pay_bill);
+        //setContentView(R.layout.activity_pay_bill);
         back();
         statusbar();
     }

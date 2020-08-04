@@ -96,16 +96,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
-                    app:srcCompat="@drawable/ic_baseline_add_a_photo_24"
-                    />
+                    android:id="@+id/take_nis_image"
+                    app:srcCompat="@drawable/ic_baseline_add_a_photo_24" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FA0C0C"
-                    android:text="* require NIS Screen Shot"/>
+                    android:id="@+id/req_text"
+                    android:layout_marginLeft="15dp"
+                    android:text="* required NIS Screen Shot"/>
             </LinearLayout>
             <!--enter a Nis no-->
             <LinearLayout

@@ -20,9 +20,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Users.Feautures.Order_Debit_Card"
+        <activity android:name=".Users.Feautures.PromoExploreActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" ></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            ></activity>
+        <activity
+            android:name=".Users.Feautures.Order_Debit_Card"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".Users.Feautures.Topup2"
             android:screenOrientation="portrait"

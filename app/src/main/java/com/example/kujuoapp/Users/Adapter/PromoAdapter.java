@@ -1,11 +1,14 @@
 package com.example.kujuoapp.Users.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.DataClass.PromoClass;
+import com.example.kujuoapp.Users.Feautures.PromoExploreActivity;
 
 import java.util.List;
 
@@ -33,7 +37,7 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.MyviewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyviewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyviewHolder holder, final int position) {
         Glide.with(context)
                 .load(data.get(position).getImage())
                 .placeholder(R.drawable.promo_img)
@@ -45,7 +49,16 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.MyviewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String image_url = data.get(position).getImage();
+                String title = data.get(position).getTitle();
+                String content = data.get(position).getContent();
 
+                Intent intent = new Intent(context, PromoExploreActivity.class);
+                intent.putExtra("image_p",image_url);
+                intent.putExtra("title_p",title);
+                intent.putExtra("content_p",content);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                ((Activity)context).startActivity(intent);
             }
         });
     }
