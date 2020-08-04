@@ -42,6 +42,12 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.MyviewHolder
                 .into(holder.imageView);
         holder.title.setText(data.get(position).getTitle());
         holder.content.setText(data.get(position).getContent());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.example.kujuoapp.Users.Feautures;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +10,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,32 +28,33 @@ import com.example.kujuoapp.Users.BaseClass;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NisDetails extends AppCompatActivity {
+public class MobilePrepaid extends AppCompatActivity {
 
 
-    TextView rec_id,rec_mobileno,amount,fees,totalamount;
-    Button sent;
-    float fee,tf;
+    String walletamount;
+    TextView balance,totalbalace;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nis_details);
+        setContentView(R.layout.activity_mobile_prepaid);
+
+        statusbar();
 
         init();
-        statusbar();
-        sentMoney();
+
+        first_fetch_wallet_balance();
+        back();
+
     }
 
-    private void sentMoney()
+    private void back()
     {
-        sent.setOnClickListener(new View.OnClickListener() {
+        ImageView imageView=findViewById(R.id.tback);
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(BaseClass.isNetworkConnected(NisDetails.this))
-                    sent();
-                else
-                    BaseClass.toast(getApplicationContext(),"Check your Internet Connection");
+                finish();
             }
         });
     }
@@ -60,7 +62,7 @@ public class NisDetails extends AppCompatActivity {
     private void statusbar() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Window window = NisDetails.this.getWindow();
+            Window window = MobilePrepaid.this.getWindow();
 
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             window.setStatusBarColor(Color.TRANSPARENT);
@@ -73,31 +75,28 @@ public class NisDetails extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
-
     private void init()
     {
-        rec_id=findViewById(R.id.ccnic);
-        rec_mobileno=findViewById(R.id.mobileno);
-        amount=findViewById(R.id.amount);
-        fees=findViewById(R.id.fees);
-        sent=findViewById(R.id.sent);
-        totalamount=findViewById(R.id.totalamount);
 
-        rec_id.setText(WalletToCnic.nis.getText().toString());
-        rec_mobileno.setText(WalletToCnic.contactno);
-        amount.setText("$ "+WalletToCnic.amount.getText().toString());
-         fee=Integer.parseInt(WalletToCnic.amount.getText().toString())*Float.parseFloat(WalletToCnic.percentage);
-        fees.setText("$ "+fee+"");
-        tf=Integer.parseInt(WalletToCnic.amount.getText().toString()) + fee ;
-       totalamount.setText(tf+"");
+        EditText phoneno, amount;
+
+        Button cont;
+
+        balance=findViewById(R.id.tbalance);
+        totalbalace=findViewById(R.id.ttbalance);
+        phoneno=findViewById(R.id.t_phone);
+        amount=findViewById(R.id.tvalue);
+        cont=findViewById(R.id.cont);
+
+
+
     }
-
-
-    public void sent() {
-        BaseClass.progress(NisDetails.this);
+    
+    public void first_fetch_wallet_balance() {
+        BaseClass.progress(MobilePrepaid.this);
         BaseClass.progressDialog.show();
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"cnic_transfer.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"fetch_wallet_ballance.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
@@ -107,10 +106,13 @@ public class NisDetails extends AppCompatActivity {
 
                         if(ServerResponse.trim().equals("false"))
                         {
+                            BaseClass.toast(MobilePrepaid.this,"Try again");
                         }
                         else
                         {
-
+                            walletamount=ServerResponse.trim();
+                            balance.setText("$ : "+walletamount);
+                            totalbalace.setText("Total balance : $"+walletamount);
                         }
 
                     }
@@ -126,23 +128,12 @@ public class NisDetails extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-               /* $sender_id = 25; $_POST['sender_id'];
-                $send_amount = 2;$_POST['send_amount'];
-                $transaction_charges = 2;$_POST['transaction_charges'];
-                $transacted_amount = 2;$_POST['transacted_amount'];
-                $receiver_cnic =2; $_POST['receiver_cnic'];
-                $receiver_phoneno =2; $_POST['receiver_phoneno'];*/
                 Map<String, String> params = new HashMap<String, String>();
 
                 SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
                 String userid=preferences1.getString("user_id", "");
-                params.put("sender_id",userid);
-                params.put("send_amount",WalletToCnic.amount.getText().toString());
-                params.put("transaction_charges",String.valueOf(fee));
-                params.put("transacted_amount",String.valueOf(tf));
-                params.put("receiver_cnic",WalletToCnic.nis.getText().toString());
-                params.put("receiver_phoneno",WalletToCnic.contactno);
+                params.put("userid",userid);
 
                 return params;
 

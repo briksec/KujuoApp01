@@ -96,9 +96,9 @@ public class User_menu extends Fragment {
 
         //populating Image slider
         ArrayList<String> sliderImages = new ArrayList<>();
-        sliderImages.add("https://i.ibb.co/k9K0XMd/download.jpg");
-        sliderImages.add("https://i.ibb.co/k9K0XMd/download.jpg");
-        sliderImages.add("https://i.ibb.co/MD60t7K/download-1.jpg");
+        sliderImages.add("http://app.briksec.com/Kujuo_App/api/images/promo1.jpg");
+        sliderImages.add("http://app.briksec.com/Kujuo_App/api/images/promo6.jpg");
+        sliderImages.add("http://app.briksec.com/Kujuo_App/api/images/promo2.jpg");
         //  sliderImages.add("https://www.printstop.co.in/images/flashgallary/large/calendar-diaries-home-banner.jpg");
        /* sliderImages.add("https://www.printstop.co.in/images/flashgallary/large/calendar-diaries-banner.jpg");
         sliderImages.add("https://www.printstop.co.in/images/flashgallary/large/free-visiting-cards-home-banner.JPG");
@@ -123,6 +123,8 @@ public class User_menu extends Fragment {
         feautureData.add(new FeautureData("4","Bill",R.drawable.yellowcircle,R.drawable.billicon));
         feautureData.add(new FeautureData("5","Mobile Prepaid",R.drawable.orangecolor,R.drawable.mblicon));
         feautureData.add(new FeautureData("6","QR Code",R.drawable.purplecircle,R.drawable.my_qr_code));
+        feautureData.add(new FeautureData("7","Bus Ticket",R.drawable.orangecolor,R.drawable.ic_baseline_directions_bus_24));
+        feautureData.add(new FeautureData("8","Donation",R.drawable.yellowcircle,R.drawable.ic_baseline_local_florist_24));
 
         GridLayoutManager gridLayout=new GridLayoutManager(getContext(),4);
         recyclerView.setLayoutManager(gridLayout);
@@ -130,15 +132,7 @@ public class User_menu extends Fragment {
         FeautureAdapter feautureAdapter=new FeautureAdapter(feautureData,getContext());
         recyclerView.setAdapter(feautureAdapter);
 
-     /*   List<DashboardData> dashboardData=new ArrayList<>();
 
-        dashboardData.add(new DashboardData("1","Cars","https://i.ibb.co/MD60t7K/download-1.jpg"));
-       dashboardData.add(new DashboardData("1","Cloths","https://i.ibb.co/k9K0XMd/download.jpg"));
-        GridLayoutManager gridLayout=new GridLayoutManager(UserDasboard.this,2);
-        recyclerView.setLayoutManager(gridLayout);
-
-        CategoryAdapter categoryAdapter= new CategoryAdapter(UserDasboard.this,dashboardData);
-        recyclerView.setAdapter(categoryAdapter);*/
     }
 
 
@@ -147,9 +141,10 @@ public class User_menu extends Fragment {
 
         List<PromoClass> data=new ArrayList<>();
 
-        data.add(new PromoClass("1","Bonus CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","https://i.ibb.co/MD60t7K/download-1.jpg"));
-        data.add(new PromoClass("1","DailyDiscount CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ",""));
-        data.add(new PromoClass("1","Bonus CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","https://i.ibb.co/k9K0XMd/download.jpg"));
+        data.add(new PromoClass("1","Bonus CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","http://app.briksec.com/Kujuo_App/api/images/promo3.jpg"));
+        data.add(new PromoClass("1","DailyDiscount CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","http://app.briksec.com/Kujuo_App/api/images/promo4.jpg"));
+        data.add(new PromoClass("1","Bonus CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","http://app.briksec.com/Kujuo_App/api/images/promo5.jpg"));
+        data.add(new PromoClass("1","Bonus CashBack","Get 10% Cashback\\nfor all transaction\\nwith Wallie ","http://app.briksec.com/Kujuo_App/api/images/promo6.jpg"));
         GridLayoutManager gridLayout=new GridLayoutManager(getContext(),2);
         recyclerView.setLayoutManager(gridLayout);
 

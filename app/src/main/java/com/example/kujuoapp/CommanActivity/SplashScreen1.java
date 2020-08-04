@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.kujuoapp.R;
+import com.example.kujuoapp.Users.BaseClass;
+import com.example.kujuoapp.Users.UserDashboard;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.RECORD_AUDIO;
@@ -27,7 +29,7 @@ public class SplashScreen1 extends AppCompatActivity {
 
     public static final int RequestPermissionCode = 1;
     Handler handler;
-
+    String login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +100,9 @@ public class SplashScreen1 extends AppCompatActivity {
 
     public void handler()
     {
-
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+         login = preferences.getString("userlogin", "");
+        BaseClass.toast(getApplicationContext(),login);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -115,8 +119,18 @@ public class SplashScreen1 extends AppCompatActivity {
                     finish();
                 }
 */
-                startActivity(new Intent(SplashScreen1.this, SplashScreen2.class));
-                finish();
+
+                if(login.equals("true"))
+                {
+                    startActivity(new Intent(SplashScreen1.this, UserDashboard.class));
+                    finish();
+                }
+                else
+                    {
+                        startActivity(new Intent(SplashScreen1.this, SplashScreen2.class));
+                        finish();
+                    }
+
             }
         }, 3000);
     }

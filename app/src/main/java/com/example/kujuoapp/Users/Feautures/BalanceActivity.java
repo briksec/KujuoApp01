@@ -3,6 +3,7 @@ package com.example.kujuoapp.Users.Feautures;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -54,6 +55,8 @@ public class BalanceActivity extends AppCompatActivity {
     Spinner balchk,convert2;
     ArrayList<String> countryName=new ArrayList<>();
     String walletamount;
+
+    Button order_debit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,12 +144,22 @@ public class BalanceActivity extends AppCompatActivity {
         balchk=findViewById(R.id.balCurr);
         balance=findViewById(R.id.t_balance);
         tcuurency=findViewById(R.id.t_currency);
+        order_debit=findViewById(R.id.order_debit);
+
+        order_debit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BalanceActivity.this,Order_Debit_Card.class));
+            }
+        });
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
 
     }
     

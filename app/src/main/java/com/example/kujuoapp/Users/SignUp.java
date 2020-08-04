@@ -179,6 +179,7 @@ public class SignUp extends AppCompatActivity {
                             //Edited by Zeeshan
                             String[] split=ServerResponse.split("!");
                             editor.putString("user_id",split[0].toString());
+                            editor.putString("userlogin","true");
                             editor.apply();
 
 //                            if (db.insertNewUser(split[0],split[1])){

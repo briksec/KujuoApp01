@@ -262,6 +262,7 @@ public class Login extends AppCompatActivity {
                             //Edited by Zeeshan
                             String[] split=ServerResponse.split("!");
                             editor.putString("user_id",split[0].toString());
+                            editor.putString("userlogin","true");
                             editor.apply();
                             startActivity(new Intent(Login.this,UserDashboard.class));
                             finish();

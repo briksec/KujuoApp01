@@ -16,7 +16,12 @@ import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.BaseClass;
 import com.example.kujuoapp.Users.DataClass.FeautureData;
 import com.example.kujuoapp.Users.Feautures.BalanceActivity;
+import com.example.kujuoapp.Users.Feautures.BusTicket;
+import com.example.kujuoapp.Users.Feautures.Donation;
+import com.example.kujuoapp.Users.Feautures.MobilePrepaid;
+import com.example.kujuoapp.Users.Feautures.PayBill;
 import com.example.kujuoapp.Users.Feautures.Topup;
+import com.example.kujuoapp.Users.Feautures.Topup2;
 import com.example.kujuoapp.Users.Feautures.Transfer;
 import com.example.kujuoapp.Users.Feautures.WalletToWallet;
 import com.example.kujuoapp.Users.QRCodeGenerator;
@@ -56,7 +61,7 @@ public class FeautureAdapter extends RecyclerView.Adapter<FeautureAdapter.Myview
             public void onClick(View view) {
                 if(feautureDataList.get(position).getId()=="1")
                 {
-                    Intent intent=new Intent(context,Topup.class);
+                    Intent intent=new Intent(context, Topup2.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
 
@@ -73,16 +78,31 @@ public class FeautureAdapter extends RecyclerView.Adapter<FeautureAdapter.Myview
                     context.startActivity(intent);
                 } else if(feautureDataList.get(position).getId()=="4")
                 {
+                    Intent intent=new Intent(context, PayBill.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
 
                 } else if(feautureDataList.get(position).getId()=="5")
                 {
-                   /* Intent intent=new Intent(context, QRCodeGenerator.class);
+                    Intent intent=new Intent(context, MobilePrepaid.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);*/
+                    context.startActivity(intent);
                 }
                 else if(feautureDataList.get(position).getId()=="6")
                 {
                     Intent intent=new Intent(context, QRCodeGenerator.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+                else if(feautureDataList.get(position).getId()=="7")
+                {
+                    Intent intent=new Intent(context, BusTicket.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+                else if(feautureDataList.get(position).getId()=="8")
+                {
+                    Intent intent=new Intent(context, Donation.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }
