@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.DataClass.TransHistoryData;
 import com.example.kujuoapp.Users.DataClass.TransportData;
+import com.example.kujuoapp.Users.Feautures.BusSeatReserved;
 import com.example.kujuoapp.Users.Feautures.ViewAll;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.Myvi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyviewHolder holder, int position)
+    public void onBindViewHolder(@NonNull MyviewHolder holder, final int position)
     {
         if(position%2==1)
         {
@@ -57,6 +58,19 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.Myvi
         holder.tranport_name.setText(data.get(position).getTrans_name());
         holder.description.setText(data.get(position).getTrans_description());
         holder.trans_amount.setText("BookNow $"+data.get(position).getTran_charges());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(context, BusSeatReserved.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("bg",data.get(position).getTrans_image());
+                intent.putExtra("name",data.get(position).getTrans_name());
+                context.startActivity(intent);
+
+            }
+        });
 
       /*  Glide.with(context)
                 .load(data.get(position).getProfile())

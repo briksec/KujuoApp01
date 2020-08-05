@@ -2,24 +2,53 @@ package com.example.kujuoapp.Users.Feautures;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.example.kujuoapp.R;
 
 public class Topup2 extends AppCompatActivity {
 
+    RelativeLayout uber ,daraz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topup2);
+
+        init();
+
         back();
         statusbar();
     }
+
+    private void init()
+    {
+        uber=findViewById(R.id.uber);
+        daraz=findViewById(R.id.daraz);
+
+
+        uber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Topup2.this,UberClasification.class));
+            }
+        });
+
+        daraz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Topup2.this,DarazWallet.class));
+
+            }
+        });
+    }
+
     private void back()
     {
         ImageView imageView=findViewById(R.id.tback);

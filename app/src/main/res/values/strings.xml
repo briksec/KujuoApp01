@@ -48,4 +48,22 @@
     <string name="pin_code_confirmation">Pin Code Confirmation</string>
     <string name="enter_new_email_address">Enter new email address</string>
     <string name="xyz_example_com">xyz@example.com</string>
+
+    <array name="city">
+        <item>Select City</item>
+        <item>Nassau</item>
+        <item>Lucaya </item>
+        <item>Freeport </item>
+        <item>West End </item>
+        <item>Cooper’s Town</item>
+        <item>San Andros  </item>
+        <item>George Town  </item>
+        <item>Marsh Harbour </item>
+        <item>High Rock</item>
+        <item>Andros Town </item>
+        <item>Clarence Town  </item>
+        <item>Dunmore Town  </item>
+
+
+    </array>
 </resources>

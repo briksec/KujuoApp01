@@ -2,24 +2,60 @@ package com.example.kujuoapp.Users.Feautures;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.example.kujuoapp.R;
 
 public class PayBill extends AppCompatActivity {
 
+    RelativeLayout electric,gas,internet;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_pay_bill);
+
+        setContentView(R.layout.activity_pay_bill);
+
         back();
+
         statusbar();
+
+        init();
     }
+
+    private void init()
+    {
+        electric=findViewById(R.id.electric);
+        gas=findViewById(R.id.gas);
+        internet=findViewById(R.id.internet);
+
+        electric.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PayBill.this,EletricCity.class));
+            }
+        });
+        gas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PayBill.this,GasBill.class));
+            }
+        });
+        internet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PayBill.this,InternetBill.class));
+            }
+        });
+    }
+
     private void back()
     {
         ImageView imageView=findViewById(R.id.tback);

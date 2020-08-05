@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="Pay Your Bills"
+                android:text="Topups"
                 android:textColor="@color/blue"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -57,6 +57,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/uber"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/sqaure_item"
@@ -90,6 +91,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/daraz"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/sqaure_item"
