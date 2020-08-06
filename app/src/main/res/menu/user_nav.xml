@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single" android:id="@+id/grp1">
+        <item
+            android:id="@+id/transhistory"
+            android:icon="@drawable/ic_baseline_history_24"
+            android:checkableBehavior="none"
+            android:title="Transaction History" />
+
+
+        <item
+            android:id="@+id/favourite"
+            android:icon="@drawable/ic_baseline_favorite_border_24"
+            android:checkableBehavior="none"
+            android:title="Favourite" />
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_baseline_person_pin_24"
+            android:checkableBehavior="none"
+            android:title="Profile" />
+        <item
+            android:id="@+id/wallet"
+            android:icon="@drawable/wallet_24"
+            android:checkableBehavior="none"
+            android:title="Wallet" />
+    </group>
+    <group android:checkableBehavior="single" android:id="@+id/grp2">
+        <item
+            android:id="@+id/help"
+            android:icon="@drawable/ic_baseline_help_outline_24"
+            android:checkableBehavior="none"
+            android:title="Help/Faq" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_baseline_settings_power_24"
+            android:checkableBehavior="none"
+            android:title="Logout" />
+    </group>
+<!--
+
+    <group  android:id="@+id/grp4"
+        android:checkableBehavior="single"  >
+        <item
+            android:id="@+id/bill"
+            android:icon="@drawable/billicon"
+            android:checkableBehavior="none"
+            android:title="Bill" />
+    </group>
+    <group  android:id="@+id/grp5"
+        android:checkableBehavior="single"  >
+        <item
+            android:id="@+id/mobile_Prepaid"
+            android:icon="@drawable/mblicon"
+            android:checkableBehavior="none"
+            android:title="Mobile Prepaid" />
+    </group>
+
+    <group  android:id="@+id/grp6"
+        android:checkableBehavior="single"  >
+        <item
+            android:id="@+id/qr_Code"
+            android:icon="@drawable/my_qr_code"
+            android:checkableBehavior="none"
+            android:title="QR Code" />
+    </group>
+
+    <group  android:id="@+id/grp7"
+        android:checkableBehavior="single"  >
+        <item
+            android:id="@+id/Bus Ticket"
+            android:icon="@drawable/my_qr_code"
+            android:checkableBehavior="none"
+            android:title="QR Code" />
+    </group>
+-->
+
+</menu>

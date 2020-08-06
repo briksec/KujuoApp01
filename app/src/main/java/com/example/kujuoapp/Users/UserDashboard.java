@@ -1,14 +1,18 @@
 package com.example.kujuoapp.Users;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -17,8 +21,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -39,9 +48,12 @@ import com.example.kujuoapp.Users.Adapter.FeautureAdapter;
 import com.example.kujuoapp.Users.Adapter.PromoAdapter;
 import com.example.kujuoapp.Users.DataClass.FeautureData;
 import com.example.kujuoapp.Users.DataClass.PromoClass;
+import com.example.kujuoapp.Users.Feautures.BalanceActivity;
 import com.example.kujuoapp.Users.Feautures.QrSetter;
 import com.example.kujuoapp.Users.Feautures.Transfer;
+import com.example.kujuoapp.Users.Feautures.ViewAll;
 import com.example.kujuoapp.Users.Fragments.User_menu;
+import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -61,8 +73,15 @@ import kotlin.jvm.functions.Function1;
 public class UserDashboard extends AppCompatActivity {
     MeowBottomNavigation bottomNavigation;
 
-    public static String reg_datetime,user_name,user_email,user_password,user_wallet,user_phoneno,wallet_id;
+    DrawerLayout drawerLayout;
+    ImageView menu;
+    NavigationView navigationView;
+    TextView nav_name,nav_walletid;
+    ImageView nav_profile;
+    View headerView;
+    public static String reg_datetime,user_name,user_email,user_password,user_wallet,user_phoneno,wallet_id,profile_pic;
 
+    boolean opendrawer=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,16 +108,87 @@ public class UserDashboard extends AppCompatActivity {
                 reg_datetime=preferences1.getString("reg_datetime", "");
                 user_phoneno=preferences1.getString("user_phoneno", "");
                 wallet_id=preferences1.getString("wallet_id", "");
+                profile_pic=preferences1.getString("profile_pic", "");
+                nav_name.setText("User: "+user_name);
+                nav_walletid.setText("Wallet ID :"+wallet_id);
+
+                Glide.with(getApplicationContext()).load(profile_pic).circleCrop().into(nav_profile);
             }
         stausbar();
         init();
         bottomNavigations();
+        onclick();
+    }
 
+
+    private void onclick()
+    {
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                if(opendrawer==false)
+                {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                    opendrawer=true;
+                }
+                else
+                    {
+                        drawerLayout.closeDrawers();
+                        opendrawer=false;
+                    }
+
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id=menuItem.getItemId();
+                //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
+                if (id==R.id.transhistory)
+                {
+                    startActivity(new Intent(UserDashboard.this, ViewAll.class));
+
+                }
+                else if(id==R.id.profile)
+                {
+                    setFragment(new ProfileFragment());
+                    bottomNavigation.setCallListenerWhenIsSelected(true);
+                    bottomNavigation.show(3,true);
+                }
+                else if(id==R.id.wallet)
+                {
+                    startActivity(new Intent(UserDashboard.this, BalanceActivity.class));
+
+                }
+                else if(id==R.id.logout)
+                {
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    preferences.edit().clear().apply();
+                    Intent intent = new Intent(UserDashboard.this,Login.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+
+                //This is for closing the drawer after acting on it
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
     }
 
     private void init()
     {
         bottomNavigation= findViewById(R.id.bottomNavigation);
+        drawerLayout=findViewById(R.id.drawer);
+        menu=findViewById(R.id.menu);
+        navigationView = (NavigationView) findViewById(R.id.navigationView);
+        headerView = LayoutInflater.from(this).inflate(R.layout.nav_header, navigationView, false);
+        navigationView.addHeaderView(headerView);
+         nav_name = (TextView) headerView.findViewById(R.id.name);
+         nav_walletid = (TextView) headerView.findViewById(R.id.wallet_id);
+         nav_profile =  headerView.findViewById(R.id.profile);
 
     }
 
@@ -152,18 +242,8 @@ public class UserDashboard extends AppCompatActivity {
 
 
     private void stausbar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Window window = UserDashboard.this.getWindow();
-
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            window.setStatusBarColor(Color.TRANSPARENT);
-
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
-            Window window = getWindow();
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            window.setStatusBarColor(Color.TRANSPARENT);
-        }
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     private void size() {
@@ -249,6 +329,7 @@ public class UserDashboard extends AppCompatActivity {
                                     editor.putString("reg_datetime",info.getString("reg_datetime"));
                                     editor.putString("user_phoneno",info.getString("user_phoneno"));
                                     editor.putString("wallet_id",info.getString("wallet_id"));
+                                    editor.putString("profile_pic",info.getString("profile_pic"));
 
                                     // Toast.makeText(getApplicationContext(),user_name,Toast.LENGTH_SHORT).show();
                                     editor.apply();
@@ -263,9 +344,12 @@ public class UserDashboard extends AppCompatActivity {
                                         reg_datetime=preferences1.getString("reg_datetime", "");
                                         user_phoneno=preferences1.getString("user_phoneno", "");
                                         wallet_id=preferences1.getString("wallet_id", "");
-                                        Toast.makeText(getApplicationContext(),user_name,Toast.LENGTH_SHORT).show();
+                                        profile_pic=preferences1.getString("profile_pic","");
 
+                                        nav_name.setText("User: "+user_name);
+                                        nav_walletid.setText("Wallet ID :"+wallet_id);
 
+                                        Glide.with(getApplicationContext()).load(profile_pic).circleCrop().into(nav_profile);
                                     }
                                     else{
                                         Toast.makeText(getApplicationContext(),"No Data",Toast.LENGTH_SHORT).show();
@@ -317,4 +401,14 @@ public class UserDashboard extends AppCompatActivity {
 
     }
 
+
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
