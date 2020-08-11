@@ -52,18 +52,27 @@
     <array name="city">
         <item>Select City</item>
         <item>Nassau</item>
-        <item>Lucaya </item>
-        <item>Freeport </item>
-        <item>West End </item>
+        <item>Lucaya</item>
+        <item>Freeport</item>
+        <item>West End</item>
         <item>Cooper’s Town</item>
-        <item>San Andros  </item>
-        <item>George Town  </item>
-        <item>Marsh Harbour </item>
+        <item>San Andros</item>
+        <item>George Town</item>
+        <item>Marsh Harbour</item>
         <item>High Rock</item>
-        <item>Andros Town </item>
-        <item>Clarence Town  </item>
-        <item>Dunmore Town  </item>
+        <item>Andros Town</item>
+        <item>Clarence Town</item>
+        <item>Dunmore Town</item>
+    </array>
 
-
+    <array name="education">
+        <item>Select</item>
+        <item>Bahamas Baptist Community College</item>
+        <item>Bahamas Institute of Business And Technology</item>
+        <item>Cherub College</item>
+        <item>University of the Bahamas</item>
+        <item>Anglican Central Education Authority</item>
+        <item>Bright Beginnings Nursery and Preschool</item>
+        <item>H. O. Nash Junior High School</item>
     </array>
 </resources>

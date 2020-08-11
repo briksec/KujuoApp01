@@ -10,6 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kujuoapp.R;
@@ -24,6 +29,7 @@ import com.example.kujuoapp.Users.Feautures.Topup;
 import com.example.kujuoapp.Users.Feautures.Topup2;
 import com.example.kujuoapp.Users.Feautures.Transfer;
 import com.example.kujuoapp.Users.Feautures.WalletToWallet;
+import com.example.kujuoapp.Users.Fragments.UserMenuExtend;
 import com.example.kujuoapp.Users.QRCodeGenerator;
 
 import java.util.List;
@@ -102,9 +108,10 @@ public class FeautureAdapter extends RecyclerView.Adapter<FeautureAdapter.Myview
                 }
                 else if(feautureDataList.get(position).getId()=="8")
                 {
-                    Intent intent=new Intent(context, Donation.class);
+                    /*Intent intent=new Intent(context, Donation.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                    context.startActivity(intent);*/
+                    setFragment(new UserMenuExtend());
                 }
             }
         });
@@ -126,5 +133,13 @@ public class FeautureAdapter extends RecyclerView.Adapter<FeautureAdapter.Myview
             logo=itemView.findViewById(R.id.flogo);
             text=itemView.findViewById(R.id.fname);
         }
+    }
+
+    private void setFragment(Fragment fragment)
+    {
+        FragmentTransaction ft =((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
+        ft.addToBackStack(null);
+        ft.replace(R.id.user_container, fragment, "Menu2");
+        ft.commit();
     }
 }

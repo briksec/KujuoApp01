@@ -68,14 +68,6 @@ public class User_menu extends Fragment {
 
         promos();
 
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Do something after 5s = 5000ms
-                setname();            }
-        }, 100);
-
 
         return view;
     }
@@ -124,7 +116,7 @@ public class User_menu extends Fragment {
         feautureData.add(new FeautureData("5","Mobile Prepaid",R.drawable.orangecolor,R.drawable.mblicon));
         feautureData.add(new FeautureData("6","QR Code",R.drawable.purplecircle,R.drawable.my_qr_code));
         feautureData.add(new FeautureData("7","Bus Ticket",R.drawable.orangecolor,R.drawable.ic_baseline_directions_bus_24));
-        feautureData.add(new FeautureData("8","Donation",R.drawable.yellowcircle,R.drawable.ic_baseline_local_florist_24));
+        feautureData.add(new FeautureData("8","ViewAll",R.drawable.yellowcircle,R.drawable.ic_baseline_apps_24));
 
         GridLayoutManager gridLayout=new GridLayoutManager(getContext(),4);
         recyclerView.setLayoutManager(gridLayout);
@@ -150,6 +142,8 @@ public class User_menu extends Fragment {
 
         PromoAdapter promoAdapter=new PromoAdapter(data,getActivity());
         recyclerView.setAdapter(promoAdapter);
+
+
     }
 
 

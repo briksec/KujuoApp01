@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Users.Fragments.UserMenuExtend">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <!--viewall-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="View All"
+                android:textColor="@color/ap_bg"
+                android:textSize="20dp"
+                android:fontFamily="@font/rubik"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+
+            <!--money transfer-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Money Transfer"
+                    android:textColor="@color/ap_bg"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/rubik"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sqaure_item"
+                    android:orientation="horizontal">
+
+                    <!--wallet to wallet-->
+                    <LinearLayout
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:id="@+id/m2walletToWallet"
+                        android:gravity="center_vertical"
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/purplecircle"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:id="@+id/flogo"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/wallets"
+                                android:backgroundTint="@color/ap_bg"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Wallet To Wallet"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+                    <!--wallet to Nis-->
+                    <LinearLayout
+                        android:id="@+id/m2walletToNis"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:id="@+id/fbackground"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/orangecolor"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/card"
+                                android:backgroundTint="@color/ap_bg"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/fname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Wallet To NIS"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+                    <!--wallet to mblno-->
+                    <LinearLayout
+                        android:id="@+id/m2walletToMbl"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/greencircle"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/mbl2"
+                              />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Wallet To Phone No"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+                    <!--wallet to qr-->
+
+                    <LinearLayout
+                        android:id="@+id/m2walletToQR"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/greencircle"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/small_qr1"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Wallet To QR Code"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <!--Bill Payment-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bill Payment"
+                    android:textColor="@color/ap_bg"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/rubik"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sqaure_item"
+                    android:orientation="horizontal">
+
+                    <!--Electricity-->
+                    <LinearLayout
+                        android:id="@+id/m2elec"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/purplecircle"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/ic_baseline_flash_on_24"
+                                android:backgroundTint="@color/ap_bg"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Electricity"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+                    <!--Gas-->
+                    <LinearLayout
+                        android:id="@+id/m2gas"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/orangecolor"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/ic_baseline_whatshot_24"
+                                android:backgroundTint="@color/ap_bg"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Gas"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+                    <!--internet-->
+                    <LinearLayout
+                        android:id="@+id/m2internet"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/greencircle"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/ic_baseline_language_24"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Internet"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--Easyload-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Easyload"
+                    android:textColor="@color/ap_bg"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/rubik"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sqaure_item"
+                    android:orientation="horizontal">
+
+                    <!--BTC-->
+                    <LinearLayout
+                        android:id="@+id/m2btc"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/purplecircle"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/btc_logo"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="BTC"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+                    <!--Aliv-->
+                    <LinearLayout
+                        android:id="@+id/m2aliv"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/orangecolor"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/alv"
+                               />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Aliv"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <!--Food Ordering-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Food Ordering"
+                    android:textColor="@color/ap_bg"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/rubik"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sqaure_item"
+                    android:orientation="horizontal">
+
+
+                    <!--food-->
+                    <LinearLayout
+                        android:id="@+id/m2food"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/orangecolor"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/ic_baseline_pets_24"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Food"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--Education-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Education"
+                    android:textColor="@color/ap_bg"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/rubik"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sqaure_item"
+                    android:orientation="horizontal">
+
+
+                    <!--BAHAMAS ACADEMY-->
+                    <LinearLayout
+                        android:id="@+id/m2edu"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/orangecolor"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/ba"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="BAHAMAS ACADEMY"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--Health Insurance-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Health Insurance"
+                    android:textColor="@color/ap_bg"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/rubik"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sqaure_item"
+                    android:orientation="horizontal">
+
+
+                    <!--Health Insurance-->
+                    <LinearLayout
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/orangecolor"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/ic_baseline_control_point_24"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Health Insurance"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--Goverment Fees-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Goverment Fees"
+                    android:textColor="@color/ap_bg"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/rubik"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sqaure_item"
+                    android:orientation="horizontal">
+
+
+                    <!--Goverment Fees-->
+                    <LinearLayout
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/orangecolor"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/goverment_logo"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Goverment Fees"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

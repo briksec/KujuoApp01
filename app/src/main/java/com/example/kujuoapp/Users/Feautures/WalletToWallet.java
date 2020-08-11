@@ -89,6 +89,8 @@ public class WalletToWallet extends AppCompatActivity {
     String receiverid=null, transaction_type=null,messages,walletamount,percentage;
 
     boolean qrCode=false,eyeopen=false;
+
+    String active;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,6 +143,27 @@ public class WalletToWallet extends AppCompatActivity {
 
             }
         });
+         active = getIntent().getExtras().getString("active","defaultKey");
+        if(active.equals("wp"))
+        {
+
+            walletlayout.setVisibility(View.GONE);
+            phoneparentlaout.setVisibility(View.VISIBLE);
+            phontext.setText("Wallet ID");
+            phoneicon.setImageResource(R.drawable.wallet_24);
+        }
+        else if(active.equals("ww") || active.equals("www"))
+        {
+            walletlayout.setVisibility(View.VISIBLE);
+            phoneparentlaout.setVisibility(View.GONE);
+            phontext.setText("Phone Number");
+            phoneicon.setImageResource(R.drawable.phoneicon);
+        }
+        else if(active.equals("wq"))
+        {
+            scanQRMethod();
+        }
+
 
     }
 
@@ -221,16 +244,30 @@ public class WalletToWallet extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WalletToWallet.this,Transfer.class));
-                finish();
+                if(active.equals("www"))
+                {
+                    startActivity(new Intent(WalletToWallet.this,Transfer.class));
+                    finish();
+                }
+                else
+                {
+                   finish();
+                }
             }
         });
     }
 
     @Override
     public void onBackPressed() {
+        if(active.equals("www"))
+        {
         startActivity(new Intent(WalletToWallet.this,Transfer.class));
         finish();
+        }
+        else
+            {
+                finish();
+            }
     }
 
     private void init() {

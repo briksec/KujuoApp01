@@ -52,6 +52,7 @@ import com.example.kujuoapp.Users.Feautures.BalanceActivity;
 import com.example.kujuoapp.Users.Feautures.QrSetter;
 import com.example.kujuoapp.Users.Feautures.Transfer;
 import com.example.kujuoapp.Users.Feautures.ViewAll;
+import com.example.kujuoapp.Users.Fragments.UserMenuExtend;
 import com.example.kujuoapp.Users.Fragments.User_menu;
 import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -88,6 +89,7 @@ public class UserDashboard extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_user_dashboard);
+
 
 
         //size();
@@ -194,7 +196,7 @@ public class UserDashboard extends AppCompatActivity {
 
     private void bottomNavigations()
     {
-        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.bottomicon));
+        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_baseline_apps_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.scanicon));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.personicon));
 
@@ -212,18 +214,29 @@ public class UserDashboard extends AppCompatActivity {
                     scanQRMethod();
                     // startActivity(new Intent(getApplicationContext(),QRCodeGenerator.class));
                 }
+                else if (model.getId()==3)
+                {
+                    setFragment(new ProfileFragment());
+                    //scanQRMethod();
+                    // startActivity(new Intent(getApplicationContext(),QRCodeGenerator.class));
+                }
                 return null;
             }
         });
-
         bottomNavigation.setCallListenerWhenIsSelected(true);
         bottomNavigation.show(1,true);
+        setFragment(new User_menu());
+
+    /*   bottomNavigation.setCallListenerWhenIsSelected(true);
+       bottomNavigation.show(1,true);
+       // setFragment(new User_menu());
         bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
             public Unit invoke(MeowBottomNavigation.Model model) {
                 if(model.getId()==1)
                 {
                     setFragment(new User_menu());
+                    BaseClass.toast(getApplicationContext(),"kdjk");
                 }
                 else if (model.getId()==2)
                 {
@@ -237,9 +250,14 @@ public class UserDashboard extends AppCompatActivity {
                     // startActivity(new Intent(getApplicationContext(),QRCodeGenerator.class));
                 }                return null;
             }
-        });
+        });*/
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
 
     private void stausbar() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -261,6 +279,7 @@ public class UserDashboard extends AppCompatActivity {
     private void setFragment(Fragment fragment) {
         FragmentTransaction ft =getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.user_container, fragment, "Menu");
+        ft.addToBackStack(null);
         ft.commit();
     }
 
@@ -405,10 +424,20 @@ public class UserDashboard extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Fragment home2 = getSupportFragmentManager().findFragmentByTag("Menu2");
+
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else if(home2 instanceof UserMenuExtend && home2.isVisible())
+        {
+            setFragment(new User_menu());
+        }
+        else {
             super.onBackPressed();
         }
+
     }
+
+
 }

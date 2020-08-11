@@ -69,7 +69,7 @@ public class Transfer extends AppCompatActivity {
         walTowal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Transfer.this,WalletToWallet.class));
+                startActivity(new Intent(Transfer.this,WalletToWallet.class).putExtra("active","www"));
                 finish();
             }
         });

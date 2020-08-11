@@ -81,7 +81,7 @@ public class WalletToCnic extends AppCompatActivity {
         first_fetch_wallet_balance();
         init();
         statusbar();
-      FetchCurrency();
+        FetchCurrency();
         back();
         hideAndShow();
 
