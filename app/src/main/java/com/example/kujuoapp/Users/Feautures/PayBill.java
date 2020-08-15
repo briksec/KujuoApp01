@@ -21,7 +21,7 @@ public class PayBill extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_pay_bill);
+     //   setContentView(R.layout.activity_pay_bill);
 
         back();
 
@@ -32,9 +32,9 @@ public class PayBill extends AppCompatActivity {
 
     private void init()
     {
-        electric=findViewById(R.id.electric);
-        gas=findViewById(R.id.gas);
-        internet=findViewById(R.id.internet);
+//        electric=findViewById(R.id.electric);
+//        gas=findViewById(R.id.gas);
+//        internet=findViewById(R.id.internet);
 
         electric.setOnClickListener(new View.OnClickListener() {
             @Override
