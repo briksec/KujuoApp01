@@ -24,8 +24,8 @@ public class PDFActivity extends AppCompatActivity {
         setContentView(R.layout.activity_p_d_f);
 
         pdfView = findViewById(R.id.pdf_view);
-        getPdf();
-
+        //getPdf();
+        getmyPdf();
 
     }
     public static void getPdf() {
@@ -42,5 +42,19 @@ public class PDFActivity extends AppCompatActivity {
                 return null;
             }
         }.execute();
+    }
+
+    public static void getmyPdf(){
+        new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    InputStream input = new URL("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf").openStream();
+                    pdfView.fromStream(input).load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.run();
     }
 }
