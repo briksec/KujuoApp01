@@ -12,7 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:orientation="vertical"
-        ></LinearLayout>
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/lifeinsur"
+
+            />
+    </LinearLayout>
 
     <!--        Body-->
     <LinearLayout
@@ -102,17 +109,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
+            android:id="@+id/tandc_l"
             android:layout_marginTop="30dp"
             >
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:textColor="@color/white"
                 android:fontFamily="@font/rubik"
+                android:gravity="center"
                 android:text="See Terms &amp; Conditions"
-                />
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
