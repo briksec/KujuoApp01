@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 import com.example.kujuoapp.R;
 import com.example.kujuoapp.Users.Feautures.EletricCity;
 import com.example.kujuoapp.Users.Feautures.GasBill;
+import com.example.kujuoapp.Users.Feautures.HealthInsauranceActivity;
 import com.example.kujuoapp.Users.Feautures.InternetBill;
+import com.example.kujuoapp.Users.Feautures.LifeInsuranceActivity;
 import com.example.kujuoapp.Users.Feautures.MobilePrepaid;
 import com.example.kujuoapp.Users.Feautures.SearchEducation;
 import com.example.kujuoapp.Users.Feautures.SearchFood;
@@ -44,7 +46,31 @@ public class UserMenuExtend extends Fragment {
         foodordering();
 
         education();
+
+        healthInsaurance();
+
         return view;
+    }
+
+    private void healthInsaurance() {
+        LinearLayout healtIns, lifeIns;
+
+        healtIns = view.findViewById(R.id.m2healthinsaurance);
+        lifeIns = view.findViewById(R.id.m2lifeinsaurance);
+
+        healtIns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), HealthInsauranceActivity.class));
+            }
+        });
+
+        lifeIns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), LifeInsuranceActivity.class));
+            }
+        });
     }
 
     private void moneyTransfer()

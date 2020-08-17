@@ -84,7 +84,6 @@ dependencies {
 
     //Optional: see how to use the utility.
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
-
-    //tablayout
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
 }
