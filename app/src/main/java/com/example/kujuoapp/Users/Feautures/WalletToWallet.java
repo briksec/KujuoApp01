@@ -839,7 +839,7 @@ public class WalletToWallet extends AppCompatActivity {
 
                 String userid=preferences1.getString("user_id", "");
                 if(BaseClass.isNetworkConnected(WalletToWallet.this)){
-                    perform_transaction(String.valueOf(total),userid,dialog,String.valueOf(cal));
+                    perform_transaction(String.valueOf(total),userid,dialog,adminDetect.getText().toString());
                 }
                 else
                     {
@@ -907,7 +907,6 @@ public class WalletToWallet extends AppCompatActivity {
                 params.put("senderid",userid);
                 params.put("amount",transfer_amount.getText().toString());
                 params.put("message",message.getText().toString());
-                params.put("transfer_amount",transacted);
                 params.put("transaction_charges",transaction_charges);
 
                 return params;

@@ -197,8 +197,8 @@ public class UserDashboard extends AppCompatActivity {
     private void bottomNavigations()
     {
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_baseline_apps_24));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.scanicon));
-        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.personicon));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_baseline_fullscreen_24));
+        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_baseline_person_outline_24));
 
 
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {

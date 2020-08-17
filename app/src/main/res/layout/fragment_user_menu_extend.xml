@@ -194,7 +194,7 @@
                             <ImageView
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:background="@drawable/small_qr1"
+                                android:background="@drawable/mqr"
                                 />
                         </LinearLayout>
 
@@ -516,7 +516,8 @@
                             <ImageView
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:background="@drawable/ic_baseline_pets_24"
+                                android:background="@drawable/foods"
+                                android:backgroundTint="@color/ap_bg"
                                 />
                         </LinearLayout>
 

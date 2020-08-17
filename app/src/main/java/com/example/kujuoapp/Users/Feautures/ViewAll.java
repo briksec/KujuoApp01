@@ -126,7 +126,7 @@ public class ViewAll extends AppCompatActivity {
                                         data.add(new AllTrans(info.getString("trans_id"),
                                                 info.getString("rec_pic"),info.getString("rec_name"),
                                                 info.getString("rec_phone"),info.getString("date_time"),
-                                                info.getString("date_time"),info.getString("trsacted_amount")
+                                                info.getString("date_time"),info.getString("send_amount")
                                                 ,info.getString("sender_message")
                                                 ,info.getString("transaction_charges"),
                                                 info.getString("transaction_type"),

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Users.Feautures.Full_trans_history">
+
+    <!--toolbar-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".Users.Feautures.Topup">
+        <!--toolbar-->
+        <LinearLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:id="@+id/tback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_back_24"
+                android:layout_marginLeft="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Transaction History"
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/rubik_light" />
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"
+        />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+
+    <!--  <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="56dp"
+          android:orientation="horizontal"
+          >
+
+          <LinearLayout
+              android:id="@+id/rec_money"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:layout_weight="1"
+              android:background="@color/white"
+              android:orientation="vertical">
+              <ImageView
+                  android:id="@+id/rec_pic"
+                  android:layout_width="35dp"
+                  android:layout_height="35dp"
+                  android:background="@drawable/rec_money"
+                  android:backgroundTint="@color/ap_bg"
+                  />
+              <TextView
+                  android:id="@+id/rec_txt"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Received Money"
+                  android:fontFamily="@font/rubik_bold"
+                  android:textColor="@color/ap_bg"/>
+
+          </LinearLayout>
+
+          <LinearLayout
+              android:id="@+id/sent_money"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:layout_weight="1"
+              android:background="@color/ap_bg"
+              android:orientation="vertical">
+              <ImageView
+                  android:id="@+id/sent_image"
+                  android:layout_width="35dp"
+                  android:layout_height="35dp"
+                  android:background="@drawable/sent_money"
+                  android:backgroundTint="@color/white"
+                  />
+              <TextView
+                  android:id="@+id/sent_text"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Sent Money"
+                  android:textColor="@color/white"
+                  android:fontFamily="@font/rubik_bold"/>
+
+          </LinearLayout>
+      </LinearLayout>
+  -->
+</LinearLayout>

@@ -119,7 +119,7 @@ public class NisDetails extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         BaseClass.progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(),"Restart Your App...", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Restart Your App..."+volleyError.toString(), Toast.LENGTH_LONG).show();
 
                     }
                 }) {
@@ -139,8 +139,7 @@ public class NisDetails extends AppCompatActivity {
                 String userid=preferences1.getString("user_id", "");
                 params.put("sender_id",userid);
                 params.put("send_amount",WalletToCnic.amount.getText().toString());
-                params.put("transaction_charges",String.valueOf(fee));
-                params.put("transacted_amount",String.valueOf(tf));
+                params.put("transaction_charges",WalletToCnic.percentage);
                 params.put("receiver_cnic",WalletToCnic.nis.getText().toString());
                 params.put("receiver_phoneno",WalletToCnic.contactno);
 
