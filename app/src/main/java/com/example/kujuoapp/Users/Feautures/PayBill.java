@@ -15,13 +15,13 @@ import com.example.kujuoapp.R;
 
 public class PayBill extends AppCompatActivity {
 
-    RelativeLayout electric,gas,internet;
+    RelativeLayout electric,gas,internet,water;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-     //   setContentView(R.layout.activity_pay_bill);
+      setContentView(R.layout.activity_pay_bill);
 
         back();
 
@@ -32,9 +32,10 @@ public class PayBill extends AppCompatActivity {
 
     private void init()
     {
-//        electric=findViewById(R.id.electric);
-//        gas=findViewById(R.id.gas);
-//        internet=findViewById(R.id.internet);
+       electric=findViewById(R.id.electric);
+        gas=findViewById(R.id.gas);
+        internet=findViewById(R.id.internet);
+        water=findViewById(R.id.waterbill);
 
         electric.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +53,12 @@ public class PayBill extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(PayBill.this,InternetBill.class));
+            }
+        });
+        water.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PayBill.this,WaterAndSewerage.class));
             }
         });
     }

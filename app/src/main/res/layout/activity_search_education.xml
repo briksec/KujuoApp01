@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Users.Feautures.SearchEducation">
 
-    <LinearLayout
+  <!--  <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <!--toolbar-->
+        &lt;!&ndash;toolbar&ndash;&gt;
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             tools:context=".Users.Feautures.Topup">
-            <!--toolbar-->
+            &lt;!&ndash;toolbar&ndash;&gt;
             <LinearLayout
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -56,7 +56,7 @@
             android:background="@drawable/education"
             android:layout_height="200dp"/>
 
-        <!--Select School-->
+        &lt;!&ndash;Select School&ndash;&gt;
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -81,7 +81,7 @@
                 />
         </LinearLayout>
 
-        <!--Roolno-->
+        &lt;!&ndash;Roolno&ndash;&gt;
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -110,7 +110,7 @@
                 android:textColor="@color/black"
                 />
         </LinearLayout>
-        <!--
+        &lt;!&ndash;
 
                 &lt;!&ndash;date TO&ndash;&gt;
                 <LinearLayout
@@ -169,7 +169,7 @@
                         android:editable="false"
                         />
                 </LinearLayout>
-        -->
+        &ndash;&gt;
 
         <Button
             android:id="@+id/voucher_pay"
@@ -183,6 +183,178 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:fontFamily="sans-serif-condensed"/>
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--toolbar-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".Users.Feautures.Topup">
+            <!--toolbar-->
+            <LinearLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/tback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/blue_back_24"
+                    android:layout_marginLeft="10dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Pay Fees"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/rubik_light" />
+            </LinearLayout>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/gray"/>
+
+        </LinearLayout>
+
+
+        <!--selct company-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="Select Institution"
+                android:padding="5dp"/>
+
+            <Spinner
+                android:id="@+id/institute"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/gray_radious"
+                android:entries="@array/education"
+                android:spinnerMode="dialog"
+                />
+        </LinearLayout>
+
+
+        <!--account no-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="Enter a Roll no"
+                android:padding="5dp"/>
+
+            <EditText
+                android:id="@+id/rollno"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:textSize="20dp"
+                android:hint="XXXX"
+                android:background="@drawable/gray_radious"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:inputType="number"
+                android:imeOptions="actionNext"/>
+        </LinearLayout>
+
+        <!--name-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="Enter a Name of Student"
+                android:padding="5dp"/>
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:textSize="20dp"
+                android:hint="Name"
+                android:background="@drawable/gray_radious"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:inputType="text"
+                android:imeOptions="actionNext"/>
+        </LinearLayout>
+
+        <!--amount-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="Enter a Payable Fees"
+                android:padding="5dp"/>
+
+            <EditText
+                android:id="@+id/fees"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:textSize="20dp"
+                android:hint="$"
+                android:background="@drawable/gray_radious"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:inputType="number"
+                android:imeOptions="actionNext"/>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/voucher_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cont_btn"
+            android:text="Pay fees"
+            android:textColor="@color/blue"
+            android:layout_marginTop="20dp"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed"/>
+
     </LinearLayout>
 
 </ScrollView>

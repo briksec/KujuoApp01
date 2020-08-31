@@ -356,6 +356,45 @@
 
                     </LinearLayout>
 
+                    <!--Water-->
+                    <LinearLayout
+                        android:id="@+id/m2water"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/greencircle"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/ic_baseline_eco_24"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Internet"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
 

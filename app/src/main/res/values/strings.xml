@@ -5,6 +5,60 @@
 </string>
     <string name="let_s_try_w">Let\u00E2\u0080\u0099s try Wallie now!\nAnd get the best solution.
 </string>
+
+    <!--electricity-->
+    <array name="electrityCompany">
+        <item>Select Company</item>
+        <item>Bahamas Electricity Corporation</item>
+    </array>
+
+    <!--gas-->
+    <array name="gasCompany">
+        <item>Select Company</item>
+        <item>Caribbean Gas Ltd.</item>
+        <item>Shell Bahamas </item>
+        <item>Nassau Gas And Tanks</item>
+        <item>Propane Gas Company</item>
+    </array>
+    <!--water-->
+    <array name="water">
+        <item>Select Company</item>
+        <item>Caribbean Bottling Co (Bahamas) Ltd</item>
+        <item>Bahama Blu Bahamas</item>
+        <item>Pure Crystal Water</item>
+        <item>Abaco Pure Ltd.</item>
+    </array>
+    <!--insuranse-->
+    <array name="insurance">
+        <item>Select Company</item>
+        <item>J S Johnson And Co Ltd</item>
+        <item>Family Guardian Insurance Co Ltd</item>
+        <item>Insurance Management (Bahamas) Ltd.</item>
+        <item>Colina Insurance Limited</item>
+        <item>Insurance Management (Bahamas) Ltd.</item>
+        <item>Bahamas Marine Surveyors</item>
+        <item>Marine Surveyors Larry C. Phillips, ABYC</item>
+        <item>Confidence Insurance Bahamas Agency Ltd.</item>
+        <item>Bahamas CO-Operative League Insurance Brokerage Ltd</item>
+        <item>New Providence Life Insurance Company Ltd</item>
+    </array>
+
+
+    <!--internet-->
+    <array name="internetCompany">
+        <item>Select Company</item>
+        <item>Batelnet</item>
+        <item>CABLE Bahamas REV Customer Experience Centre</item>
+        <item>DSL Bahamas</item>
+        <item>Jazztell Bahamas Ltd.</item>
+        <item>SunISP</item>
+        <item>Bahamas WiMax</item>
+        <item>Abaco Internet Communications</item>
+        <item>Quictick Bahamas Online Ticket Shop</item>
+        <item>SecureNet Bahamas</item>
+    </array>
+
+
     <array name="Myspinner">
         <item>Family Support</item>
         <item>Education</item>

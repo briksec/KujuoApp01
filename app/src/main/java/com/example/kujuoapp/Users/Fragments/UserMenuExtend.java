@@ -24,6 +24,7 @@ import com.example.kujuoapp.Users.Feautures.SearchFood;
 import com.example.kujuoapp.Users.Feautures.Topup2;
 import com.example.kujuoapp.Users.Feautures.WalletToCnic;
 import com.example.kujuoapp.Users.Feautures.WalletToWallet;
+import com.example.kujuoapp.Users.Feautures.WaterAndSewerage;
 
 
 public class UserMenuExtend extends Fragment {
@@ -141,11 +142,12 @@ public class UserMenuExtend extends Fragment {
 
     private void billpayment()
     {
-        LinearLayout internet, electricity,gas;
+        LinearLayout internet, electricity,gas,water;
 
         internet=view.findViewById(R.id.m2internet);
         electricity=view.findViewById(R.id.m2elec);
         gas=view.findViewById(R.id.m2gas);
+        water=view.findViewById(R.id.m2water);
 
         internet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +166,12 @@ public class UserMenuExtend extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), GasBill.class));
+            }
+        });
+        water.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), WaterAndSewerage.class));
             }
         });
     }
