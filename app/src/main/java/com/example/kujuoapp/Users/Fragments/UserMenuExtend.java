@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.kujuoapp.R;
+import com.example.kujuoapp.Users.Feautures.Asub;
 import com.example.kujuoapp.Users.Feautures.EletricCity;
 import com.example.kujuoapp.Users.Feautures.GasBill;
+import com.example.kujuoapp.Users.Feautures.GetBitCoin;
 import com.example.kujuoapp.Users.Feautures.HealthInsauranceActivity;
 import com.example.kujuoapp.Users.Feautures.InternetBill;
 import com.example.kujuoapp.Users.Feautures.LifeInsuranceActivity;
@@ -48,8 +50,37 @@ public class UserMenuExtend extends Fragment {
         education();
 
         healthInsaurance();
+        
+        asub();
 
+        bitcoin();
         return view;
+    }
+
+    private void bitcoin()
+    {
+        LinearLayout bitcoin=view.findViewById(R.id.m2bitcoin);
+
+        bitcoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), GetBitCoin.class));
+
+            }
+        });
+    }
+
+    private void asub()
+    {
+        LinearLayout asub=view.findViewById(R.id.m2asub);
+
+        asub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), Asub.class));
+
+            }
+        });
     }
 
     private void healthInsaurance() {

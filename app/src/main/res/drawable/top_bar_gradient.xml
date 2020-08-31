@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:shape="rectangle">
+
+    <gradient
+        android:startY="115.958"
+        android:endY="115.958"
+        android:startX="-7.6293945E-6"
+        android:endX="375"
+        android:type="linear"
+        android:startColor="@color/ap_bg"
+        android:endColor="#FF002B85">
+    </gradient>
+
+</shape>

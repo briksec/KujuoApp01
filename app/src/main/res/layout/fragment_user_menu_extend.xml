@@ -790,6 +790,146 @@
 
             </LinearLayout>
 
+            <!--Asub-->
+            <LinearLayout
+                android:id="@+id/m2asub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ASUB"
+                    android:textColor="@color/ap_bg"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/rubik"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sqaure_item"
+                    android:orientation="horizontal">
+
+
+                    <!--Asub-->
+                    <LinearLayout
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/orangecolor"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/asub"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ASUB"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--Bitcoin-->
+            <LinearLayout
+                android:id="@+id/m2bitcoin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bitcoin"
+                    android:textColor="@color/ap_bg"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/rubik"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sqaure_item"
+                    android:orientation="horizontal">
+
+
+                    <!--bitcoin-->
+                    <LinearLayout
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+
+                        >
+                        <!--image View-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/orangecolor"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/bitcoin"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Bitcoin"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/rubik_light"
+                            android:textColor="#131A22"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

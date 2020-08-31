@@ -49,6 +49,8 @@ import com.example.kujuoapp.Users.Adapter.PromoAdapter;
 import com.example.kujuoapp.Users.DataClass.FeautureData;
 import com.example.kujuoapp.Users.DataClass.PromoClass;
 import com.example.kujuoapp.Users.Feautures.BalanceActivity;
+import com.example.kujuoapp.Users.Feautures.Full_trans_history;
+import com.example.kujuoapp.Users.Feautures.HelpAndFaq;
 import com.example.kujuoapp.Users.Feautures.QrSetter;
 import com.example.kujuoapp.Users.Feautures.Transfer;
 import com.example.kujuoapp.Users.Feautures.ViewAll;
@@ -149,7 +151,7 @@ public class UserDashboard extends AppCompatActivity {
                 //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
                 if (id==R.id.transhistory)
                 {
-                    startActivity(new Intent(UserDashboard.this, ViewAll.class));
+                    startActivity(new Intent(UserDashboard.this, Full_trans_history.class));
 
                 }
                 else if(id==R.id.profile)
@@ -171,6 +173,11 @@ public class UserDashboard extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
+                }
+                else if(id==R.id.help)
+                {
+                    startActivity(new Intent(UserDashboard.this, HelpAndFaq.class));
+
                 }
 
                 //This is for closing the drawer after acting on it

@@ -49,75 +49,40 @@
 
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="scrollable"
-        />
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/ap_bg"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/searchRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_group_527"
+            android:paddingLeft="9dp"
+            android:layout_marginTop="20dp"
+            android:maxLines="1"
+            android:minLines="1"
+            android:lines="1"
+            android:singleLine="true"
+            />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextColor="@color/white"
+            app:tabSelectedTextColor="#FF5722"
+            />
+    </LinearLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/containers"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_height="match_parent"
+        app:layout_behavior=""/>
 
 
-    <!--  <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="56dp"
-          android:orientation="horizontal"
-          >
-
-          <LinearLayout
-              android:id="@+id/rec_money"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center"
-              android:layout_weight="1"
-              android:background="@color/white"
-              android:orientation="vertical">
-              <ImageView
-                  android:id="@+id/rec_pic"
-                  android:layout_width="35dp"
-                  android:layout_height="35dp"
-                  android:background="@drawable/rec_money"
-                  android:backgroundTint="@color/ap_bg"
-                  />
-              <TextView
-                  android:id="@+id/rec_txt"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Received Money"
-                  android:fontFamily="@font/rubik_bold"
-                  android:textColor="@color/ap_bg"/>
-
-          </LinearLayout>
-
-          <LinearLayout
-              android:id="@+id/sent_money"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center"
-              android:layout_weight="1"
-              android:background="@color/ap_bg"
-              android:orientation="vertical">
-              <ImageView
-                  android:id="@+id/sent_image"
-                  android:layout_width="35dp"
-                  android:layout_height="35dp"
-                  android:background="@drawable/sent_money"
-                  android:backgroundTint="@color/white"
-                  />
-              <TextView
-                  android:id="@+id/sent_text"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Sent Money"
-                  android:textColor="@color/white"
-                  android:fontFamily="@font/rubik_bold"/>
-
-          </LinearLayout>
-      </LinearLayout>
-  -->
 </LinearLayout>

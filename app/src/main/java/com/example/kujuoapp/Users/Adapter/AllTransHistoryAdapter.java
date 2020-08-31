@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -398,5 +399,12 @@ public class AllTransHistoryAdapter extends RecyclerView.Adapter<AllTransHistory
             trans_amount=itemView.findViewById(R.id.trans_amount);
             datetime=itemView.findViewById(R.id.datetime);
         }
+    }
+
+    public void filterList(ArrayList<AllTrans> filteredList) {
+        data=new ArrayList<>();
+        data.addAll(filteredList);
+
+        notifyDataSetChanged();
     }
 }

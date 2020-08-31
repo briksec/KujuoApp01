@@ -97,7 +97,7 @@ public class NisDetails extends AppCompatActivity {
         BaseClass.progress(NisDetails.this);
         BaseClass.progressDialog.show();
         // Creating string request with post method.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"cnic_transfer.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, BaseClass.domain+"wallet_to_nis.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {

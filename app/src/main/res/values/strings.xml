@@ -75,4 +75,97 @@
         <item>Bright Beginnings Nursery and Preschool</item>
         <item>H. O. Nash Junior High School</item>
     </array>
+
+    <string name="tab1">Send Money</string>
+    <string name="tab2">Received Money</string>
+    <string name="tab3">NIS Record</string>
+
+    <string name="asub1">Daily Asub</string>
+    <string name="asub2">Weekly Asub</string>
+    <string name="asub3">Monthly Asub</string>
+
+    <string name="about">4 About Kujuo App
+
+Kujuo App constantly drives towards innovation and
+
+empowering its customers.
+
+The Kujuo App App was launched for all branchless
+
+banking services in 2020.
+
+The app has an easy to understand registration
+
+process and numerous use-cases such as Money
+
+Transfer, Easyload, Utility Bill Payments and
+
+Ticketing made available on your mobile phone.</string>
+
+
+    <string name="privacy">4 Privacy Policy
+Easypaisa Privacy Policy
+1.1 The main security feature of the Service is the
+five (5) digit MPIN, which You use to authenticate and
+authorize transaction requests from Your Registered
+Branchless Banking account number. In addition,
+for certain transactions, You will be provided with a
+unique transaction reference number and passcode.
+1.2 The security of the MPIN must not be endangered
+or compromised by choosing a MPIN that can be
+easily guessed, such as five (5) of the same numbers
+or numbers in sequence such as 12345.
+1.3 You must not under any circumstances store Your
+MPIN (or passcode) on Your Branchless handset in
+any way whatsoever. If Your handset automatically
+stores Your MPIN (or passcode), the onus is on
+You to delete it. This will ensure that no one can
+transact using Your Registered Branchless Banking
+account number, as they will need Your MPIN and/or
+passcode to complete and authorize transactions.
+1.4 You are responsible for the security of the MPIN
+and passcode (if applicable) and may not disclose the
+MOPIN or passcode to anyone.
+1.5 If anyone obtains Your MOPIN and/or passcode
+and SIM with the Registered Branchless Banking
+account number, it will be assumed that this person
+is You. From our perspective, any transactions
+authorised by this other person are legitimate and will
+be acted on. You will be liable for any transactions
+processed during this period until You advise us to</string>
+
+    <string name="termscondition">These Terms and Conditions apply to the registration of
+Account Holder and subsequent use of the Branchless Banking
+Services offered by Telenor Microfinance Bank Limited
+“Bank” or “TMB”). These terms and conditions (“Terms and
+Conditions”) constitute an Agreement between (“Customer” or
+“Agent” or “Account Holder” or “I/ We/You”) and TMB when you
+register and make use of the Branchless Banking Service.
+Definitions:
+“BB Regulations” means the Branchless Banking Regulations
+dated 12th July, 2016 issued by the State Bank of Pakistan, as
+amended from time to time;
+“Branchless Banking” or “BB” means conduct of banking
+activities as outlined in the BB Regulations by TMB for Account
+Holder having a Branchless Banking Account. It does not
+include the information services already being provided to
+existing Account Holders using channels like, phone, internet,
+SMS etc;
+“Branchless Banking Account” or “BB Account” means an
+account maintained by the Account Holder in Easypaisa in
+which credits and debits may be effected by virtue of Electronic
+Funds Transfer and which is used to conduct Branchless
+Banking activities as outlined in the BB Regulations;
+"Rranchlace Ranlinn Ananew Anraamant” maane tha inetritmant</string>
+
+    <string name="callus">Helpline 111-003-737 (with area code)
+
+For Telenor users 3737
+
+For merchants 345-545 (accessible from Telenor numbers)</string>
+    <string name="Writetous">For general queries info@telenorbank.pk
+
+For media related queries press.center@telenorbank.pk
+
+For complaints complaints@telenorbank.pk</string>
 </resources>
